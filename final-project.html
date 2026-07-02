@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>파이널프로젝트 | 생성형 AI SaaS 플랫폼</title>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;600;700;800&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  body { font-family: "Noto Sans KR", sans-serif; color: #171717; background: #ffffff; word-break: keep-all; overflow-wrap: break-word; }
+  .display { font-family: "Hanken Grotesk", "Noto Sans KR", sans-serif; letter-spacing: 0; }
+  .material-symbols-outlined { font-variation-settings: "FILL" 0, "wght" 450, "GRAD" 0, "opsz" 24; }
+  .project-shot { aspect-ratio: 16 / 10; width: 100%; object-fit: cover; }
+</style>
+</head>
+<body>
+<header class="sticky top-0 z-50 border-b border-neutral-200 bg-white/90 backdrop-blur">
+  <div class="mx-auto flex h-16 max-w-6xl items-center justify-between px-5">
+    <a class="display text-lg font-extrabold text-neutral-950" href="index.html">김개발</a>
+    <nav class="hidden items-center gap-7 md:flex">
+      <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="index.html">홈</a>
+      <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="mini-project.html">미니프로젝트</a>
+      <a class="text-sm font-bold text-blue-700" href="final-project.html">파이널프로젝트</a>
+      <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="troubleshooting.html">트러블슛팅</a>
+    </nav>
+    <details class="relative md:hidden">
+      <summary class="list-none p-2 text-neutral-900"><span class="material-symbols-outlined">menu</span></summary>
+      <nav class="absolute right-0 mt-2 w-48 rounded-lg border border-neutral-200 bg-white p-2 shadow-lg">
+        <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="index.html">홈</a>
+        <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="mini-project.html">미니프로젝트</a>
+        <a class="block rounded px-3 py-2 text-sm font-bold text-blue-700" href="final-project.html">파이널프로젝트</a>
+        <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="troubleshooting.html">트러블슛팅</a>
+      </nav>
+    </details>
+  </div>
+</header>
+
+<main>
+  <section class="bg-white">
+    <div class="mx-auto grid max-w-6xl gap-10 px-5 py-20 md:grid-cols-[1.05fr_0.95fr] md:items-center">
+      <div>
+        <p class="text-sm font-bold uppercase text-blue-700">Final Project</p>
+        <h1 class="display mt-3 text-4xl font-extrabold leading-tight text-neutral-950 md:text-6xl">생성형 AI 기반 SaaS 업무 지원 플랫폼</h1>
+        <p class="mt-6 max-w-3xl text-lg leading-8 text-neutral-700">조직 단위 사용자를 대상으로 문서 업로드, AI 요약, 질의응답, 권한 관리, 사용 이력 조회를 제공하는 SaaS 플랫폼입니다. 팀 프로젝트로 진행하며 요구사항 정의, API 설계, 기능 구현, 배포 확인, 협업 문서화를 함께 경험했습니다.</p>
+        <div class="mt-8 flex flex-wrap gap-2">
+          <span class="rounded bg-blue-50 px-3 py-1 text-sm font-bold text-blue-700">Java</span>
+          <span class="rounded bg-blue-50 px-3 py-1 text-sm font-bold text-blue-700">Spring Boot</span>
+          <span class="rounded bg-blue-50 px-3 py-1 text-sm font-bold text-blue-700">React</span>
+          <span class="rounded bg-blue-50 px-3 py-1 text-sm font-bold text-blue-700">MySQL</span>
+          <span class="rounded bg-blue-50 px-3 py-1 text-sm font-bold text-blue-700">Docker</span>
+          <span class="rounded bg-blue-50 px-3 py-1 text-sm font-bold text-blue-700">AWS</span>
+        </div>
+      </div>
+      <figure class="overflow-hidden rounded-lg border border-neutral-200 bg-neutral-100">
+        <img class="project-shot" src="assets/profile-hero.jpg" alt="생성형 AI SaaS 플랫폼 대시보드" width="900" height="1200"/>
+        <figcaption class="border-t border-neutral-200 bg-white px-4 py-3 text-sm font-semibold text-neutral-600">SaaS 플랫폼 대시보드</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="bg-neutral-50">
+    <div class="mx-auto max-w-6xl px-5 pt-16 pb-28">
+      <div class="grid gap-4 md:grid-cols-[0.8fr_1.2fr] md:items-end">
+      <div>
+        <p class="text-sm font-bold text-blue-700">Repository</p>
+        <div class="mt-2 flex flex-wrap items-center gap-3">
+          <h2 class="display text-3xl font-extrabold text-neutral-950">GitHub 저장소</h2>
+          <span class="inline-flex rounded bg-white px-2.5 py-1 text-xs font-bold uppercase text-blue-700 ring-1 ring-neutral-200">Mono Repo</span>
+        </div>
+      </div>
+      </div>
+      <div class="mt-6">
+        <a class="flex flex-col gap-4 rounded-lg border border-neutral-200 bg-white p-4 transition hover:border-blue-700 hover:shadow-sm md:flex-row md:items-center md:justify-between" href="https://github.com/your-github-profile/ai-saas-platform" target="_blank" rel="noreferrer">
+          <div>
+          <p class="font-bold text-neutral-950">ai-saas-platform</p>
+          <p class="mt-1 text-sm text-neutral-600">Spring Boot, React, Docker, AWS 배포 문서, 협업 기록</p>
+          </div>
+          <span class="inline-flex shrink-0 items-center gap-1 text-sm font-bold text-blue-700">GitHub 바로가기 <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_outward</span></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-y border-neutral-200 bg-white">
+    <div class="mx-auto max-w-6xl px-5 py-14">
+      <p class="text-sm font-bold text-blue-700">Design Assets</p>
+      <h2 class="display mt-2 text-3xl font-extrabold text-neutral-950">설계 산출물</h2>
+      <div class="mt-8 grid gap-6 md:grid-cols-3">
+        <figure class="overflow-hidden rounded-lg border border-neutral-200 bg-white">
+          <img class="project-shot" src="assets/profile-hero.jpg" alt="파이널프로젝트 AWS 아키텍처 다이어그램" width="900" height="1200"/>
+          <figcaption class="border-t border-neutral-200 p-4">
+            <strong class="text-neutral-950">AWS 아키텍처</strong>
+            <p class="mt-2 text-sm leading-6 text-neutral-600">정적 리소스, 애플리케이션 서버, 데이터베이스, 외부 AI API 연동 흐름을 정리합니다.</p>
+          </figcaption>
+        </figure>
+        <figure class="overflow-hidden rounded-lg border border-neutral-200 bg-white">
+          <img class="project-shot" src="assets/profile-hero.jpg" alt="파이널프로젝트 유스케이스 다이어그램" width="900" height="1200"/>
+          <figcaption class="border-t border-neutral-200 p-4">
+            <strong class="text-neutral-950">유스케이스 다이어그램</strong>
+            <p class="mt-2 text-sm leading-6 text-neutral-600">일반 사용자, 조직 관리자, 시스템 관리자가 수행하는 주요 흐름을 구분합니다.</p>
+          </figcaption>
+        </figure>
+        <figure class="overflow-hidden rounded-lg border border-neutral-200 bg-white">
+          <img class="project-shot" src="assets/profile-hero.jpg" alt="파이널프로젝트 ERD" width="900" height="1200"/>
+          <figcaption class="border-t border-neutral-200 p-4">
+            <strong class="text-neutral-950">ERD</strong>
+            <p class="mt-2 text-sm leading-6 text-neutral-600">조직, 사용자, 문서, AI 요청, 사용 이력의 관계와 제약 조건을 정리합니다.</p>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-neutral-50">
+    <div class="mx-auto max-w-6xl px-5 py-14">
+      <p class="text-sm font-bold text-blue-700">Features</p>
+      <h2 class="display mt-2 text-3xl font-extrabold text-neutral-950">구현 기능</h2>
+      <div class="mt-8 grid gap-6 md:grid-cols-2">
+      <article class="overflow-hidden rounded-lg border border-neutral-200 bg-white">
+        <img class="project-shot" src="assets/profile-hero.jpg" alt="조직과 사용자 관리 화면" width="900" height="1200"/>
+        <div class="p-5">
+          <h3 class="font-bold text-neutral-950">조직과 사용자 권한 관리</h3>
+          <p class="mt-3 text-sm leading-6 text-neutral-600">조직 단위로 사용자를 초대하고 역할을 부여할 수 있도록 설계했습니다. 일반 사용자와 관리자 권한을 구분해 접근 가능한 API와 화면을 나눴습니다.</p>
+        </div>
+      </article>
+      <article class="overflow-hidden rounded-lg border border-neutral-200 bg-white">
+        <img class="project-shot" src="assets/profile-hero.jpg" alt="문서 업로드와 AI 요약 화면" width="900" height="1200"/>
+        <div class="p-5">
+          <h3 class="font-bold text-neutral-950">문서 업로드와 AI 요약</h3>
+          <p class="mt-3 text-sm leading-6 text-neutral-600">사용자가 업로드한 문서를 저장하고 AI 요약 요청을 생성합니다. 요청 상태를 저장해 처리 중, 완료, 실패 상태를 화면에서 확인할 수 있도록 구성했습니다.</p>
+        </div>
+      </article>
+      <article class="overflow-hidden rounded-lg border border-neutral-200 bg-white">
+        <img class="project-shot" src="assets/profile-hero.jpg" alt="AI 질의응답 화면" width="900" height="1200"/>
+        <div class="p-5">
+          <h3 class="font-bold text-neutral-950">문서 기반 질의응답</h3>
+          <p class="mt-3 text-sm leading-6 text-neutral-600">문서와 질문을 연결해 답변을 생성하는 흐름을 구현했습니다. 응답 이력을 남겨 사용자가 이전 질문과 답변을 다시 확인할 수 있도록 했습니다.</p>
+        </div>
+      </article>
+      <article class="overflow-hidden rounded-lg border border-neutral-200 bg-white">
+        <img class="project-shot" src="assets/profile-hero.jpg" alt="관리자 대시보드 화면" width="900" height="1200"/>
+        <div class="p-5">
+          <h3 class="font-bold text-neutral-950">사용 이력과 관리자 대시보드</h3>
+          <p class="mt-3 text-sm leading-6 text-neutral-600">조직별 요청 수, 사용자별 사용 이력, 최근 오류를 확인할 수 있도록 대시보드를 구성했습니다. 운영 관점에서 사용량과 실패 흐름을 추적할 수 있게 했습니다.</p>
+        </div>
+      </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-y border-neutral-200 bg-white">
+    <div class="mx-auto max-w-6xl px-5 py-14">
+      <p class="text-sm font-bold text-blue-700">Architecture Notes</p>
+      <h2 class="display mt-2 text-3xl font-extrabold text-neutral-950">구현하면서 고려한 기술 포인트</h2>
+      <p class="mt-4 max-w-3xl leading-7 text-neutral-700">기능이 늘어날수록 인증, 권한, 외부 API 호출, 배포 설정이 서로 영향을 줍니다. 그래서 책임을 나누고 실패 지점을 확인할 수 있는 구조를 우선했습니다.</p>
+      <div class="mt-8 space-y-3">
+        <details class="rounded-lg border border-neutral-200 bg-white p-5" open>
+          <summary class="cursor-pointer list-none font-bold text-neutral-950">API 계약</summary>
+          <p class="mt-3 text-sm leading-6 text-neutral-700">프론트엔드와 맞춰야 하는 요청/응답, 에러 포맷을 먼저 정리했습니다. 문서 업로드, AI 요약 요청, 질의응답, 관리자 조회처럼 화면과 맞닿는 기능은 응답 구조가 흔들리지 않도록 필드를 명확히 나눴습니다.</p>
+        </details>
+        <details class="rounded-lg border border-neutral-200 bg-white p-5" open>
+          <summary class="cursor-pointer list-none font-bold text-neutral-950">권한 경계</summary>
+          <p class="mt-3 text-sm leading-6 text-neutral-700">조직 관리자와 일반 사용자의 접근 가능 범위를 API 계층에서 확인했습니다. 같은 문서라도 소속 조직과 역할에 따라 접근이 달라질 수 있어 조회와 수정 요청마다 권한 검증 흐름을 분리했습니다.</p>
+        </details>
+        <details class="rounded-lg border border-neutral-200 bg-white p-5" open>
+          <summary class="cursor-pointer list-none font-bold text-neutral-950">비동기 처리</summary>
+          <p class="mt-3 text-sm leading-6 text-neutral-700">AI 응답 지연을 고려해 요청 상태를 저장하고 사용자에게 처리 상태를 보여줬습니다. 요청 생성, 처리 중, 완료, 실패 상태를 구분해 긴 작업이 화면 흐름을 막지 않도록 나눴습니다.</p>
+        </details>
+        <details class="rounded-lg border border-neutral-200 bg-white p-5" open>
+          <summary class="cursor-pointer list-none font-bold text-neutral-950">운영 확인</summary>
+          <p class="mt-3 text-sm leading-6 text-neutral-700">배포 후 확인해야 할 로그, 환경 변수, 외부 API 연결 실패 상황을 체크했습니다. 오류가 발생했을 때 어느 구간에서 실패했는지 추적할 수 있도록 요청 흐름과 설정 값을 문서로 남겼습니다.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-neutral-50">
+    <div class="mx-auto max-w-6xl px-5 py-14">
+      <p class="text-sm font-bold text-blue-700">Release Management</p>
+      <h2 class="display mt-2 text-3xl font-extrabold text-neutral-950">팀 협업과 릴리즈 관리</h2>
+      <p class="mt-4 max-w-3xl leading-7 text-neutral-700">파이널프로젝트는 여러 사람이 동시에 작업하는 팀 프로젝트로 진행했습니다. 요구사항 문서, API 계약, 이슈와 PR, 배포 체크리스트, 릴리즈 이후 확인 기준을 연결해 기능 구현이 실제 실행 가능한 상태까지 이어지도록 관리했습니다.</p>
+      <div class="mt-10 divide-y divide-neutral-200 border-y border-neutral-200">
+        <article class="grid gap-6 py-8 md:grid-cols-[0.86fr_1.14fr] md:items-center">
+          <div>
+            <p class="text-xs font-bold uppercase text-blue-700">01 / Requirement</p>
+            <h3 class="mt-2 text-xl font-extrabold text-neutral-950">Notion에서 요구사항과 역할을 먼저 맞췄습니다</h3>
+            <p class="mt-3 text-sm leading-6 text-neutral-700">사용자 역할, 핵심 화면, API 필요 항목, 담당 범위를 문서로 정리했습니다. 변경된 요구사항은 구현 전에 문서에 먼저 반영해 팀원이 같은 기준을 보고 작업하도록 맞췄습니다.</p>
+            <ul class="mt-4 grid gap-2 text-sm leading-6 text-neutral-700">
+              <li><strong class="text-neutral-950">관리 항목</strong> 회의록, 화면 정의, 역할 분담, 완료 기준</li>
+              <li><strong class="text-neutral-950">확인 방식</strong> 작업 전 문서 기준을 맞추고 이슈로 구현 범위를 분리</li>
+            </ul>
+          </div>
+          <figure class="overflow-hidden border border-neutral-200 bg-white">
+            <img class="project-shot" src="assets/profile-hero.jpg" alt="Notion 요구사항과 역할 분담 문서 화면" width="900" height="1200"/>
+            <figcaption class="border-t border-neutral-200 px-4 py-3 text-sm font-semibold text-neutral-600">Notion 요구사항과 역할 분담</figcaption>
+          </figure>
+        </article>
+        <article class="grid gap-6 py-8 md:grid-cols-[1.14fr_0.86fr] md:items-center">
+          <div>
+            <p class="text-xs font-bold uppercase text-blue-700">02 / Pull Request</p>
+            <h3 class="mt-2 text-xl font-extrabold text-neutral-950">Issue, Branch, PR을 연결해 변경 이력을 남겼습니다</h3>
+            <p class="mt-3 text-sm leading-6 text-neutral-700">GitHub Issue를 기준으로 브랜치를 만들고 PR에서 구현 의도, 변경 범위, 확인 방법을 공유했습니다. 리뷰 코멘트가 생기면 수정 커밋으로 반영해 논의가 코드에 어떻게 반영됐는지 추적할 수 있게 했습니다.</p>
+            <ul class="mt-4 grid gap-2 text-sm leading-6 text-neutral-700">
+              <li><strong class="text-neutral-950">관리 항목</strong> 브랜치 전략, 커밋 컨벤션, PR 설명, 코드리뷰 코멘트</li>
+              <li><strong class="text-neutral-950">확인 방식</strong> 병합 전 변경 파일과 테스트 결과를 PR에 함께 기록</li>
+            </ul>
+          </div>
+          <figure class="overflow-hidden border border-neutral-200 bg-white md:order-first">
+            <img class="project-shot" src="assets/profile-hero.jpg" alt="GitHub Issue Branch PR 코드리뷰 화면" width="900" height="1200"/>
+            <figcaption class="border-t border-neutral-200 px-4 py-3 text-sm font-semibold text-neutral-600">GitHub Issue, Branch, PR 흐름</figcaption>
+          </figure>
+        </article>
+        <article class="grid gap-6 py-8 md:grid-cols-[0.86fr_1.14fr] md:items-center">
+          <div>
+            <p class="text-xs font-bold uppercase text-blue-700">03 / Release</p>
+            <h3 class="mt-2 text-xl font-extrabold text-neutral-950">API 계약과 배포 준비로 릴리즈 위험을 줄였습니다</h3>
+            <p class="mt-3 text-sm leading-6 text-neutral-700">요청/응답 필드, 에러 포맷, 인증이 필요한 API를 프론트엔드와 먼저 맞췄습니다. 배포 전에는 환경 변수, DB 연결, 외부 AI API 키, 빌드 결과를 확인해 릴리즈 직전의 실패 가능성을 줄였습니다.</p>
+            <ul class="mt-4 grid gap-2 text-sm leading-6 text-neutral-700">
+              <li><strong class="text-neutral-950">관리 항목</strong> API 계약, 환경 변수, DB 연결, 외부 API 키, 빌드 결과</li>
+              <li><strong class="text-neutral-950">확인 방식</strong> 배포 전 체크리스트로 누락 항목을 먼저 제거</li>
+            </ul>
+          </div>
+          <figure class="overflow-hidden border border-neutral-200 bg-white">
+            <img class="project-shot" src="assets/profile-hero.jpg" alt="API 계약과 배포 체크리스트 화면" width="900" height="1200"/>
+            <figcaption class="border-t border-neutral-200 px-4 py-3 text-sm font-semibold text-neutral-600">API 계약과 배포 준비 체크리스트</figcaption>
+          </figure>
+        </article>
+        <article class="grid gap-6 py-8 md:grid-cols-[1.14fr_0.86fr] md:items-center">
+          <div>
+            <p class="text-xs font-bold uppercase text-blue-700">04 / Release QA</p>
+            <h3 class="mt-2 text-xl font-extrabold text-neutral-950">릴리즈 이후 확인 기준과 대응 순서를 정리했습니다</h3>
+            <p class="mt-3 text-sm leading-6 text-neutral-700">배포가 끝난 뒤에는 주요 화면 접근, 로그인, 문서 업로드, AI 요청 생성, 관리자 조회처럼 사용자가 실제로 거치는 흐름을 기준으로 다시 확인했습니다. 문제가 발생했을 때는 로그, 환경 변수, DB 연결, 외부 API 응답을 순서대로 확인하는 기준을 팀 문서에 남겼습니다.</p>
+            <ul class="mt-4 grid gap-2 text-sm leading-6 text-neutral-700">
+              <li><strong class="text-neutral-950">관리 항목</strong> 릴리즈 노트, 배포 후 확인 목록, 장애 대응 순서</li>
+              <li><strong class="text-neutral-950">확인 방식</strong> 핵심 사용자 흐름과 실패 로그를 기준으로 릴리즈 완료 판단</li>
+            </ul>
+          </div>
+          <figure class="overflow-hidden border border-neutral-200 bg-white md:order-first">
+            <img class="project-shot" src="assets/profile-hero.jpg" alt="릴리즈 이후 QA와 장애 대응 문서 화면" width="900" height="1200"/>
+            <figcaption class="border-t border-neutral-200 px-4 py-3 text-sm font-semibold text-neutral-600">릴리즈 QA와 장애 대응 기준</figcaption>
+          </figure>
+        </article>
+        <article class="grid gap-6 py-8 md:grid-cols-[0.86fr_1.14fr] md:items-center">
+          <div>
+            <p class="text-xs font-bold uppercase text-blue-700">05 / AI Skills</p>
+            <h3 class="mt-2 text-xl font-extrabold text-neutral-950">AI를 개발 흐름을 보조하는 도구로 활용했습니다</h3>
+            <p class="mt-3 text-sm leading-6 text-neutral-700">요구사항을 먼저 정리하고, AI에게 역할과 제약 조건, 검증 기준을 함께 전달해 코드 초안을 만들었습니다. 생성된 코드는 바로 붙여넣지 않고 프로젝트 구조, 의존성, 예외 처리 방식에 맞는지 읽고 수정한 뒤 적용했습니다.</p>
+            <ul class="mt-4 grid gap-2 text-sm leading-6 text-neutral-700">
+              <li><strong class="text-neutral-950">관리 항목</strong> 스펙 정리, 프롬프트 컨텍스트, 코드 리뷰, 검증 체크</li>
+              <li><strong class="text-neutral-950">확인 방식</strong> AI 제안 코드를 분석하고 팀 컨벤션과 검증 기준에 맞게 조정</li>
+            </ul>
+          </div>
+          <figure class="overflow-hidden border border-neutral-200 bg-white">
+            <img class="project-shot" src="assets/profile-hero.jpg" alt="AI Skills 기반 개발 방식과 코드 검토 기록 화면" width="900" height="1200"/>
+            <figcaption class="border-t border-neutral-200 px-4 py-3 text-sm font-semibold text-neutral-600">AI Skills 기반 개발 방식과 코드 검토 기록</figcaption>
+          </figure>
+        </article>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="bg-white border-t border-neutral-200">
+  <div class="mx-auto max-w-6xl px-5 py-8 text-sm text-neutral-500">
+      <div class="flex items-baseline justify-between gap-6">
+        <span class="font-bold text-neutral-900">김개발</span>
+        <a class="font-bold text-neutral-900" href="https://github.com/your-github-profile" target="_blank" rel="noreferrer">GitHub 프로필</a>
+      </div>
+      <p class="mt-2">© 2026 백엔드 신입 개발자 포트폴리오. Java, Spring Boot, DB, 배포와 문제 해결.</p>
+  </div>
+</footer>
+<script src="assets/image-modal.js" defer></script>
+</body>
+</html>

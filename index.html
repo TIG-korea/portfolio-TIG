@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>김개발 | 백엔드 포트폴리오</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=Noto+Sans+KR:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "outline-variant": "#cfc4c5",
+                    "on-secondary": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-fixed-dim": "#c7c6c6",
+                    "on-tertiary": "#ffffff",
+                    "on-tertiary-fixed": "#001b3f",
+                    "on-tertiary-fixed-variant": "#00458f",
+                    "on-primary-container": "#848484",
+                    "secondary-container": "#e1dfdf",
+                    "secondary-fixed": "#e4e2e2",
+                    "surface-container-highest": "#e2e2e4",
+                    "surface-bright": "#f9f9fb",
+                    "on-primary-fixed-variant": "#474747",
+                    "on-primary-fixed": "#1b1b1b",
+                    "on-secondary-fixed": "#1b1c1c",
+                    "surface-container": "#eeeef0",
+                    "inverse-primary": "#c6c6c6",
+                    "on-secondary-container": "#626262",
+                    "on-background": "#1a1c1d",
+                    "on-primary": "#ffffff",
+                    "tertiary": "#000000",
+                    "background": "#f9f9fb",
+                    "primary-fixed": "#e2e2e2",
+                    "on-error": "#ffffff",
+                    "outline": "#7e7576",
+                    "primary": "#000000",
+                    "on-secondary-fixed-variant": "#464747",
+                    "surface": "#f9f9fb",
+                    "primary-fixed-dim": "#c6c6c6",
+                    "on-surface-variant": "#4c4546",
+                    "inverse-surface": "#2f3132",
+                    "on-surface": "#1a1c1d",
+                    "tertiary-fixed-dim": "#abc7ff",
+                    "secondary": "#5e5e5e",
+                    "surface-container-low": "#f3f3f5",
+                    "surface-variant": "#e2e2e4",
+                    "surface-tint": "#5e5e5e",
+                    "primary-container": "#1b1b1b",
+                    "surface-container-high": "#e8e8ea",
+                    "error-container": "#ffdad6",
+                    "on-error-container": "#93000a",
+                    "error": "#ba1a1a",
+                    "tertiary-container": "#001b3f",
+                    "on-tertiary-container": "#2b82f4",
+                    "inverse-on-surface": "#f0f0f2",
+                    "surface-dim": "#d9dadc",
+                    "tertiary-fixed": "#d7e2ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "stack-md": "24px",
+                    "margin-mobile": "20px",
+                    "section-v-padding": "120px",
+                    "stack-sm": "8px",
+                    "container-max": "1200px",
+                    "gutter": "32px",
+                    "stack-lg": "64px",
+                    "margin-desktop": "40px"
+            },
+            "fontFamily": {
+                    "label-md": ["Noto Sans KR", "Inter", "sans-serif"],
+                    "display": ["Noto Sans KR", "Inter", "sans-serif"],
+                    "body-md": ["Noto Sans KR", "Inter", "sans-serif"],
+                    "headline-lg": ["Noto Sans KR", "Inter", "sans-serif"],
+                    "headline-md": ["Noto Sans KR", "Inter", "sans-serif"],
+                    "body-lg": ["Noto Sans KR", "Inter", "sans-serif"],
+                    "caption": ["Noto Sans KR", "Inter", "sans-serif"]
+            },
+            "fontSize": {
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0", "fontWeight": "500"}],
+                    "display": ["56px", {"lineHeight": "68px", "letterSpacing": "0", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-lg": ["40px", {"lineHeight": "50px", "letterSpacing": "0", "fontWeight": "600"}],
+                    "headline-md": ["24px", {"lineHeight": "34px", "letterSpacing": "0", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "caption": ["12px", {"lineHeight": "16px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .nav-link-active {
+            color: #000000;
+            border-bottom: 2px solid #000000;
+            padding-bottom: 4px;
+        }
+        body {
+            word-break: keep-all;
+            overflow-wrap: break-word;
+        }
+        .display {
+            font-family: "Inter", "Noto Sans KR", sans-serif;
+            letter-spacing: 0;
+        }
+        .ko-copy,
+        .ko-copy p,
+        .ko-copy li,
+        .ko-copy h1,
+        .ko-copy h2,
+        .ko-copy h3,
+        .ko-copy h4 {
+            word-break: keep-all;
+            overflow-wrap: break-word;
+        }
+        .hero-title {
+            color: #141516;
+            font-family: "Inter", "Noto Sans KR", sans-serif;
+            font-size: 56px;
+            font-weight: 600;
+            line-height: 1.08;
+            letter-spacing: 0;
+        }
+        .hero-content {
+            width: min(1200px, 100%);
+            margin-inline: auto;
+            text-align: left;
+        }
+        .hero-copy {
+            min-width: 0;
+            max-width: 870px;
+        }
+        .hero-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            color: #3f4448;
+            font-size: 14px;
+            font-weight: 700;
+        }
+        .hero-kicker {
+            margin-top: 16px;
+            max-width: 700px;
+            color: #5d6368;
+            font-size: 19px;
+            font-weight: 600;
+            line-height: 1.52;
+        }
+        .hero-section {
+            --hero-image-width: clamp(430px, 40vw, 720px);
+            --hero-image-offset: max(40px, calc((100% - 1200px) / 2));
+            position: relative;
+            isolation: isolate;
+            min-height: 520px;
+            overflow: hidden;
+            padding-top: 74px;
+            padding-bottom: 82px;
+            background: #f9f9fb;
+        }
+        .hero-section::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(90deg, #f9f9fb 0%, rgba(249, 249, 251, 0.99) 44%, rgba(249, 249, 251, 0.84) 60%, rgba(249, 249, 251, 0.36) 82%, rgba(249, 249, 251, 0.08) 100%),
+                linear-gradient(180deg, rgba(249, 249, 251, 0.2), rgba(249, 249, 251, 0) 42%, rgba(249, 249, 251, 0.18));
+            pointer-events: none;
+            z-index: 1;
+        }
+        .hero-section > div {
+            position: relative;
+            z-index: 2;
+        }
+        .hero-lede {
+            display: grid;
+            gap: 10px;
+            max-width: 700px;
+            margin-top: 18px;
+            padding-left: 0;
+            list-style: none;
+            text-align: left;
+            font-size: 15px;
+            line-height: 1.72;
+            text-shadow: 0 1px 18px rgba(255, 255, 255, 0.72);
+        }
+        .hero-lede p {
+            margin: 0;
+        }
+        .ai-principles-section {
+            background: #ffffff;
+            border-bottom: 1px solid #e6e7e9;
+        }
+        .ai-principles-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 22px;
+            padding-top: 80px;
+            padding-bottom: 108px;
+        }
+        .ai-principle {
+            border-top: 2px solid #1a1c1d;
+            min-height: 178px;
+            padding-top: 18px;
+            padding-bottom: 8px;
+        }
+        .ai-principle .ai-principle-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 34px;
+            height: 34px;
+            margin-top: 0;
+            margin-bottom: 16px;
+            border-radius: 999px;
+            background: #eef4ff;
+            color: #1554e8;
+            font-size: 20px;
+            line-height: 1;
+        }
+        .ai-principle strong {
+            display: block;
+            color: #171717;
+            font-size: 18px;
+            font-weight: 800;
+            line-height: 1.35;
+        }
+        .ai-principle span {
+            display: block;
+            margin-top: 8px;
+            color: #5d6368;
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 1.5;
+        }
+        .ai-principle p {
+            margin-top: 14px;
+            color: #6a7075;
+            font-size: 13px;
+            font-weight: 500;
+            line-height: 1.65;
+        }
+        .hero-lede li::marker {
+            color: #141516;
+            font-size: 0.72em;
+        }
+        .hero-links {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 28px;
+            color: #2f3438;
+            font-family: "Inter", "Noto Sans KR", sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            line-height: 20px;
+        }
+        .hero-links a {
+            color: inherit;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(47, 52, 56, 0.35);
+            transition: border-color 0.2s ease, color 0.2s ease;
+        }
+        .hero-links a:hover {
+            color: #141516;
+            border-bottom-color: #141516;
+        }
+        .hero-links span {
+            color: #8b9196;
+            font-weight: 600;
+        }
+        .hero-portrait {
+            position: absolute;
+            inset: 0 var(--hero-image-offset) 0 auto;
+            width: var(--hero-image-width);
+            height: 100%;
+            overflow: hidden;
+            background: #f9f9fb;
+            z-index: 0;
+        }
+        .hero-portrait img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center center;
+        }
+        .career-role {
+            margin-top: 6px;
+            color: #4c5155;
+            font-size: 15px;
+            font-weight: 600;
+            line-height: 24px;
+        }
+        .career-stack {
+            margin-top: 12px;
+            color: #6a7075;
+            font-size: 13px;
+            font-weight: 600;
+            line-height: 22px;
+        }
+        #projects,
+        #experience,
+        #teaching {
+            padding-top: 24px;
+        }
+        .project-section {
+            background: #f9f9fb;
+        }
+        .project-header {
+            margin-bottom: 36px;
+            padding-bottom: 28px;
+            border-bottom: 1px solid #e6e7e9;
+        }
+        .project-eyebrow {
+            display: block;
+            margin-bottom: 10px;
+            color: #6a7075;
+            font-family: "Inter", "Noto Sans KR", sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0;
+            text-transform: uppercase;
+        }
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 20px;
+        }
+        .project-card {
+            display: flex;
+            min-height: 410px;
+            flex-direction: column;
+            padding: 24px;
+            border: 1px solid #e1e4e7;
+            border-radius: 8px;
+            background: #ffffff;
+            color: inherit;
+            text-decoration: none;
+            transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        button.project-card {
+            width: 100%;
+            font: inherit;
+            text-align: left;
+            cursor: pointer;
+        }
+        .project-card:hover {
+            transform: translateY(-3px);
+            border-color: #111314;
+            box-shadow: 0 18px 40px rgba(17, 19, 20, 0.08);
+        }
+        .project-media {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 156px;
+            margin-bottom: 22px;
+            overflow: hidden;
+            border: 1px solid #eef1f4;
+            border-radius: 6px;
+            background: #f8fafc;
+        }
+        .project-media img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 18px;
+        }
+        .project-media--mark {
+            background:
+                linear-gradient(135deg, rgba(20, 21, 22, 0.03), rgba(20, 21, 22, 0)),
+                #f8fafc;
+        }
+        .project-media--cveradar {
+            background: #ffffff;
+        }
+        .cveradar-logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #111827;
+            font-family: "Inter", "Noto Sans KR", sans-serif;
+            font-size: 22px;
+            font-weight: 800;
+            line-height: 1;
+        }
+        .cveradar-logo-mark {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            background: #f97316;
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: 800;
+            line-height: 1;
+        }
+        .project-kind {
+            color: #6a7075;
+            font-family: "Inter", "Noto Sans KR", sans-serif;
+            font-size: 12px;
+            font-weight: 700;
+            line-height: 18px;
+            text-transform: uppercase;
+        }
+        .project-card-title {
+            margin-top: 14px;
+            color: #141516;
+            font-size: 22px;
+            font-weight: 800;
+            line-height: 1.25;
+        }
+        .project-card-copy {
+            margin-top: 14px;
+            color: #4f565c;
+            font-size: 14px;
+            line-height: 1.68;
+        }
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+            margin-top: auto;
+            padding-top: 22px;
+        }
+        .project-tags li {
+            padding: 5px 9px;
+            border: 1px solid #dde1e5;
+            border-radius: 999px;
+            color: #4f565c;
+            font-size: 12px;
+            font-weight: 700;
+            line-height: 16px;
+        }
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            margin-top: 18px;
+            color: #141516;
+            font-size: 13px;
+            font-weight: 800;
+            line-height: 20px;
+        }
+        .project-link .material-symbols-outlined {
+            font-size: 17px;
+        }
+        .teaching-section {
+            background: #ffffff;
+        }
+        .teaching-header {
+            margin-bottom: 0;
+            padding-bottom: 28px;
+            border-bottom: 1px solid #e6e7e9;
+        }
+        .teaching-list {
+            display: grid;
+        }
+        .teaching-item {
+            display: grid;
+            grid-template-columns: 190px minmax(0, 1fr);
+            gap: 36px;
+            align-items: start;
+            padding: 24px 0;
+            border-bottom: 1px solid #eceeef;
+        }
+        .teaching-period {
+            color: #6a7075;
+            font-family: "Inter", "Noto Sans KR", sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            line-height: 24px;
+            white-space: nowrap;
+        }
+        .teaching-course {
+            color: #141516;
+            display: block;
+            font-size: 18px;
+            font-weight: 700;
+            line-height: 1.55;
+        }
+        .teaching-detail {
+            min-width: 0;
+        }
+        .teaching-detail summary {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 24px;
+            gap: 16px;
+            align-items: center;
+            cursor: pointer;
+            list-style: none;
+        }
+        .teaching-detail summary::-webkit-details-marker {
+            display: none;
+        }
+        .teaching-detail summary::after {
+            content: "+";
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 22px;
+            height: 22px;
+            border: 1px solid #cfd3d7;
+            border-radius: 50%;
+            color: #4c5155;
+            font-size: 14px;
+            font-weight: 800;
+            line-height: 1;
+        }
+        .teaching-detail[open] summary::after {
+            content: "-";
+        }
+        .teaching-stack-groups {
+            display: grid;
+            gap: 12px;
+            margin-top: 16px;
+        }
+        .teaching-stack-group {
+            display: grid;
+            gap: 7px;
+        }
+        .teaching-stack-label {
+            color: #6a7075;
+            font-size: 12px;
+            font-weight: 800;
+            line-height: 18px;
+        }
+        .teaching-stack-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+            margin-top: 0;
+            padding: 0;
+            list-style: none;
+        }
+        .teaching-stack-list li {
+            padding: 5px 9px;
+            border: 1px solid #dde1e5;
+            border-radius: 999px;
+            color: #4f565c;
+            font-size: 12px;
+            font-weight: 700;
+            line-height: 16px;
+        }
+        .activity-list {
+            display: grid;
+            border-top: 1px solid #e2e2e4;
+        }
+        .activity-item {
+            display: grid;
+            grid-template-columns: 170px minmax(0, 1fr);
+            gap: 36px;
+            padding: 26px 0;
+            border-bottom: 1px solid #e2e2e4;
+        }
+        .activity-meta {
+            color: #6a7075;
+            font-family: "Inter", "Noto Sans KR", sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            line-height: 22px;
+        }
+        .activity-title {
+            color: #141516;
+            font-size: 22px;
+            font-weight: 800;
+            line-height: 1.35;
+        }
+        .activity-copy {
+            margin-top: 8px;
+            color: #4f565c;
+            font-size: 15px;
+            line-height: 1.7;
+        }
+        .activity-detail {
+            display: grid;
+            gap: 5px;
+            margin-top: 10px;
+            padding-left: 18px;
+            color: #4f565c;
+            font-size: 14px;
+            line-height: 1.55;
+            list-style: disc;
+        }
+        .activity-detail li {
+            padding-left: 2px;
+        }
+        .activity-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            margin-left: 8px;
+            color: #141516;
+            font-size: 12px;
+            font-weight: 800;
+            line-height: 18px;
+            text-decoration: none;
+        }
+        .activity-link--pending {
+            color: #6a7075;
+            text-decoration: none;
+        }
+        .collaboration-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 14px;
+            margin-top: 18px;
+        }
+        .collaboration-shot {
+            min-width: 0;
+            overflow: hidden;
+            border: 1px solid #dfe3e7;
+            border-radius: 8px;
+            background: #ffffff;
+        }
+        .collaboration-shot img {
+            display: block;
+            width: 100%;
+            aspect-ratio: 16 / 10;
+            object-fit: cover;
+        }
+        .collaboration-shot figcaption {
+            padding: 10px 12px;
+            color: #4f565c;
+            font-size: 13px;
+            font-weight: 700;
+            line-height: 1.45;
+        }
+        @media (max-width: 767px) {
+            .hero-section {
+                min-height: 460px;
+                padding-top: 58px;
+                padding-bottom: 64px;
+                background-position: center top;
+            }
+            .hero-title {
+                font-size: 40px;
+                line-height: 1.12;
+            }
+            .hero-content {
+                display: block;
+                text-align: center;
+            }
+            .hero-copy {
+                max-width: 100%;
+            }
+            .hero-eyebrow {
+                justify-content: center;
+                font-size: 13px;
+            }
+            .hero-kicker {
+                font-size: 17px;
+            }
+            .ai-principles-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding-top: 48px;
+                padding-bottom: 60px;
+            }
+            .ai-principle {
+                min-height: auto;
+            }
+            .hero-lede {
+                max-width: 100%;
+                margin-top: 18px;
+            }
+            .hero-links {
+                justify-content: center;
+                margin-top: 24px;
+            }
+            .hero-portrait {
+                display: none;
+            }
+            .section-title {
+                font-size: 32px;
+                line-height: 1.35;
+            }
+            .ko-card {
+                padding: 24px;
+            }
+            #experience .relative.ml-4 {
+                margin-left: 0;
+            }
+            #experience .absolute.left-\[-5px\] {
+                left: -1px;
+            }
+            #experience .pl-12 {
+                padding-left: 28px;
+            }
+            #experience .career-list > :not([hidden]) ~ :not([hidden]) {
+                margin-top: 40px;
+            }
+            #experience .font-label-md.uppercase {
+                font-size: 12px;
+                line-height: 20px;
+            }
+            .career-role {
+                font-size: 14px;
+                line-height: 22px;
+            }
+            .career-stack {
+                font-size: 12px;
+                line-height: 20px;
+            }
+            #projects,
+            #experience,
+            #teaching {
+                padding-top: 24px;
+            }
+            .project-header {
+                margin-bottom: 22px;
+                padding-bottom: 22px;
+            }
+            .project-grid {
+                grid-template-columns: 1fr;
+                gap: 14px;
+            }
+            .project-card {
+                min-height: auto;
+                padding: 22px;
+            }
+            .project-media {
+                height: 128px;
+                margin-bottom: 18px;
+            }
+            .project-media img {
+                padding: 14px;
+            }
+            .project-card-title {
+                font-size: 20px;
+            }
+            .teaching-header {
+                display: block;
+                margin-bottom: 0;
+                padding-bottom: 22px;
+            }
+            .teaching-list {
+                grid-template-columns: 1fr;
+            }
+            .teaching-item {
+                grid-template-columns: 1fr;
+                gap: 6px;
+                padding: 20px 0;
+            }
+            .teaching-period {
+                font-size: 13px;
+                line-height: 20px;
+            }
+            .teaching-course {
+                font-size: 16px;
+                line-height: 1.58;
+            }
+            .teaching-detail summary {
+                grid-template-columns: minmax(0, 1fr) 22px;
+                gap: 10px;
+            }
+            .teaching-stack-list {
+                margin-top: 12px;
+            }
+            .activity-item {
+                grid-template-columns: 1fr;
+                gap: 6px;
+                padding: 22px 0;
+            }
+            .activity-title {
+                font-size: 20px;
+            }
+            .activity-copy {
+                font-size: 14px;
+            }
+        }
+        @media (min-width: 768px) and (max-width: 1120px) {
+            .hero-content {
+                display: block;
+                text-align: left;
+            }
+            .hero-copy {
+                max-width: 100%;
+            }
+            .hero-portrait {
+                display: none;
+            }
+            .project-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md selection:bg-primary-fixed selection:text-on-primary-fixed ko-copy">
+<header class="sticky top-0 z-50 border-b border-neutral-200 bg-white/90 backdrop-blur">
+<div class="mx-auto flex h-16 max-w-6xl items-center justify-between px-5">
+<a class="display text-lg font-extrabold text-neutral-950" href="index.html">김개발</a>
+<nav class="hidden items-center gap-7 md:flex">
+<a class="text-sm font-bold text-blue-700" href="index.html">홈</a>
+<a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="mini-project.html">미니프로젝트</a>
+<a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="final-project.html">파이널프로젝트</a>
+<a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="troubleshooting.html">트러블슛팅</a>
+</nav>
+<details class="relative md:hidden">
+<summary class="list-none p-2 text-neutral-900 cursor-pointer">
+<span class="material-symbols-outlined">menu</span>
+</summary>
+<nav class="absolute right-0 mt-2 w-48 rounded-lg border border-neutral-200 bg-white p-2 shadow-lg">
+<a class="block rounded px-3 py-2 text-sm font-bold text-blue-700" href="index.html">홈</a>
+<a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="mini-project.html">미니프로젝트</a>
+<a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="final-project.html">파이널프로젝트</a>
+<a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="troubleshooting.html">트러블슛팅</a>
+</nav>
+</details>
+</div>
+</header>
+<main class="overflow-x-hidden">
+<!-- 히어로 섹션 -->
+<section class="hero-section flex flex-col justify-center items-center px-margin-mobile md:px-margin-desktop">
+<figure class="hero-portrait" aria-label="김개발 프로필 이미지">
+<img src="assets/profile-hero.jpg" alt="김개발 프로필 사진" width="900" height="1200"/>
+</figure>
+<div class="hero-content reveal-on-scroll visible">
+<div class="hero-copy">
+<span class="hero-eyebrow">백엔드 신입 개발자</span>
+<h1 class="hero-title">안녕하세요, 김개발입니다.</h1>
+<p class="hero-kicker">요구사항과 검증 기준을 먼저 정리하고, AI와 도구를 활용해 구현 속도와 품질을 함께 높이는 백엔드 개발자를 지향합니다.</p>
+<div class="hero-lede text-on-surface-variant">
+<p>AI가 제안한 코드는 그대로 사용하지 않고, 프로젝트 구조와 의존성, 예외 흐름을 확인한 뒤 필요한 형태로 적용합니다.</p>
+<p>구현 이후에도 로그 분석, 장애 재현, 개선 과정을 기록하며 서비스가 동작하는 전체 흐름을 이해하려고 합니다.</p>
+</div>
+<div class="hero-links" aria-label="홈 주요 링크">
+</div>
+</div>
+</div>
+</section>
+<!-- AI 활용 원칙 -->
+<section class="ai-principles-section px-margin-mobile md:px-margin-desktop" aria-label="AI 활용 원칙">
+<div class="max-w-container-max mx-auto">
+<div class="ai-principles-grid reveal-on-scroll">
+<div class="ai-principle">
+<span class="material-symbols-outlined ai-principle-icon" aria-hidden="true">checklist</span>
+<strong>요구사항 먼저</strong>
+<span>검증 기준을 먼저 정의합니다.</span>
+<p>기능 범위, 입력과 출력, 실패 조건을 정리한 뒤 구현 범위를 작게 나눕니다.</p>
+</div>
+<div class="ai-principle">
+<span class="material-symbols-outlined ai-principle-icon" aria-hidden="true">smart_toy</span>
+<strong>AI 활용 환경 설계</strong>
+<span>AI가 안전하게 작동할 조건을 만듭니다.</span>
+<p>모호한 요청을 바로 코드로 넘기지 않고, 컨텍스트와 제약 조건을 함께 제공합니다.</p>
+</div>
+<div class="ai-principle">
+<span class="material-symbols-outlined ai-principle-icon" aria-hidden="true">verified_user</span>
+<strong>개발자 책임</strong>
+<span>동작 원리와 의존성을 분석합니다.</span>
+<p>생성된 코드는 직접 읽고 수정하며, 배포 이후 로그와 오류까지 확인합니다.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- 프로젝트 섹션 -->
+<section class="project-section py-section-v-padding px-margin-mobile md:px-margin-desktop" id="projects">
+<div class="max-w-container-max mx-auto">
+<div class="project-header reveal-on-scroll">
+<div>
+<h2 class="font-headline-lg text-headline-lg section-title">프로젝트</h2>
+</div>
+</div>
+<div class="project-grid">
+<a class="project-card reveal-on-scroll" href="mini-project.html" aria-label="미니프로젝트 페이지로 이동">
+<div class="project-media project-media--cveradar">
+<span class="material-symbols-outlined text-[48px] text-on-surface-variant" aria-hidden="true">code</span>
+</div>
+<span class="project-kind">Mini Project</span>
+<h3 class="project-card-title">미니프로젝트</h3>
+<p class="project-card-copy">회원 기반 게시판 서비스를 통해 CRUD, 검색과 페이징, 입력 검증, DB 연동처럼 웹 서비스의 기본 흐름을 구현한 프로젝트입니다.</p>
+<ul class="project-tags" aria-label="기술스택">
+<li>Java</li>
+<li>Spring Boot</li>
+<li>MySQL</li>
+<li>Thymeleaf</li>
+</ul>
+<span class="project-link">페이지 보기 <span class="material-symbols-outlined" aria-hidden="true">arrow_outward</span></span>
+</a>
+<a class="project-card reveal-on-scroll" href="final-project.html" aria-label="파이널프로젝트 페이지로 이동">
+<div class="project-media project-media--cveradar">
+<span class="material-symbols-outlined text-[48px] text-on-surface-variant" aria-hidden="true">rocket_launch</span>
+</div>
+<span class="project-kind">Final Project</span>
+<h3 class="project-card-title">파이널프로젝트</h3>
+<p class="project-card-copy">생성형 AI SaaS 플랫폼을 팀 프로젝트로 구현하며 요구사항 정의, API 설계, 기능 구현, 배포와 협업 과정을 함께 정리했습니다.</p>
+<ul class="project-tags" aria-label="기술스택">
+<li>Spring Boot</li>
+<li>REST API</li>
+<li>Docker</li>
+<li>AWS</li>
+</ul>
+<span class="project-link">페이지 보기 <span class="material-symbols-outlined" aria-hidden="true">arrow_outward</span></span>
+</a>
+<a class="project-card reveal-on-scroll" href="troubleshooting.html" aria-label="트러블슛팅 페이지로 이동">
+<div class="project-media project-media--cveradar">
+<span class="material-symbols-outlined text-[48px] text-on-surface-variant" aria-hidden="true">build</span>
+</div>
+<span class="project-kind">Troubleshooting</span>
+<h3 class="project-card-title">트러블슛팅 기록</h3>
+<p class="project-card-copy">프로젝트 중 만난 배포, API, DB 연동, 인증 흐름 이슈를 재현 조건부터 원인 분석, 해결 방법, 재검증까지 정리했습니다.</p>
+<ul class="project-tags" aria-label="기술스택">
+<li>Debugging</li>
+<li>Log</li>
+<li>Deploy</li>
+<li>API</li>
+</ul>
+<span class="project-link">페이지 보기 <span class="material-symbols-outlined" aria-hidden="true">arrow_outward</span></span>
+</a>
+</div>
+</div>
+</section>
+<!-- 이력 섹션 -->
+<section class="bg-white py-section-v-padding px-margin-mobile md:px-margin-desktop" id="experience">
+<div class="max-w-container-max mx-auto">
+<h2 class="font-headline-lg text-headline-lg section-title mb-stack-lg border-b border-outline-variant pb-stack-sm">이력</h2>
+<div class="relative ml-4 md:ml-0">
+<!-- 타임라인 세로선 -->
+<div class="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-outline-variant transform md:-translate-x-1/2"></div>
+<div class="career-list space-y-16">
+<!-- History 1 -->
+<div class="relative flex flex-col md:flex-row items-start md:items-center">
+<div class="hidden md:block w-1/2 pr-16 text-right reveal-on-scroll">
+<span class="font-label-md text-label-md text-secondary">2026.06 — 현재</span>
+</div>
+<div class="absolute left-[-5px] md:left-1/2 w-[11px] h-[11px] bg-primary rounded-full md:-translate-x-1/2 z-10"></div>
+<div class="w-full md:w-1/2 pl-12 md:pl-16 reveal-on-scroll">
+<span class="md:hidden font-label-md text-label-md text-secondary block mb-2">2026.06 — 현재</span>
+<h3 class="font-headline-md text-headline-md mb-2">신입 백엔드 개발자 포트폴리오 정리</h3>
+<p class="career-role">프로젝트 구현 내용, 트러블슛팅 기록, 협업 자료를 신입 백엔드 개발자 지원용 포트폴리오로 정리하고 있습니다.</p>
+</div>
+</div>
+<!-- History 2 -->
+<div class="relative flex flex-col md:flex-row-reverse items-start md:items-center">
+<div class="hidden md:block w-1/2 pl-16 text-left reveal-on-scroll">
+<span class="font-label-md text-label-md text-secondary">2026.01 — 2026.07</span>
+</div>
+<div class="absolute left-[-5px] md:left-1/2 w-[11px] h-[11px] bg-outline-variant rounded-full md:-translate-x-1/2 z-10"></div>
+<div class="w-full md:w-1/2 pr-0 md:pr-16 pl-12 md:pl-0 md:text-right reveal-on-scroll">
+<span class="md:hidden font-label-md text-label-md text-secondary block mb-2">2026.01 — 2026.07</span>
+<h3 class="font-headline-md text-headline-md mb-2">코리아IT아카데미</h3>
+<p class="career-role">클라우드네이티브&amp;생성형AI SaaS플랫폼 구축 과정</p>
+</div>
+</div>
+<!-- History 3 -->
+<div class="relative flex flex-col md:flex-row items-start md:items-center">
+<div class="hidden md:block w-1/2 pr-16 text-right reveal-on-scroll">
+<span class="font-label-md text-label-md text-secondary">2025.02</span>
+</div>
+<div class="absolute left-[-5px] md:left-1/2 w-[11px] h-[11px] bg-outline-variant rounded-full md:-translate-x-1/2 z-10"></div>
+<div class="w-full md:w-1/2 pl-12 md:pl-16 reveal-on-scroll">
+<span class="md:hidden font-label-md text-label-md text-secondary block mb-2">2025.02</span>
+<h3 class="font-headline-md text-headline-md mb-2">서울대학교 컴퓨터공학과</h3>
+<p class="career-role">컴퓨터공학 전공 졸업</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 문제 해결 요약 -->
+<section class="bg-surface-container-low py-12 md:py-14 px-margin-mobile md:px-margin-desktop" id="awards">
+<div class="max-w-container-max mx-auto reveal-on-scroll">
+<div class="border-y border-outline-variant py-10">
+<span class="font-label-md text-label-md text-secondary uppercase">Problem Solving</span>
+<div class="mt-3 grid gap-6 md:grid-cols-[1.22fr_0.78fr] md:items-start">
+<div>
+<h2 class="font-headline-lg text-headline-lg section-title">트러블슛팅 기록으로 보여주는 성장</h2>
+<p class="mt-4 text-body-md text-on-surface-variant">프로젝트를 진행하며 만난 오류를 재현 조건, 원인 분석, 해결 과정, 검증 결과로 나누어 기록했습니다.</p>
+<p class="mt-4 text-body-md text-on-surface-variant">결과 화면만 확인하지 않고 로그, 요청 값, DB 상태를 함께 보며 문제가 발생한 지점을 좁혀갑니다.</p>
+<p class="mt-4 text-body-md text-on-surface-variant">같은 문제가 반복되지 않도록 원인과 확인 기준을 남기는 습관을 포트폴리오에 담았습니다.</p>
+</div>
+<div class="grid gap-6 md:w-full md:max-w-[500px] md:justify-self-end">
+<div class="grid gap-2 rounded-lg border border-outline-variant bg-white p-5 md:grid-cols-[36px_1fr]">
+<span class="font-label-md text-label-md text-secondary">01</span>
+<p class="text-body-md font-semibold md:whitespace-nowrap">문제 상황과 재현 조건을 먼저 적습니다.</p>
+</div>
+<div class="grid gap-2 rounded-lg border border-outline-variant bg-white p-5 md:grid-cols-[36px_1fr]">
+<span class="font-label-md text-label-md text-secondary">02</span>
+<p class="text-body-md font-semibold md:whitespace-nowrap">로그, 요청 값, DB 상태를 기준으로 원인을 좁힙니다.</p>
+</div>
+<div class="grid gap-2 rounded-lg border border-outline-variant bg-white p-5 md:grid-cols-[36px_1fr]">
+<span class="font-label-md text-label-md text-secondary">03</span>
+<p class="text-body-md font-semibold md:whitespace-nowrap">수정 후 같은 조건에서 다시 검증합니다.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 협업 방식 -->
+<section class="py-section-v-padding px-margin-mobile md:px-margin-desktop bg-white" id="seminars">
+<div class="max-w-container-max mx-auto">
+<div class="reveal-on-scroll">
+<h2 class="font-headline-lg text-headline-lg section-title mb-stack-lg">협업 방식</h2>
+</div>
+<div class="activity-list">
+<article class="activity-item reveal-on-scroll">
+<span class="activity-meta">Notion</span>
+<div>
+<h4 class="activity-title">회의와 요구사항을 문서로 남깁니다</h4>
+<p class="activity-copy">기능 요구사항, 역할 분담, 진행 상황, 회의 내용을 Notion에 정리해 팀원이 같은 기준으로 작업할 수 있도록 맞춥니다.</p>
+<div class="collaboration-gallery" aria-label="Notion 협업 자료 이미지 영역">
+<figure class="collaboration-shot">
+<img src="assets/profile-hero.jpg" alt="Notion 회의록 및 요구사항 정리 예시 이미지" width="900" height="1200"/>
+<figcaption>Notion 회의록 및 요구사항 정리</figcaption>
+</figure>
+<figure class="collaboration-shot">
+<img src="assets/profile-hero.jpg" alt="Notion 작업 현황과 담당자 관리 예시 이미지" width="900" height="1200"/>
+<figcaption>작업 현황과 담당자 관리</figcaption>
+</figure>
+</div>
+</div>
+</article>
+<article class="activity-item reveal-on-scroll">
+<span class="activity-meta">GitHub</span>
+<div>
+<h4 class="activity-title">브랜치 전략과 커밋 컨벤션을 맞춥니다</h4>
+<ul class="activity-detail">
+<li>기능 단위 브랜치를 만들고, 작업 범위가 한 PR에 과하게 섞이지 않도록 관리합니다.</li>
+<li>커밋 메시지는 변경 의도가 드러나도록 팀 컨벤션에 맞춰 작성합니다.</li>
+</ul>
+<div class="collaboration-gallery" aria-label="GitHub 브랜치와 커밋 자료 이미지 영역">
+<figure class="collaboration-shot">
+<img src="assets/profile-hero.jpg" alt="GitHub 브랜치 전략 예시 이미지" width="900" height="1200"/>
+<figcaption>브랜치 전략</figcaption>
+</figure>
+<figure class="collaboration-shot">
+<img src="assets/profile-hero.jpg" alt="GitHub 커밋 컨벤션 예시 이미지" width="900" height="1200"/>
+<figcaption>커밋 컨벤션</figcaption>
+</figure>
+</div>
+</div>
+</article>
+<article class="activity-item reveal-on-scroll">
+<span class="activity-meta">Issue</span>
+<div>
+<h4 class="activity-title">이슈 단위로 작업을 추적합니다</h4>
+<p class="activity-copy">구현할 기능, 버그, 개선 사항을 이슈로 나누고 진행 상태와 완료 기준을 남겨 작업 흐름이 보이도록 정리합니다.</p>
+<div class="collaboration-gallery" aria-label="GitHub 이슈 자료 이미지 영역">
+<figure class="collaboration-shot">
+<img src="assets/profile-hero.jpg" alt="GitHub 이슈 목록 예시 이미지" width="900" height="1200"/>
+<figcaption>GitHub 이슈 목록</figcaption>
+</figure>
+<figure class="collaboration-shot">
+<img src="assets/profile-hero.jpg" alt="GitHub 이슈 상세와 진행 기록 예시 이미지" width="900" height="1200"/>
+<figcaption>이슈 상세와 진행 기록</figcaption>
+</figure>
+</div>
+</div>
+</article>
+<article class="activity-item reveal-on-scroll">
+<span class="activity-meta">Code Review</span>
+<div>
+<h4 class="activity-title">코드리뷰 코멘트로 개선 과정을 남깁니다</h4>
+<p class="activity-copy">구현 결과만 공유하지 않고, 리뷰 코멘트와 수정 내역을 함께 기록해 팀 안에서 개선한 과정을 남깁니다.</p>
+<div class="collaboration-gallery" aria-label="코드리뷰 자료 이미지 영역">
+<figure class="collaboration-shot">
+<img src="assets/profile-hero.jpg" alt="Pull Request 코드리뷰 코멘트 예시 이미지" width="900" height="1200"/>
+<figcaption>Pull Request</figcaption>
+</figure>
+<figure class="collaboration-shot">
+<img src="assets/profile-hero.jpg" alt="코드리뷰 반영 기록 예시 이미지" width="900" height="1200"/>
+<figcaption>코드리뷰</figcaption>
+</figure>
+</div>
+</div>
+</article>
+</div>
+</div>
+</section>
+</main>
+<!-- 푸터 -->
+<footer class="bg-white border-t border-neutral-200">
+<div class="mx-auto max-w-6xl px-5 py-8 text-sm text-neutral-500">
+<div class="flex items-baseline justify-between gap-6">
+<span class="font-bold text-neutral-900">김개발</span>
+<a class="font-bold text-neutral-900" href="https://github.com/your-github-profile" target="_blank" rel="noreferrer">GitHub 프로필</a>
+</div>
+<p class="mt-2">© 2026 백엔드 신입 개발자 포트폴리오. Java, Spring Boot, DB, 배포와 문제 해결.</p>
+</div>
+</footer>
+<script src="assets/image-modal.js" defer></script>
+<script>
+    // Simple Intersection Observer for reveal effects
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
+
+    // Smooth scroll for nav links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const href = this.getAttribute('href');
+            if (href === '#') {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+                return;
+            }
+
+            const target = document.querySelector(href);
+            if (target) {
+                window.scrollTo({
+                    top: target.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+
+    // Active Link Highlighting
+    window.addEventListener('scroll', () => {
+        const sections = ['projects', 'experience', 'teaching', 'awards', 'seminars'];
+        let current = '';
+
+        sections.forEach(section => {
+            const sectionEl = document.getElementById(section);
+            if (sectionEl) {
+                const sectionTop = sectionEl.offsetTop;
+                if (pageYOffset >= sectionTop - 150) {
+                    current = section;
+                }
+            }
+        });
+
+        document.querySelectorAll('nav .nav-link').forEach(a => {
+            a.classList.remove('nav-link-active');
+            if (a.getAttribute('href') === `#${current}`) {
+                a.classList.add('nav-link-active');
+            }
+        });
+    });
+</script>
+</body></html>

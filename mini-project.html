@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>미니프로젝트 | 회원 기반 게시판 서비스</title>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;600;700;800&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  body { font-family: "Noto Sans KR", sans-serif; color: #171717; background: #fafafa; word-break: keep-all; overflow-wrap: break-word; }
+  .display { font-family: "Hanken Grotesk", "Noto Sans KR", sans-serif; letter-spacing: 0; }
+  .material-symbols-outlined { font-variation-settings: "FILL" 0, "wght" 450, "GRAD" 0, "opsz" 24; }
+  .project-shot { aspect-ratio: 16 / 10; width: 100%; object-fit: cover; }
+</style>
+</head>
+<body>
+<header class="sticky top-0 z-50 border-b border-neutral-200 bg-white/90 backdrop-blur">
+  <div class="mx-auto flex h-16 max-w-6xl items-center justify-between px-5">
+    <a class="display text-lg font-extrabold text-neutral-950" href="index.html">김개발</a>
+    <nav class="hidden items-center gap-7 md:flex">
+      <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="index.html">홈</a>
+      <a class="text-sm font-bold text-blue-700" href="mini-project.html">미니프로젝트</a>
+      <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="final-project.html">파이널프로젝트</a>
+      <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="troubleshooting.html">트러블슛팅</a>
+    </nav>
+    <details class="relative md:hidden">
+      <summary class="list-none p-2 text-neutral-900"><span class="material-symbols-outlined">menu</span></summary>
+      <nav class="absolute right-0 mt-2 w-48 rounded-lg border border-neutral-200 bg-white p-2 shadow-lg">
+        <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="index.html">홈</a>
+        <a class="block rounded px-3 py-2 text-sm font-bold text-blue-700" href="mini-project.html">미니프로젝트</a>
+        <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="final-project.html">파이널프로젝트</a>
+        <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="troubleshooting.html">트러블슛팅</a>
+      </nav>
+    </details>
+  </div>
+</header>
+
+<main>
+  <section class="bg-white">
+    <div class="mx-auto grid max-w-6xl gap-10 px-5 py-20 md:grid-cols-[1.05fr_0.95fr] md:items-center">
+      <div>
+        <p class="text-sm font-bold uppercase text-blue-700">Mini Project</p>
+        <h1 class="display mt-3 text-4xl font-extrabold leading-tight text-neutral-950 md:text-6xl">회원 기반 게시판 서비스</h1>
+        <p class="mt-6 max-w-3xl text-lg leading-8 text-neutral-700">회원 가입, 게시글 작성, 검색, 댓글, 권한 검증을 포함해 웹 서비스의 기본 흐름을 구현한 프로젝트입니다. 화면 구현에 그치지 않고 API 요청, DB 저장 구조, 예외 응답, 배포 환경까지 함께 확인했습니다.</p>
+        <div class="mt-8 flex flex-wrap gap-2">
+          <span class="rounded bg-blue-50 px-3 py-1 text-sm font-bold text-blue-700">Java</span>
+          <span class="rounded bg-blue-50 px-3 py-1 text-sm font-bold text-blue-700">Spring Boot</span>
+          <span class="rounded bg-blue-50 px-3 py-1 text-sm font-bold text-blue-700">MySQL</span>
+          <span class="rounded bg-blue-50 px-3 py-1 text-sm font-bold text-blue-700">Thymeleaf</span>
+          <span class="rounded bg-blue-50 px-3 py-1 text-sm font-bold text-blue-700">AWS EC2</span>
+        </div>
+      </div>
+      <figure class="overflow-hidden rounded-lg border border-neutral-200 bg-neutral-100">
+        <img class="project-shot" src="assets/profile-hero.jpg" alt="회원 기반 게시판 서비스 대표 화면" width="900" height="1200"/>
+        <figcaption class="border-t border-neutral-200 bg-white px-4 py-3 text-sm font-semibold text-neutral-600">서비스 메인 화면</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="bg-neutral-50">
+    <div class="mx-auto max-w-6xl px-5 py-16">
+      <div class="grid gap-4 md:grid-cols-[0.8fr_1.2fr] md:items-end">
+      <div>
+        <p class="text-sm font-bold text-blue-700">Repository</p>
+        <div class="mt-2 flex flex-wrap items-center gap-3">
+          <h2 class="display text-3xl font-extrabold text-neutral-950">GitHub 저장소</h2>
+          <span class="inline-flex rounded bg-white px-2.5 py-1 text-xs font-bold uppercase text-blue-700 ring-1 ring-neutral-200">Multi Repo</span>
+        </div>
+      </div>
+      </div>
+      <div class="mt-6 grid gap-3 md:grid-cols-3">
+        <a class="flex min-h-36 flex-col justify-between rounded-lg border border-neutral-200 bg-white p-4 transition hover:border-blue-700 hover:shadow-sm" href="https://github.com/your-github-profile/mini-board-backend" target="_blank" rel="noreferrer">
+          <div>
+          <p class="font-bold text-neutral-950">mini-board-backend</p>
+          <p class="mt-1 text-sm text-neutral-600">Spring Boot API, 인증, 게시글/댓글 도메인</p>
+          </div>
+          <span class="mt-4 inline-flex items-center gap-1 text-sm font-bold text-blue-700">GitHub 바로가기 <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_outward</span></span>
+        </a>
+        <a class="flex min-h-36 flex-col justify-between rounded-lg border border-neutral-200 bg-white p-4 transition hover:border-blue-700 hover:shadow-sm" href="https://github.com/your-github-profile/mini-board-frontend" target="_blank" rel="noreferrer">
+          <div>
+          <p class="font-bold text-neutral-950">mini-board-frontend</p>
+          <p class="mt-1 text-sm text-neutral-600">Thymeleaf 화면, 사용자 흐름, 입력 검증 UI</p>
+          </div>
+          <span class="mt-4 inline-flex items-center gap-1 text-sm font-bold text-blue-700">GitHub 바로가기 <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_outward</span></span>
+        </a>
+        <a class="flex min-h-36 flex-col justify-between rounded-lg border border-neutral-200 bg-white p-4 transition hover:border-blue-700 hover:shadow-sm" href="https://github.com/your-github-profile/mini-board-deploy" target="_blank" rel="noreferrer">
+          <div>
+          <p class="font-bold text-neutral-950">mini-board-deploy</p>
+          <p class="mt-1 text-sm text-neutral-600">AWS 배포 설정, 실행 문서, 환경 변수 정리</p>
+          </div>
+          <span class="mt-4 inline-flex items-center gap-1 text-sm font-bold text-blue-700">GitHub 바로가기 <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_outward</span></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-y border-neutral-200 bg-white">
+    <div class="mx-auto max-w-6xl px-5 py-14">
+      <p class="text-sm font-bold text-blue-700">Design Assets</p>
+      <h2 class="display mt-2 text-3xl font-extrabold text-neutral-950">설계 산출물</h2>
+      <div class="mt-8 grid gap-6 md:grid-cols-3">
+        <figure class="overflow-hidden rounded-lg border border-neutral-200 bg-neutral-100">
+          <img class="project-shot" src="assets/profile-hero.jpg" alt="미니프로젝트 AWS 아키텍처 다이어그램" width="900" height="1200"/>
+          <figcaption class="border-t border-neutral-200 bg-white p-4">
+            <strong class="text-neutral-950">AWS 아키텍처</strong>
+            <p class="mt-2 text-sm leading-6 text-neutral-600">사용자 요청이 애플리케이션 서버와 데이터베이스로 이어지는 배포 구성을 정리합니다.</p>
+          </figcaption>
+        </figure>
+        <figure class="overflow-hidden rounded-lg border border-neutral-200 bg-neutral-100">
+          <img class="project-shot" src="assets/profile-hero.jpg" alt="미니프로젝트 유스케이스 다이어그램" width="900" height="1200"/>
+          <figcaption class="border-t border-neutral-200 bg-white p-4">
+            <strong class="text-neutral-950">유스케이스 다이어그램</strong>
+            <p class="mt-2 text-sm leading-6 text-neutral-600">비회원, 회원, 관리자가 수행하는 기능과 접근 가능한 범위를 구분합니다.</p>
+          </figcaption>
+        </figure>
+        <figure class="overflow-hidden rounded-lg border border-neutral-200 bg-neutral-100">
+          <img class="project-shot" src="assets/profile-hero.jpg" alt="미니프로젝트 ERD" width="900" height="1200"/>
+          <figcaption class="border-t border-neutral-200 bg-white p-4">
+            <strong class="text-neutral-950">ERD</strong>
+            <p class="mt-2 text-sm leading-6 text-neutral-600">회원, 게시글, 댓글, 첨부파일의 관계와 삭제 정책을 함께 정리합니다.</p>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-neutral-50">
+    <div class="mx-auto max-w-6xl px-5 py-14">
+      <p class="text-sm font-bold text-blue-700">Features</p>
+      <h2 class="display mt-2 text-3xl font-extrabold text-neutral-950">구현 기능</h2>
+      <div class="mt-8 grid gap-6 md:grid-cols-2">
+      <article class="overflow-hidden rounded-lg border border-neutral-200 bg-white">
+        <img class="project-shot" src="assets/profile-hero.jpg" alt="회원가입과 로그인 화면" width="900" height="1200"/>
+        <div class="p-5">
+          <h3 class="font-bold text-neutral-950">회원가입과 로그인</h3>
+          <p class="mt-3 text-sm leading-6 text-neutral-600">아이디 중복 검증, 비밀번호 암호화, 세션 기반 로그인 상태 유지, 인증 실패 메시지를 구현했습니다. 로그인 여부에 따라 작성, 수정, 삭제 접근 기준도 분리했습니다.</p>
+        </div>
+      </article>
+      <article class="overflow-hidden rounded-lg border border-neutral-200 bg-white">
+        <img class="project-shot" src="assets/profile-hero.jpg" alt="게시글 목록과 상세 화면" width="900" height="1200"/>
+        <div class="p-5">
+          <h3 class="font-bold text-neutral-950">게시글 CRUD와 권한 검증</h3>
+          <p class="mt-3 text-sm leading-6 text-neutral-600">게시글 작성, 상세 조회, 수정, 삭제를 구현하고 작성자와 관리자만 수정/삭제할 수 있도록 서비스 계층에서 권한을 검증했습니다.</p>
+        </div>
+      </article>
+      <article class="overflow-hidden rounded-lg border border-neutral-200 bg-white">
+        <img class="project-shot" src="assets/profile-hero.jpg" alt="검색과 페이징 화면" width="900" height="1200"/>
+        <div class="p-5">
+          <h3 class="font-bold text-neutral-950">검색과 페이징</h3>
+          <p class="mt-3 text-sm leading-6 text-neutral-600">제목, 작성자, 내용 기준 검색과 페이지 이동을 구현했습니다. 조회 조건이 늘어나도 흐름을 추적하기 쉽도록 Repository 책임을 분리했습니다.</p>
+        </div>
+      </article>
+      <article class="overflow-hidden rounded-lg border border-neutral-200 bg-white">
+        <img class="project-shot" src="assets/profile-hero.jpg" alt="댓글 기능 화면" width="900" height="1200"/>
+        <div class="p-5">
+          <h3 class="font-bold text-neutral-950">댓글과 입력 검증</h3>
+          <p class="mt-3 text-sm leading-6 text-neutral-600">댓글 작성과 삭제, 빈 값 검증, 길이 제한, 예외 응답을 처리했습니다. 잘못된 입력이 들어왔을 때 사용자가 다시 시도할 수 있도록 메시지를 분리했습니다.</p>
+        </div>
+      </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-y border-neutral-200 bg-white">
+    <div class="mx-auto max-w-6xl px-5 py-14">
+      <p class="text-sm font-bold text-blue-700">Architecture Notes</p>
+      <h2 class="display mt-2 text-3xl font-extrabold text-neutral-950">구현하면서 고려한 기술 포인트</h2>
+      <p class="mt-4 max-w-3xl leading-7 text-neutral-700">게시판은 단순 CRUD처럼 보이지만 로그인 상태, 작성자 권한, 검색 조건, 댓글 관계가 함께 얽힙니다. 그래서 요청 흐름과 책임을 나누고, 실패 조건을 명확히 처리하는 데 집중했습니다.</p>
+      <div class="mt-8 space-y-3">
+        <details class="rounded-lg border border-neutral-200 bg-white p-5" open>
+          <summary class="cursor-pointer list-none font-bold text-neutral-950">도메인 분리</summary>
+          <p class="mt-3 text-sm leading-6 text-neutral-700">Controller는 요청과 응답에 집중하고, 핵심 규칙은 Service에서 처리하도록 나눴습니다. Repository는 데이터 접근 책임을 맡겨 기능을 수정할 때 영향 범위를 좁히는 것을 기준으로 삼았습니다.</p>
+        </details>
+        <details class="rounded-lg border border-neutral-200 bg-white p-5" open>
+          <summary class="cursor-pointer list-none font-bold text-neutral-950">예외 처리</summary>
+          <p class="mt-3 text-sm leading-6 text-neutral-700">입력 오류, 인증 실패, 권한 실패를 구분해 원인을 파악할 수 있는 응답을 반환했습니다. 사용자가 다시 시도할 수 있는 오류와 개발자가 확인해야 하는 오류를 나눠 기록했습니다.</p>
+        </details>
+        <details class="rounded-lg border border-neutral-200 bg-white p-5" open>
+          <summary class="cursor-pointer list-none font-bold text-neutral-950">DB 설계</summary>
+          <p class="mt-3 text-sm leading-6 text-neutral-700">회원, 게시글, 댓글 간 관계와 삭제 정책을 기준으로 테이블 구조를 잡았습니다. 외래 키 관계와 조회 조건을 고려해 검색과 페이징 기능이 자연스럽게 이어지도록 설계했습니다.</p>
+        </details>
+        <details class="rounded-lg border border-neutral-200 bg-white p-5" open>
+          <summary class="cursor-pointer list-none font-bold text-neutral-950">배포 확인</summary>
+          <p class="mt-3 text-sm leading-6 text-neutral-700">로컬 실행과 AWS 실행 환경의 차이를 확인하며 환경 변수와 로그를 점검했습니다. 실행 방법, 필요한 설정 값, 오류가 발생했을 때 확인할 위치를 README에 정리하는 방식으로 마무리했습니다.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-neutral-50">
+    <div class="mx-auto max-w-6xl px-5 py-14">
+      <p class="text-sm font-bold text-blue-700">Verification</p>
+      <h2 class="display mt-2 text-3xl font-extrabold text-neutral-950">기능 구현과 검증 기록</h2>
+      <p class="mt-4 max-w-3xl leading-7 text-neutral-700">개인 프로젝트에서는 기능을 많이 넣는 것보다 각 기능의 책임을 나누고, 정상 동작과 실패 조건을 함께 확인하는 데 집중했습니다. 회원, 게시글, 댓글, 검색 기능을 구현 단위로 분리하고 예외, 권한, 입력 검증 결과를 남겼습니다.</p>
+      <div class="mt-10 divide-y divide-neutral-200 border-y border-neutral-200">
+        <article class="grid gap-6 py-8 md:grid-cols-[0.86fr_1.14fr] md:items-center">
+          <div>
+            <p class="text-xs font-bold uppercase text-blue-700">01 / Authentication</p>
+            <h3 class="mt-2 text-xl font-extrabold text-neutral-950">회원 인증을 먼저 고정해 접근 기준을 만들었습니다</h3>
+            <p class="mt-3 text-sm leading-6 text-neutral-700">가입, 로그인, 로그아웃, 인증 실패 흐름을 먼저 구현하고 이후 게시글 작성, 댓글 작성, 수정/삭제 기능의 접근 기준으로 사용했습니다.</p>
+            <ul class="mt-4 grid gap-2 text-sm leading-6 text-neutral-700">
+              <li><strong class="text-neutral-950">확인 조건</strong> 아이디 중복, 비밀번호 오류, 비로그인 요청</li>
+              <li><strong class="text-neutral-950">검증 결과</strong> 로그인 상태에 따라 버튼 노출과 접근 가능 경로를 분리</li>
+            </ul>
+          </div>
+          <figure class="overflow-hidden border border-neutral-200 bg-white">
+            <img class="project-shot" src="assets/profile-hero.jpg" alt="회원 인증과 접근 기준 검증 화면" width="900" height="1200"/>
+            <figcaption class="border-t border-neutral-200 px-4 py-3 text-sm font-semibold text-neutral-600">회원 인증과 접근 기준 검증</figcaption>
+          </figure>
+        </article>
+        <article class="grid gap-6 py-8 md:grid-cols-[1.14fr_0.86fr] md:items-center">
+          <div>
+            <p class="text-xs font-bold uppercase text-blue-700">02 / Permission</p>
+            <h3 class="mt-2 text-xl font-extrabold text-neutral-950">권한과 예외 조건을 화면 버튼 밖에서도 확인했습니다</h3>
+            <p class="mt-3 text-sm leading-6 text-neutral-700">작성자와 관리자만 게시글과 댓글을 수정/삭제할 수 있도록 서비스 계층에서 검증했습니다. 화면 버튼 노출뿐 아니라 직접 URL 요청도 같은 기준으로 막히는지 확인했습니다.</p>
+            <ul class="mt-4 grid gap-2 text-sm leading-6 text-neutral-700">
+              <li><strong class="text-neutral-950">확인 조건</strong> 작성자가 아닌 사용자, 삭제된 게시글, 존재하지 않는 댓글</li>
+              <li><strong class="text-neutral-950">검증 결과</strong> 실패 조건별 메시지와 응답 흐름을 문서에 기록</li>
+            </ul>
+          </div>
+          <figure class="overflow-hidden border border-neutral-200 bg-white md:order-first">
+            <img class="project-shot" src="assets/profile-hero.jpg" alt="권한 검증과 예외 응답 확인 화면" width="900" height="1200"/>
+            <figcaption class="border-t border-neutral-200 px-4 py-3 text-sm font-semibold text-neutral-600">권한 검증과 예외 응답 확인</figcaption>
+          </figure>
+        </article>
+        <article class="grid gap-6 py-8 md:grid-cols-[0.86fr_1.14fr] md:items-center">
+          <div>
+            <p class="text-xs font-bold uppercase text-blue-700">03 / Search & Input</p>
+            <h3 class="mt-2 text-xl font-extrabold text-neutral-950">검색, 페이징, 입력값 검증을 사용자 흐름으로 확인했습니다</h3>
+            <p class="mt-3 text-sm leading-6 text-neutral-700">제목, 내용, 작성자 검색 조건을 나누고 페이지 이동 후에도 조회 조건이 유지되는지 확인했습니다. 빈 제목, 긴 내용, 잘못된 검색 조건처럼 사용자가 만들 수 있는 입력 오류도 함께 점검했습니다.</p>
+            <ul class="mt-4 grid gap-2 text-sm leading-6 text-neutral-700">
+              <li><strong class="text-neutral-950">확인 조건</strong> 검색 조건 유지, 빈 값 입력, 길이 제한</li>
+              <li><strong class="text-neutral-950">검증 결과</strong> 기능별 재현 방법과 수정 결과를 이슈 단위로 정리</li>
+            </ul>
+          </div>
+          <figure class="overflow-hidden border border-neutral-200 bg-white">
+            <img class="project-shot" src="assets/profile-hero.jpg" alt="검색 페이징 입력값 검증 화면" width="900" height="1200"/>
+            <figcaption class="border-t border-neutral-200 px-4 py-3 text-sm font-semibold text-neutral-600">검색, 페이징, 입력값 검증 기록</figcaption>
+          </figure>
+        </article>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="bg-white border-t border-neutral-200">
+  <div class="mx-auto max-w-6xl px-5 py-8 text-sm text-neutral-500">
+      <div class="flex items-baseline justify-between gap-6">
+        <span class="font-bold text-neutral-900">김개발</span>
+        <a class="font-bold text-neutral-900" href="https://github.com/your-github-profile" target="_blank" rel="noreferrer">GitHub 프로필</a>
+      </div>
+      <p class="mt-2">© 2026 백엔드 신입 개발자 포트폴리오. Java, Spring Boot, DB, 배포와 문제 해결.</p>
+  </div>
+</footer>
+<script src="assets/image-modal.js" defer></script>
+</body>
+</html>

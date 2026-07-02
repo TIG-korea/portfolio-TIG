@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>트러블슛팅 | 김개발 포트폴리오</title>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;600;700;800&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  body { font-family: "Noto Sans KR", sans-serif; color: #171717; background: #fafafa; }
+  .display { font-family: "Hanken Grotesk", "Noto Sans KR", sans-serif; letter-spacing: 0; }
+  .material-symbols-outlined { font-variation-settings: "FILL" 0, "wght" 450, "GRAD" 0, "opsz" 24; }
+</style>
+</head>
+<body>
+<header class="sticky top-0 z-50 border-b border-neutral-200 bg-white/90 backdrop-blur">
+  <div class="mx-auto flex h-16 max-w-6xl items-center justify-between px-5">
+    <a class="display text-lg font-extrabold text-neutral-950" href="index.html">김개발</a>
+    <nav class="hidden items-center gap-7 md:flex">
+      <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="index.html">홈</a>
+      <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="mini-project.html">미니프로젝트</a>
+      <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="final-project.html">파이널프로젝트</a>
+      <a class="text-sm font-bold text-blue-700" href="troubleshooting.html">트러블슛팅</a>
+    </nav>
+    <details class="relative md:hidden">
+      <summary class="list-none p-2 text-neutral-900"><span class="material-symbols-outlined">menu</span></summary>
+      <nav class="absolute right-0 mt-2 w-48 rounded-lg border border-neutral-200 bg-white p-2 shadow-lg">
+        <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="index.html">홈</a>
+        <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="mini-project.html">미니프로젝트</a>
+        <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="final-project.html">파이널프로젝트</a>
+        <a class="block rounded px-3 py-2 text-sm font-bold text-blue-700" href="troubleshooting.html">트러블슛팅</a>
+      </nav>
+    </details>
+  </div>
+</header>
+
+<main>
+  <section class="bg-white">
+    <div class="mx-auto max-w-6xl px-5 py-14">
+      <p class="text-sm font-bold text-blue-700">Troubleshooting</p>
+      <h1 class="display mt-2 text-4xl font-extrabold text-neutral-950 md:text-5xl">문제를 재현하고 원인을 좁힌 기록</h1>
+      <p class="mt-5 max-w-3xl leading-7 text-neutral-700">트러블슛팅은 코드를 고친 결과뿐 아니라 문제가 발생한 프로젝트, 재현 조건, 원인을 좁힌 과정, 수정 후 다시 확인한 기준까지 함께 남기는 기록이라고 생각합니다. 아래 사례는 단순 해결 요약이 아니라 로그, 요청 흐름, 트랜잭션 경계, 쿼리 실행 방식까지 확인하며 원인을 좁혀간 예시입니다.</p>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-5 py-12">
+    <div class="space-y-5">
+      <article class="rounded-lg border border-neutral-200 bg-white p-6 shadow-sm">
+        <div class="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
+          <div>
+            <p class="text-xs font-bold uppercase text-blue-700">파이널프로젝트</p>
+            <h2 class="display mt-2 text-2xl font-extrabold text-neutral-950">JWT 인증 필터 예외가 500으로 반환되는 문제</h2>
+          </div>
+          <span class="rounded bg-neutral-100 px-3 py-1 text-xs font-bold text-neutral-700">Spring Security</span>
+        </div>
+        <dl class="mt-6 divide-y divide-neutral-200 border-y border-neutral-200 text-sm leading-6">
+          <div class="grid gap-2 py-4 md:grid-cols-[140px_1fr]">
+            <dt class="font-bold text-red-700">Problem</dt>
+            <dd class="text-neutral-700">만료되었거나 위변조된 토큰으로 보호된 API를 호출했을 때 클라이언트가 기대한 401 응답이 아니라 500 응답이 반환되었습니다. 프론트엔드에서는 로그인 만료와 서버 오류를 구분할 수 없어 재로그인 안내 흐름이 깨졌습니다.</dd>
+          </div>
+          <div class="grid gap-2 py-4 md:grid-cols-[140px_1fr]">
+            <dt class="font-bold text-neutral-950">Cause</dt>
+            <dd class="text-neutral-700">처음에는 전역 예외 처리 설정 문제로 보고 Controller Advice를 확인했지만, JWT 검증은 DispatcherServlet에 도달하기 전 Security Filter Chain에서 실행되고 있었습니다. 따라서 필터 내부에서 발생한 토큰 만료, 서명 불일치 예외는 Controller Advice가 잡을 수 없었고, 별도 처리 없이 RuntimeException처럼 흘러가며 500으로 변환되었습니다. 인증 실패와 서버 내부 오류를 같은 경로로 처리하면 안 된다고 판단해, 예외가 발생한 위치와 Spring Security의 인증 실패 처리 진입점을 분리해 확인했습니다.</dd>
+          </div>
+          <div class="grid gap-2 py-4 md:grid-cols-[140px_1fr]">
+            <dt class="font-bold text-blue-700">Solution</dt>
+            <dd class="text-neutral-700">JWT 필터에서는 토큰 검증 실패 원인을 AuthenticationException 계열로 정리하고, AuthenticationEntryPoint에서 401 상태 코드와 에러 메시지를 명시적으로 반환하도록 처리했습니다. 토큰 누락, 만료, 위변조 케이스별 메시지가 과하게 노출되지 않도록 클라이언트 안내용 메시지와 서버 로그를 분리했습니다.</dd>
+          </div>
+          <div class="grid gap-2 py-4 md:grid-cols-[140px_1fr]">
+            <dt class="font-bold text-emerald-700">Result</dt>
+            <dd class="text-neutral-700">토큰 누락, 만료, 위변조 요청을 각각 재현해 모두 401로 응답되는지 확인했습니다. 정상 토큰 요청은 기존 API 흐름을 유지했고, 프론트엔드는 401을 기준으로 재로그인 안내를 처리할 수 있게 되었습니다.</dd>
+          </div>
+        </dl>
+      </article>
+
+      <article class="rounded-lg border border-neutral-200 bg-white p-6 shadow-sm">
+        <div class="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
+          <div>
+            <p class="text-xs font-bold uppercase text-blue-700">파이널프로젝트</p>
+            <h2 class="display mt-2 text-2xl font-extrabold text-neutral-950">Redis Cache-Aside 도입 후 데이터 정합성 문제</h2>
+          </div>
+          <span class="rounded bg-neutral-100 px-3 py-1 text-xs font-bold text-neutral-700">Redis · MySQL</span>
+        </div>
+        <dl class="mt-6 divide-y divide-neutral-200 border-y border-neutral-200 text-sm leading-6">
+          <div class="grid gap-2 py-4 md:grid-cols-[140px_1fr]">
+            <dt class="font-bold text-red-700">Problem</dt>
+            <dd class="text-neutral-700">프로필 또는 사용량 통계처럼 자주 조회되는 데이터를 Redis에 캐싱한 뒤, DB 값이 변경되었음에도 일부 요청에서 이전 데이터가 조회되는 문제가 발생했습니다. 특히 수정 요청 직후 새로고침하거나 다른 탭에서 조회할 때 최신 값과 캐시 값이 어긋났습니다.</dd>
+          </div>
+          <div class="grid gap-2 py-4 md:grid-cols-[140px_1fr]">
+            <dt class="font-bold text-neutral-950">Cause</dt>
+            <dd class="text-neutral-700">처음에는 TTL이 너무 길어서 발생한 문제로 의심했지만, TTL을 줄여도 수정 직후의 짧은 불일치는 사라지지 않았습니다. 로그를 기준으로 DB update, transaction commit, Redis delete 순서를 확인해보니 캐시 삭제가 트랜잭션 커밋보다 먼저 실행될 수 있는 구조였습니다. 이 상태에서 다른 요청이 들어오면 아직 커밋되지 않은 DB 값을 기준으로 캐시를 다시 만들거나, 삭제된 캐시가 오래된 값으로 재생성될 수 있었습니다. 결국 문제의 핵심은 캐시 전략 자체보다 DB 트랜잭션 경계와 캐시 무효화 시점이 분리되어 있다는 점이라고 판단했습니다.</dd>
+          </div>
+          <div class="grid gap-2 py-4 md:grid-cols-[140px_1fr]">
+            <dt class="font-bold text-blue-700">Solution</dt>
+            <dd class="text-neutral-700">수정 로직 안에서 바로 Redis를 삭제하지 않고, 트랜잭션 커밋 이후 캐시를 무효화하도록 이벤트 처리 흐름을 조정했습니다. 또한 조회 캐시는 Cache-Aside 방식으로 유지하되, 수정 직후 재조회가 많은 키는 캐시 키 규칙과 삭제 대상을 명확히 분리했습니다.</dd>
+          </div>
+          <div class="grid gap-2 py-4 md:grid-cols-[140px_1fr]">
+            <dt class="font-bold text-emerald-700">Result</dt>
+            <dd class="text-neutral-700">수정 직후 단건 조회, 목록 조회, 반복 조회를 순서대로 실행하며 최신 DB 값 기준으로 응답되는지 확인했습니다. 캐시 삭제 로그와 SQL 로그를 함께 비교해 커밋 이후 무효화가 실행되는지도 확인했습니다.</dd>
+          </div>
+        </dl>
+      </article>
+
+      <article class="rounded-lg border border-neutral-200 bg-white p-6 shadow-sm">
+        <div class="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
+          <div>
+            <p class="text-xs font-bold uppercase text-blue-700">미니프로젝트</p>
+            <h2 class="display mt-2 text-2xl font-extrabold text-neutral-950">게시글 목록 조회 시 응답 시간이 늘어나는 문제</h2>
+          </div>
+          <span class="rounded bg-neutral-100 px-3 py-1 text-xs font-bold text-neutral-700">JPA · SQL</span>
+        </div>
+        <dl class="mt-6 divide-y divide-neutral-200 border-y border-neutral-200 text-sm leading-6">
+          <div class="grid gap-2 py-4 md:grid-cols-[140px_1fr]">
+            <dt class="font-bold text-red-700">Problem</dt>
+            <dd class="text-neutral-700">게시글 목록 화면에서 작성자명과 댓글 수를 함께 표시하자 데이터가 늘어날수록 목록 조회 시간이 증가했습니다. 로컬에서는 크게 느껴지지 않았지만, 더미 데이터를 늘린 뒤 페이지 이동 시 응답 시간이 눈에 띄게 증가했습니다.</dd>
+          </div>
+          <div class="grid gap-2 py-4 md:grid-cols-[140px_1fr]">
+            <dt class="font-bold text-neutral-950">Cause</dt>
+            <dd class="text-neutral-700">처음에는 페이징 크기나 인덱스 문제를 의심했지만, SQL 로그를 확인하니 게시글 목록 1회 조회 이후 작성자와 댓글 수를 가져오는 쿼리가 게시글 수만큼 반복되고 있었습니다. Fetch Join을 먼저 고려했지만, 댓글처럼 1:N 관계가 섞이면 페이징과 중복 row 문제가 생길 수 있어 목록 화면에 필요한 데이터만 별도로 조회하는 방식이 더 적절하다고 판단했습니다. 즉, 원인은 단순히 쿼리가 느린 것이 아니라 화면에서 필요한 데이터 형태와 엔티티 조회 방식이 맞지 않아 N+1 형태로 확장된 것이었습니다.</dd>
+          </div>
+          <div class="grid gap-2 py-4 md:grid-cols-[140px_1fr]">
+            <dt class="font-bold text-blue-700">Solution</dt>
+            <dd class="text-neutral-700">목록 화면에 필요한 게시글 제목, 작성자명, 작성일, 댓글 수를 DTO 조회로 분리했습니다. 댓글 수는 게시글별 반복 조회 대신 group by 집계 쿼리로 함께 가져오고, 상세 화면에서만 필요한 연관 데이터는 별도 조회하도록 책임을 나눴습니다.</dd>
+          </div>
+          <div class="grid gap-2 py-4 md:grid-cols-[140px_1fr]">
+            <dt class="font-bold text-emerald-700">Result</dt>
+            <dd class="text-neutral-700">동일한 더미 데이터와 페이지 크기에서 실행 SQL 수를 비교했습니다. 목록 조회 시 반복 쿼리가 줄어든 것을 확인했고, 페이지 이동과 검색 조건을 함께 적용했을 때도 응답 시간이 안정적으로 유지되는지 확인했습니다.</dd>
+          </div>
+        </dl>
+      </article>
+    </div>
+  </section>
+</main>
+
+<footer class="bg-white border-t border-neutral-200">
+  <div class="mx-auto max-w-6xl px-5 py-8 text-sm text-neutral-500">
+      <div class="flex items-baseline justify-between gap-6">
+        <span class="font-bold text-neutral-900">김개발</span>
+        <a class="font-bold text-neutral-900" href="https://github.com/your-github-profile" target="_blank" rel="noreferrer">GitHub 프로필</a>
+      </div>
+      <p class="mt-2">© 2026 백엔드 신입 개발자 포트폴리오. Java, Spring Boot, DB, 배포와 문제 해결.</p>
+  </div>
+</footer>
+<script src="assets/image-modal.js" defer></script>
+</body>
+</html>
