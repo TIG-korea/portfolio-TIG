@@ -11,7 +11,7 @@
   body { font-family: "Noto Sans KR", sans-serif; color: #171717; background: #ffffff; word-break: keep-all; overflow-wrap: break-word; }
   .display { font-family: "Hanken Grotesk", "Noto Sans KR", sans-serif; letter-spacing: 0; }
   .material-symbols-outlined { font-variation-settings: "FILL" 0, "wght" 450, "GRAD" 0, "opsz" 24; }
-  .project-shot { aspect-ratio: 16 / 10; width: 100%; object-fit: cover; }
+  .project-shot { aspect-ratio: 16 / 10; width: 100%; object-fit: contain; background: #f8fafc; }
 </style>
 </head>
 <body>
@@ -55,8 +55,8 @@
         </div>
       </div>
       <figure class="overflow-hidden rounded-lg border border-neutral-200 bg-neutral-100">
-        <img class="project-shot" src="assets/profile-hero.jpg" alt="TFT-gogo 대시보드" width="900" height="1200"/>
-        <figcaption class="border-t border-neutral-200 bg-white px-4 py-3 text-sm font-semibold text-neutral-600">TFT-gogo 대시보드 - 보류 -</figcaption>
+        <img class="project-shot" src="assets/tft-live-dashboard.png" alt="TFT-gogo 대시보드" width="1440" height="900"/>
+        <figcaption class="border-t border-neutral-200 bg-white px-4 py-3 text-sm font-semibold text-neutral-600">TFT-gogo 대시보드</figcaption>
       </figure>
     </div>
   </section>
@@ -86,28 +86,28 @@
 
   <section class="border-y border-neutral-200 bg-white">
     <div class="mx-auto max-w-6xl px-5 py-14">
-      <p class="text-sm font-bold text-blue-700">Design Assets</p>
-      <h2 class="display mt-2 text-3xl font-extrabold text-neutral-950">설계 산출물</h2>
+      <p class="text-sm font-bold text-blue-700">Product Screenshots</p>
+      <h2 class="display mt-2 text-3xl font-extrabold text-neutral-950">주요 화면 캡처</h2>
       <div class="mt-8 grid gap-6 md:grid-cols-3">
         <figure class="overflow-hidden rounded-lg border border-neutral-200 bg-white">
-          <img class="project-shot" src="assets/profile-hero.jpg" alt="파이널프로젝트 AWS 아키텍처 다이어그램" width="900" height="1200"/>
+          <img class="project-shot" src="assets/tft-live-dashboard.png" alt="TFT-gogo 대시보드 화면" width="1440" height="900"/>
           <figcaption class="border-t border-neutral-200 p-4">
-            <strong class="text-neutral-950">AWS 아키텍처</strong>
-            <p class="mt-2 text-sm leading-6 text-neutral-600">React, Spring Boot, FastAPI, MySQL, Redis, 외부 Riot/CDragon 데이터 연동 흐름을 정리합니다.</p>
+            <strong class="text-neutral-950">대시보드</strong>
+            <p class="mt-2 text-sm leading-6 text-neutral-600">추천 메타, 전적 검색, 파티원 찾기, 실시간 채팅 흐름을 한 화면에서 확인합니다.</p>
           </figcaption>
         </figure>
         <figure class="overflow-hidden rounded-lg border border-neutral-200 bg-white">
-          <img class="project-shot" src="assets/profile-hero.jpg" alt="파이널프로젝트 유스케이스 다이어그램" width="900" height="1200"/>
+          <img class="project-shot" src="assets/tft-live-guide.png" alt="TFT-gogo 게임 가이드 화면" width="1440" height="900"/>
           <figcaption class="border-t border-neutral-200 p-4">
-            <strong class="text-neutral-950">유스케이스 다이어그램</strong>
-            <p class="mt-2 text-sm leading-6 text-neutral-600">전적 조회, 게임 가이드 탐색, 패치노트 확인, AI 추천, 커뮤니티 사용 흐름을 구분합니다.</p>
+            <strong class="text-neutral-950">게임 가이드</strong>
+            <p class="mt-2 text-sm leading-6 text-neutral-600">패치 버전 기준 시너지, 아이템, 증강체, 챔피언 정보를 비교할 수 있습니다.</p>
           </figcaption>
         </figure>
         <figure class="overflow-hidden rounded-lg border border-neutral-200 bg-white">
-          <img class="project-shot" src="assets/profile-hero.jpg" alt="파이널프로젝트 ERD" width="900" height="1200"/>
+          <img class="project-shot" src="assets/tft-live-decks.png" alt="TFT-gogo 덱모음 화면" width="1440" height="900"/>
           <figcaption class="border-t border-neutral-200 p-4">
-            <strong class="text-neutral-950">ERD</strong>
-            <p class="mt-2 text-sm leading-6 text-neutral-600">챔피언, 아이템, 시너지, 증강, 패치 버전, AI 요청 기록의 관계와 제약 조건을 정리합니다.</p>
+            <strong class="text-neutral-950">덱모음</strong>
+            <p class="mt-2 text-sm leading-6 text-neutral-600">메타 덱의 챔피언 구성, 승률, 평균 등수를 표 형태로 확인합니다.</p>
           </figcaption>
         </figure>
       </div>
@@ -120,28 +120,28 @@
       <h2 class="display mt-2 text-3xl font-extrabold text-neutral-950">구현 기능</h2>
       <div class="mt-8 grid gap-6 md:grid-cols-2">
       <article class="overflow-hidden rounded-lg border border-neutral-200 bg-white">
-        <img class="project-shot" src="assets/profile-hero.jpg" alt="게임 가이드 데이터 화면" width="900" height="1200"/>
+        <img class="project-shot" src="assets/tft-live-guide.png" alt="게임 가이드 데이터 화면" width="1440" height="900"/>
         <div class="p-5">
           <h3 class="font-bold text-neutral-950">게임 가이드 데이터 import</h3>
           <p class="mt-3 text-sm leading-6 text-neutral-600">CDragon 기반 챔피언, 아이템, 시너지, 증강 데이터를 수집하고 패치 버전 기준으로 조회할 수 있도록 scheduler와 API 흐름을 정리했습니다.</p>
         </div>
       </article>
       <article class="overflow-hidden rounded-lg border border-neutral-200 bg-white">
-        <img class="project-shot" src="assets/profile-hero.jpg" alt="패치노트 화면" width="900" height="1200"/>
+        <img class="project-shot" src="assets/tft-patch-notes.png" alt="패치노트 화면" width="1440" height="900"/>
         <div class="p-5">
           <h3 class="font-bold text-neutral-950">패치노트 크롤링과 변경 분류</h3>
           <p class="mt-3 text-sm leading-6 text-neutral-600">공식 패치노트를 수집해 챔피언, 아이템, 시너지 변경을 buff/nerf/adjust 기준으로 분류하고 검색과 패치 필터를 연결했습니다.</p>
         </div>
       </article>
       <article class="overflow-hidden rounded-lg border border-neutral-200 bg-white">
-        <img class="project-shot" src="assets/profile-hero.jpg" alt="GameGuide AI Pathfinder 화면" width="900" height="1200"/>
+        <img class="project-shot" src="assets/tft-live-ai-recommend.png" alt="GameGuide AI Pathfinder 화면" width="1440" height="900"/>
         <div class="p-5">
           <h3 class="font-bold text-neutral-950">GameGuide AI Pathfinder</h3>
           <p class="mt-3 text-sm leading-6 text-neutral-600">FastAPI AI 서버와 Spring 프록시, 프론트 채팅 위젯을 연결해 게임 가이드 맥락에서 질문과 답변을 주고받는 흐름을 구현했습니다.</p>
         </div>
       </article>
       <article class="overflow-hidden rounded-lg border border-neutral-200 bg-white">
-        <img class="project-shot" src="assets/profile-hero.jpg" alt="운영 배포 검증 화면" width="900" height="1200"/>
+        <img class="project-shot" src="assets/gh-tft-prs.png" alt="TFT-gogo 운영 배포 검증 PR 목록" width="1440" height="900"/>
         <div class="p-5">
           <h3 class="font-bold text-neutral-950">운영 배포 검증</h3>
           <p class="mt-3 text-sm leading-6 text-neutral-600">CORS, OAuth2 redirect, AI 서버 URL, OpenAI 키, healthcheck, ALB 라우팅처럼 배포 중 누락되기 쉬운 설정을 guard와 smoke 기준으로 점검했습니다.</p>
@@ -194,8 +194,8 @@
             </ul>
           </div>
           <figure class="overflow-hidden border border-neutral-200 bg-white">
-            <img class="project-shot" src="assets/profile-hero.jpg" alt="Notion 요구사항과 역할 분담 문서 화면" width="900" height="1200"/>
-            <figcaption class="border-t border-neutral-200 px-4 py-3 text-sm font-semibold text-neutral-600">요구사항과 역할 분담 - 보류 -</figcaption>
+            <img class="project-shot" src="assets/gh-tft-docs-spec.png" alt="TFT-gogo 도메인 명세 문서 화면" width="1440" height="900"/>
+            <figcaption class="border-t border-neutral-200 px-4 py-3 text-sm font-semibold text-neutral-600">TFT-gogo 도메인 명세 문서</figcaption>
           </figure>
         </article>
         <article class="grid gap-6 py-8 md:grid-cols-[1.14fr_0.86fr] md:items-center">
@@ -209,7 +209,7 @@
             </ul>
           </div>
           <figure class="overflow-hidden border border-neutral-200 bg-white md:order-first">
-            <img class="project-shot" src="assets/profile-hero.jpg" alt="GitHub Issue Branch PR 코드리뷰 화면" width="900" height="1200"/>
+            <img class="project-shot" src="assets/gh-tft-prs.png" alt="TFT-gogo PR 목록 화면" width="1440" height="900"/>
             <figcaption class="border-t border-neutral-200 px-4 py-3 text-sm font-semibold text-neutral-600">GitHub Issue, Branch, PR 흐름</figcaption>
           </figure>
         </article>
@@ -224,7 +224,7 @@
             </ul>
           </div>
           <figure class="overflow-hidden border border-neutral-200 bg-white">
-            <img class="project-shot" src="assets/profile-hero.jpg" alt="API 계약과 배포 체크리스트 화면" width="900" height="1200"/>
+            <img class="project-shot" src="assets/gh-tft-releases.png" alt="TFT-gogo 릴리즈 화면" width="1440" height="900"/>
             <figcaption class="border-t border-neutral-200 px-4 py-3 text-sm font-semibold text-neutral-600">API 계약과 배포 준비 체크리스트</figcaption>
           </figure>
         </article>
@@ -239,7 +239,7 @@
             </ul>
           </div>
           <figure class="overflow-hidden border border-neutral-200 bg-white md:order-first">
-            <img class="project-shot" src="assets/profile-hero.jpg" alt="릴리즈 이후 QA와 장애 대응 문서 화면" width="900" height="1200"/>
+            <img class="project-shot" src="assets/gh-tft-issues.png" alt="TFT-gogo 이슈 목록 화면" width="1440" height="900"/>
             <figcaption class="border-t border-neutral-200 px-4 py-3 text-sm font-semibold text-neutral-600">릴리즈 QA와 장애 대응 기준</figcaption>
           </figure>
         </article>
@@ -254,7 +254,7 @@
             </ul>
           </div>
           <figure class="overflow-hidden border border-neutral-200 bg-white">
-            <img class="project-shot" src="assets/profile-hero.jpg" alt="AI Skills 기반 개발 방식과 코드 검토 기록 화면" width="900" height="1200"/>
+            <img class="project-shot" src="assets/gh-tft-pr-679.png" alt="TFT-gogo 게임가이드 AI 및 패치노트 안정화 PR 화면" width="1440" height="900"/>
             <figcaption class="border-t border-neutral-200 px-4 py-3 text-sm font-semibold text-neutral-600">AI Skills 기반 개발 방식과 코드 검토 기록</figcaption>
           </figure>
         </article>
