@@ -346,7 +346,7 @@
         }
         .project-grid {
             display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
+            grid-template-columns: repeat(4, minmax(0, 1fr));
             gap: 20px;
         }
         .project-card {
@@ -819,8 +819,9 @@
 <nav class="hidden items-center gap-7 md:flex">
 <a class="text-sm font-bold text-blue-700" href="index.html">홈</a>
 <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="mini-project.html">미니프로젝트</a>
-<a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="final-project.html">TFT-gogo</a>
-<a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="troubleshooting.html">트러블슛팅</a>
+<a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="final-project.html">파이널 프로젝트</a>
+<a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="troubleshooting.html">트러블슈팅</a>
+<a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="ai-usage.html">AI 활용</a>
 </nav>
 <details class="relative md:hidden">
 <summary class="list-none p-2 text-neutral-900 cursor-pointer">
@@ -829,8 +830,9 @@
 <nav class="absolute right-0 mt-2 w-48 rounded-lg border border-neutral-200 bg-white p-2 shadow-lg">
 <a class="block rounded px-3 py-2 text-sm font-bold text-blue-700" href="index.html">홈</a>
 <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="mini-project.html">미니프로젝트</a>
-<a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="final-project.html">TFT-gogo</a>
-<a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="troubleshooting.html">트러블슛팅</a>
+<a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="final-project.html">파이널 프로젝트</a>
+<a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="troubleshooting.html">트러블슈팅</a>
+<a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="ai-usage.html">AI 활용</a>
 </nav>
 </details>
 </div>
@@ -899,7 +901,7 @@
 <span class="material-symbols-outlined text-[48px] text-on-surface-variant" aria-hidden="true">code</span>
 </div>
 <span class="project-kind">Mini Project</span>
-<h3 class="project-card-title">Mapingo Spring API Server</h3>
+<h3 class="project-card-title">Mapingo</h3>
 <p class="project-card-copy">지도 기반 AI 영어 학습 서비스의 백엔드 서버에서 JWT 인증, OAuth2, 유저 API, 결제/구독, 관리자 API와 Swagger 문서화를 구현했습니다.</p>
 <ul class="project-tags" aria-label="기술스택">
 <li>Java 21</li>
@@ -924,18 +926,33 @@
 </ul>
 <span class="project-link">페이지 보기 <span class="material-symbols-outlined" aria-hidden="true">arrow_outward</span></span>
 </a>
-<a class="project-card reveal-on-scroll" href="troubleshooting.html" aria-label="트러블슛팅 페이지로 이동">
+<a class="project-card reveal-on-scroll" href="troubleshooting.html" aria-label="트러블슈팅 페이지로 이동">
 <div class="project-media project-media--cveradar">
 <span class="material-symbols-outlined text-[48px] text-on-surface-variant" aria-hidden="true">build</span>
 </div>
 <span class="project-kind">Troubleshooting</span>
-<h3 class="project-card-title">트러블슛팅 기록</h3>
-<p class="project-card-copy">운영 환경 변수, 헬스체크 인증, ALB 라우팅, import 중복 방지, 화면 overflow처럼 구현과 배포 과정에서 만난 문제를 정리합니다.</p>
+<h3 class="project-card-title">트러블슈팅 기록</h3>
+<p class="project-card-copy">Mapingo의 인증/캐시/검증 이슈와 TFT-gogo의 성능/데이터/Flyway 이슈를 프로젝트별로 나누어 정리합니다.</p>
 <ul class="project-tags" aria-label="기술스택">
-<li>Deploy</li>
+<li>Auth</li>
+<li>Cache</li>
+<li>JMeter</li>
+<li>Flyway</li>
+</ul>
+<span class="project-link">페이지 보기 <span class="material-symbols-outlined" aria-hidden="true">arrow_outward</span></span>
+</a>
+<a class="project-card reveal-on-scroll" href="ai-usage.html" aria-label="AI 활용 페이지로 이동">
+<div class="project-media project-media--cveradar">
+<span class="material-symbols-outlined text-[48px] text-on-surface-variant" aria-hidden="true">psychology</span>
+</div>
+<span class="project-kind">AI Workflow</span>
+<h3 class="project-card-title">AI 활용 기록</h3>
+<p class="project-card-copy">노션에 남긴 ooo seed, interview, qa 기록을 바탕으로 기능 설계, 프롬프트 보강, 프롬프트 공격 방어, 배포 QA를 정리합니다.</p>
+<ul class="project-tags" aria-label="주요 항목">
+<li>Spec</li>
+<li>Prompt</li>
+<li>Guardrail</li>
 <li>QA</li>
-<li>Issue</li>
-<li>Smoke</li>
 </ul>
 <span class="project-link">페이지 보기 <span class="material-symbols-outlined" aria-hidden="true">arrow_outward</span></span>
 </a>
@@ -1071,11 +1088,15 @@
 <p class="activity-copy">CORS, OAuth2 redirect, AI 서버 설정, 화면 overflow처럼 구현과 배포 중 확인한 문제를 재현 조건과 해결 방향으로 정리합니다.</p>
 <div class="collaboration-gallery" aria-label="GitHub 이슈 자료 이미지 영역">
 <figure class="collaboration-shot">
+<a href="https://github.com/s4ngg/TFT-gogo/issues" target="_blank" rel="noreferrer">
 <img src="assets/gh-tft-issues.png" alt="TFT-gogo GitHub 이슈 목록 화면" width="1440" height="900"/>
+</a>
 <figcaption>TFT-gogo 이슈 목록</figcaption>
 </figure>
 <figure class="collaboration-shot">
+<a href="https://github.com/soo97/languagemap-spring/issues" target="_blank" rel="noreferrer">
 <img src="assets/gh-mapingo-issues.png" alt="Mapingo GitHub 이슈 목록 화면" width="1440" height="900"/>
+</a>
 <figcaption>Mapingo 이슈 추적 기록</figcaption>
 </figure>
 </div>

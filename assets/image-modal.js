@@ -113,6 +113,7 @@
     const closeButton = modal.querySelector(".image-modal-close");
 
     document.querySelectorAll("img:not(#portfolio-image-modal img)").forEach((image) => {
+      if (image.closest("a")) return;
       image.dataset.imageModal = "true";
       image.addEventListener("click", () => openModal(modal, image));
     });

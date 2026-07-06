@@ -21,16 +21,18 @@
     <nav class="hidden items-center gap-7 md:flex">
       <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="index.html">홈</a>
       <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="mini-project.html">미니프로젝트</a>
-      <a class="text-sm font-bold text-blue-700" href="final-project.html">TFT-gogo</a>
-      <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="troubleshooting.html">트러블슛팅</a>
+      <a class="text-sm font-bold text-blue-700" href="final-project.html">파이널 프로젝트</a>
+      <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="troubleshooting.html">트러블슈팅</a>
+      <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="ai-usage.html">AI 활용</a>
     </nav>
     <details class="relative md:hidden">
       <summary class="list-none p-2 text-neutral-900"><span class="material-symbols-outlined">menu</span></summary>
       <nav class="absolute right-0 mt-2 w-48 rounded-lg border border-neutral-200 bg-white p-2 shadow-lg">
         <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="index.html">홈</a>
         <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="mini-project.html">미니프로젝트</a>
-        <a class="block rounded px-3 py-2 text-sm font-bold text-blue-700" href="final-project.html">TFT-gogo</a>
-        <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="troubleshooting.html">트러블슛팅</a>
+        <a class="block rounded px-3 py-2 text-sm font-bold text-blue-700" href="final-project.html">파이널 프로젝트</a>
+        <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="troubleshooting.html">트러블슈팅</a>
+        <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="ai-usage.html">AI 활용</a>
       </nav>
     </details>
   </div>
@@ -141,7 +143,7 @@
         </div>
       </article>
       <article class="overflow-hidden rounded-lg border border-neutral-200 bg-white">
-        <img class="project-shot" src="assets/gh-tft-prs.png" alt="TFT-gogo 운영 배포 검증 PR 목록" width="1440" height="900"/>
+        <img class="project-shot" src="assets/gh-tft-prs-clean.png" alt="TFT-gogo 운영 배포 검증 PR 목록" width="1440" height="900"/>
         <div class="p-5">
           <h3 class="font-bold text-neutral-950">운영 배포 검증</h3>
           <p class="mt-3 text-sm leading-6 text-neutral-600">CORS, OAuth2 redirect, AI 서버 URL, OpenAI 키, healthcheck, ALB 라우팅처럼 배포 중 누락되기 쉬운 설정을 guard와 smoke 기준으로 점검했습니다.</p>
@@ -163,7 +165,8 @@
         </details>
         <details class="rounded-lg border border-neutral-200 bg-white p-5" open>
           <summary class="cursor-pointer list-none font-bold text-neutral-950">데이터 import 기준</summary>
-          <p class="mt-3 text-sm leading-6 text-neutral-700">CDragon 데이터와 공식 패치노트는 최신 버전 기준, 수집 실패 fallback, scheduler 중복 실행 방지 기준을 함께 고려했습니다. 여러 인스턴스에서 같은 데이터가 중복 저장되지 않도록 DB lock도 확인했습니다.</p>
+          <p class="mt-3 text-sm leading-6 text-neutral-700">CDragon 데이터와 공식 패치노트는 최신 버전 기준, 수집 실패 fallback, scheduler 중복 실행 방지 기준을 함께 고려했습니다. 패치노트는 서버 시작 시 1회 import, 매시간 목록 확인, 매일 06:30 최신 상세 refresh로 나누고, DB에 없는 sourceKey/sourceUrl/version만 상세 import하도록 설계했습니다.</p>
+          <p class="mt-2 text-sm leading-6 text-neutral-700">로컬과 dev 기본값은 OFF로 두고 공용 개발 서버나 운영 서버에서만 켜도록 분리했으며, 단일 서버 기준 중복 실행은 <code>AtomicBoolean</code> guard로 막았습니다. 멀티 서버 환경에서는 공용 락이 필요하다는 후속 이슈까지 분리해 운영 리스크를 남겼습니다.</p>
         </details>
         <details class="rounded-lg border border-neutral-200 bg-white p-5" open>
           <summary class="cursor-pointer list-none font-bold text-neutral-950">AI 연동</summary>
@@ -209,8 +212,8 @@
             </ul>
           </div>
           <figure class="overflow-hidden border border-neutral-200 bg-white md:order-first">
-            <img class="project-shot" src="assets/gh-tft-prs.png" alt="TFT-gogo PR 목록 화면" width="1440" height="900"/>
-            <figcaption class="border-t border-neutral-200 px-4 py-3 text-sm font-semibold text-neutral-600">GitHub Issue, Branch, PR 흐름</figcaption>
+            <img class="project-shot" src="assets/gh-tft-prs-clean.png" alt="TFT-gogo 병합 PR 목록 화면" width="1440" height="900"/>
+            <figcaption class="border-t border-neutral-200 px-4 py-3 text-sm font-semibold text-neutral-600">병합 PR 중심으로 정리한 Issue, Branch, PR 흐름</figcaption>
           </figure>
         </article>
         <article class="grid gap-6 py-8 md:grid-cols-[0.86fr_1.14fr] md:items-center">
@@ -243,7 +246,7 @@
             <figcaption class="border-t border-neutral-200 px-4 py-3 text-sm font-semibold text-neutral-600">릴리즈 QA와 장애 대응 기준</figcaption>
           </figure>
         </article>
-        <article class="grid gap-6 py-8 md:grid-cols-[0.86fr_1.14fr] md:items-center">
+        <article class="py-8">
           <div>
             <p class="text-xs font-bold uppercase text-blue-700">05 / AI Skills</p>
             <h3 class="mt-2 text-xl font-extrabold text-neutral-950">AI를 개발 흐름을 보조하는 도구로 활용했습니다</h3>
@@ -252,11 +255,8 @@
               <li><strong class="text-neutral-950">관리 항목</strong> 스펙 정리, 프롬프트 컨텍스트, 코드 리뷰, 검증 체크</li>
               <li><strong class="text-neutral-950">확인 방식</strong> AI 제안 코드를 분석하고 팀 컨벤션과 검증 기준에 맞게 조정</li>
             </ul>
+            <a class="mt-5 inline-flex items-center gap-1 text-sm font-extrabold text-blue-700" href="ai-usage.html">AI 활용 기록 보기 <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_outward</span></a>
           </div>
-          <figure class="overflow-hidden border border-neutral-200 bg-white">
-            <img class="project-shot" src="assets/gh-tft-pr-679.png" alt="TFT-gogo 게임가이드 AI 및 패치노트 안정화 PR 화면" width="1440" height="900"/>
-            <figcaption class="border-t border-neutral-200 px-4 py-3 text-sm font-semibold text-neutral-600">AI Skills 기반 개발 방식과 코드 검토 기록</figcaption>
-          </figure>
         </article>
       </div>
     </div>
