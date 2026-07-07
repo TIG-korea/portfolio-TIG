@@ -461,7 +461,8 @@
             display: inline-flex;
             align-items: center;
             gap: 5px;
-            margin-top: 18px;
+            margin-top: auto;
+            padding-top: 18px;
             color: #141516;
             font-size: 13px;
             font-weight: 800;
@@ -849,9 +850,9 @@
 <div class="hero-copy">
 <span class="hero-eyebrow">백엔드 신입 개발자</span>
 <h1 class="hero-title">안녕하세요, 이현재입니다.</h1>
-<p class="hero-kicker">Spring Boot 기반 서비스에서 데이터 흐름을 설계하고 API 구현, 인증/결제, 운영 검증까지 연결해 보는 백엔드 개발자를 지향합니다.</p>
+<p class="hero-kicker">서비스의 데이터 흐름을 설계하고 API 구현, 인증/결제, 운영 검증까지 연결해 보는 백엔드 개발자를 지향합니다.</p>
 <div class="hero-lede text-on-surface-variant">
-<p>Mapingo 미니프로젝트에서는 JWT, Redis, OAuth2, PortOne, Swagger 문서화처럼 서비스 운영에 필요한 백엔드 흐름을 중심으로 작업했습니다.</p>
+<p>Mapingo 미니프로젝트에서는 인증, 세션 관리, 외부 결제, API 문서화처럼 서비스 운영에 필요한 백엔드 흐름을 중심으로 작업했습니다.</p>
 <p>TFT-gogo 파이널 프로젝트에서는 게임 가이드와 패치노트 도메인을 맡아 데이터 수집, AI 추천 연동, 배포 환경 점검을 경험했습니다.</p>
 </div>
 <div class="hero-links" aria-label="홈 주요 링크">
@@ -906,13 +907,7 @@
 </div>
 <span class="project-kind">Mini Project</span>
 <h3 class="project-card-title">Mapingo</h3>
-<p class="project-card-copy">지도 기반 AI 영어 학습 서비스의 백엔드 서버에서 JWT 인증, OAuth2, 유저 API, 결제/구독, 관리자 API와 Swagger 문서화를 구현했습니다.</p>
-<ul class="project-tags" aria-label="기술스택">
-<li>Java 21</li>
-<li>Spring Security</li>
-<li>Redis</li>
-<li>PortOne</li>
-</ul>
+<p class="project-card-copy">지도 기반 AI 영어 학습 서비스의 백엔드 서버에서 인증, 유저 API, 결제/구독, 관리자 API와 문서화 흐름을 구현했습니다.</p>
 <span class="project-link">페이지 보기 <span class="material-symbols-outlined" aria-hidden="true">arrow_outward</span></span>
 </a>
 <a class="project-card reveal-on-scroll" href="final-project.html" aria-label="TFT-gogo 페이지로 이동">
@@ -922,12 +917,6 @@
 <span class="project-kind">Final Project</span>
 <h3 class="project-card-title">TFT-gogo</h3>
 <p class="project-card-copy">롤토체스 유저를 위한 전적 분석, AI 메타 추천, 커뮤니티 플랫폼에서 게임 가이드와 패치노트 도메인을 중심으로 작업했습니다.</p>
-<ul class="project-tags" aria-label="기술스택">
-<li>Spring Boot</li>
-<li>React</li>
-<li>FastAPI</li>
-<li>CDragon</li>
-</ul>
 <span class="project-link">페이지 보기 <span class="material-symbols-outlined" aria-hidden="true">arrow_outward</span></span>
 </a>
 <a class="project-card reveal-on-scroll" href="troubleshooting.html" aria-label="트러블슈팅 페이지로 이동">
@@ -936,13 +925,7 @@
 </div>
 <span class="project-kind">Troubleshooting</span>
 <h3 class="project-card-title">트러블슈팅 기록</h3>
-<p class="project-card-copy">Mapingo의 인증/캐시/검증 이슈와 TFT-gogo의 성능/데이터/Flyway 이슈를 프로젝트별로 나누어 정리합니다.</p>
-<ul class="project-tags" aria-label="기술스택">
-<li>Auth</li>
-<li>Cache</li>
-<li>JMeter</li>
-<li>Flyway</li>
-</ul>
+<p class="project-card-copy">Mapingo의 인증/캐시/검증 이슈와 TFT-gogo의 성능/데이터/migration 이슈를 프로젝트별로 나누어 정리합니다.</p>
 <span class="project-link">페이지 보기 <span class="material-symbols-outlined" aria-hidden="true">arrow_outward</span></span>
 </a>
 <a class="project-card reveal-on-scroll" href="technical-decisions.html" aria-label="기술 정리 페이지로 이동">
@@ -1149,7 +1132,7 @@
 <span class="font-bold text-neutral-900">이현재</span>
 <a class="font-bold text-neutral-900" href="https://github.com/TIG-korea" target="_blank" rel="noreferrer">GitHub 프로필</a>
 </div>
-<p class="mt-2">© 2026 이현재 백엔드 포트폴리오. Java, Spring Boot, 데이터 import, 운영 검증과 문제 해결.</p>
+      <p class="mt-2">© 2026 이현재 백엔드 포트폴리오. 데이터 import, 운영 검증과 문제 해결.</p>
 </div>
 </footer>
 <script src="assets/image-modal.js" defer></script>
