@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>기술 정리 | 이현재 포트폴리오</title>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;600;700;800&family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  body { font-family: "Noto Sans KR", sans-serif; color: #171717; background: #fafafa; word-break: keep-all; overflow-wrap: break-word; }
+  .display { font-family: "Hanken Grotesk", "Noto Sans KR", sans-serif; letter-spacing: 0; }
+  .material-symbols-outlined { font-variation-settings: "FILL" 0, "wght" 450, "GRAD" 0, "opsz" 24; }
+  .decision-shot { aspect-ratio: 16 / 10; width: 100%; object-fit: contain; background: #f8fafc; }
+  .decision-row { display: grid; grid-template-columns: 132px minmax(0, 1fr); gap: 16px; padding: 18px 0; border-top: 1px solid #e5e7eb; }
+  .decision-row:last-child { border-bottom: 1px solid #e5e7eb; }
+  .stack-table th,
+  .stack-table td { vertical-align: top; }
+  @media (max-width: 640px) {
+    .decision-row { grid-template-columns: 1fr; gap: 8px; }
+  }
+</style>
+</head>
+<body>
+<header class="sticky top-0 z-50 border-b border-neutral-200 bg-white/90 backdrop-blur">
+  <div class="mx-auto flex h-16 max-w-6xl items-center justify-between px-5">
+    <a class="display text-lg font-extrabold text-neutral-950" href="index.html">이현재</a>
+    <nav class="hidden items-center gap-7 md:flex">
+      <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="index.html">홈</a>
+      <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="mini-project.html">미니프로젝트</a>
+      <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="final-project.html">파이널 프로젝트</a>
+      <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="troubleshooting.html">트러블슈팅</a>
+      <a class="text-sm font-bold text-blue-700" href="technical-decisions.html">기술 정리</a>
+      <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="ai-usage.html">AI 활용</a>
+    </nav>
+    <details class="relative md:hidden">
+      <summary class="list-none p-2 text-neutral-900"><span class="material-symbols-outlined">menu</span></summary>
+      <nav class="absolute right-0 mt-2 w-48 rounded-lg border border-neutral-200 bg-white p-2 shadow-lg">
+        <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="index.html">홈</a>
+        <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="mini-project.html">미니프로젝트</a>
+        <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="final-project.html">파이널 프로젝트</a>
+        <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="troubleshooting.html">트러블슈팅</a>
+        <a class="block rounded px-3 py-2 text-sm font-bold text-blue-700" href="technical-decisions.html">기술 정리</a>
+        <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="ai-usage.html">AI 활용</a>
+      </nav>
+    </details>
+  </div>
+</header>
+
+<main>
+  <section class="bg-white">
+    <div class="mx-auto grid max-w-6xl gap-10 px-5 py-16 md:grid-cols-[1.02fr_0.98fr] md:items-center">
+      <div>
+        <p class="text-sm font-bold uppercase text-blue-700">Technical Decisions</p>
+        <h1 class="display mt-3 text-4xl font-extrabold leading-tight text-neutral-950 md:text-5xl">프로젝트에서 사용한 기술 스택과 의사결정 기준</h1>
+        <p class="mt-5 max-w-3xl text-lg leading-8 text-neutral-700">Mapingo와 TFT-gogo에서 사용한 기술을 단순 목록으로 나열하지 않고, 왜 선택했는지, 어떤 경계에서 사용했는지, 어떤 방식으로 검증했는지 한 페이지에 모았습니다.</p>
+        <div class="mt-8 flex flex-wrap gap-2">
+          <span class="rounded bg-blue-50 px-3 py-1 text-sm font-bold text-blue-700">Spring Boot</span>
+          <span class="rounded bg-blue-50 px-3 py-1 text-sm font-bold text-blue-700">React</span>
+          <span class="rounded bg-blue-50 px-3 py-1 text-sm font-bold text-blue-700">FastAPI</span>
+          <span class="rounded bg-blue-50 px-3 py-1 text-sm font-bold text-blue-700">MySQL</span>
+          <span class="rounded bg-blue-50 px-3 py-1 text-sm font-bold text-blue-700">Redis</span>
+          <span class="rounded bg-blue-50 px-3 py-1 text-sm font-bold text-blue-700">Docker</span>
+          <span class="rounded bg-blue-50 px-3 py-1 text-sm font-bold text-blue-700">AWS</span>
+        </div>
+      </div>
+      <figure class="overflow-hidden rounded-lg border border-neutral-200 bg-neutral-100">
+        <img class="decision-shot" src="assets/mapingo-aws-architecture.png" alt="Mapingo AWS 아키텍처 다이어그램" width="1627" height="967"/>
+        <figcaption class="border-t border-neutral-200 bg-white px-4 py-3 text-sm font-semibold text-neutral-600">서비스 구성과 외부 연동 경계를 정리한 아키텍처 산출물</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="border-y border-neutral-200 bg-neutral-50">
+    <div class="mx-auto max-w-6xl px-5 py-12">
+      <p class="text-sm font-bold text-blue-700">Template</p>
+      <h2 class="display mt-2 text-3xl font-extrabold text-neutral-950">정리 기준</h2>
+      <div class="mt-7 grid gap-5 md:grid-cols-3">
+        <div class="border-t-2 border-neutral-950 pt-4">
+          <strong class="text-lg text-neutral-950">역할 기준</strong>
+          <p class="mt-2 text-sm leading-6 text-neutral-600">프론트엔드, 백엔드 API, AI 서버, 데이터 저장소, 배포 환경처럼 책임 경계를 먼저 나눴습니다.</p>
+        </div>
+        <div class="border-t-2 border-neutral-950 pt-4">
+          <strong class="text-lg text-neutral-950">선택 이유</strong>
+          <p class="mt-2 text-sm leading-6 text-neutral-600">익숙해서 사용했다는 설명보다 기능 요구, 보안, 운영, 팀 협업 관점에서 선택 이유를 적었습니다.</p>
+        </div>
+        <div class="border-t-2 border-neutral-950 pt-4">
+          <strong class="text-lg text-neutral-950">검증 기준</strong>
+          <p class="mt-2 text-sm leading-6 text-neutral-600">PR, 이슈, 테스트, Swagger, smoke, JMeter처럼 결과가 남아 있는 확인 방법을 함께 붙였습니다.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white">
+    <div class="mx-auto max-w-6xl px-5 py-14">
+      <p class="text-sm font-bold text-blue-700">Stack Map</p>
+      <h2 class="display mt-2 text-3xl font-extrabold text-neutral-950">기술 스택 요약</h2>
+      <div class="mt-8 overflow-x-auto border-y border-neutral-200">
+        <table class="stack-table min-w-full text-left text-sm">
+          <thead class="bg-neutral-50 text-neutral-600">
+            <tr>
+              <th class="px-4 py-3 font-extrabold">구분</th>
+              <th class="px-4 py-3 font-extrabold">Mapingo</th>
+              <th class="px-4 py-3 font-extrabold">TFT-gogo</th>
+              <th class="px-4 py-3 font-extrabold">정리한 기준</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-neutral-200 text-neutral-700">
+            <tr>
+              <td class="px-4 py-4 font-bold text-neutral-950">Backend API</td>
+              <td class="px-4 py-4">Java 21, Spring Boot 4.x, Spring Security</td>
+              <td class="px-4 py-4">Java, Spring Boot</td>
+              <td class="px-4 py-4">도메인 로직, 인증 경계, DTO 응답 규칙, API 문서화를 백엔드에서 관리했습니다.</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-4 font-bold text-neutral-950">Frontend</td>
+              <td class="px-4 py-4">React</td>
+              <td class="px-4 py-4">React</td>
+              <td class="px-4 py-4">사용자 화면과 API 계약을 맞추고, OAuth/AI/검색 흐름을 화면 상태와 연결했습니다.</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-4 font-bold text-neutral-950">AI Server</td>
+              <td class="px-4 py-4">FastAPI AI Server</td>
+              <td class="px-4 py-4">FastAPI, OpenAI 연동</td>
+              <td class="px-4 py-4">AI 기능은 별도 서버로 두고 Spring이 프록시와 검증 경계를 담당하도록 나눴습니다.</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-4 font-bold text-neutral-950">Data</td>
+              <td class="px-4 py-4">MySQL, Redis</td>
+              <td class="px-4 py-4">MySQL, Redis, CDragon 데이터, 공식 패치노트</td>
+              <td class="px-4 py-4">영속 데이터와 캐시, 외부 import 데이터를 분리하고 갱신 기준을 명시했습니다.</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-4 font-bold text-neutral-950">External API</td>
+              <td class="px-4 py-4">Google OAuth2, PortOne V1</td>
+              <td class="px-4 py-4">Riot/CDragon, OpenAI, OAuth2</td>
+              <td class="px-4 py-4">외부 API는 환경 변수, 실패 응답, 검증 로직, 운영 설정을 함께 관리했습니다.</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-4 font-bold text-neutral-950">Deployment</td>
+              <td class="px-4 py-4">AWS 아키텍처, 환경 변수 분리</td>
+              <td class="px-4 py-4">Docker, AWS, ALB, healthcheck</td>
+              <td class="px-4 py-4">배포 기본값과 로컬 스모크 설정을 분리하고, CORS/redirect/AI URL을 체크리스트로 관리했습니다.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-y border-neutral-200 bg-neutral-50">
+    <div class="mx-auto max-w-6xl px-5 py-14">
+      <p class="text-sm font-bold text-blue-700">Decision Records</p>
+      <h2 class="display mt-2 text-3xl font-extrabold text-neutral-950">주요 기술적 의사결정</h2>
+      <div class="mt-8 space-y-6">
+        <article class="rounded-lg border border-neutral-200 bg-white p-6 shadow-sm md:p-7">
+          <div class="flex flex-wrap items-center gap-3">
+            <span class="rounded bg-blue-50 px-2.5 py-1 text-xs font-extrabold uppercase text-blue-700">Mapingo</span>
+            <h3 class="text-xl font-extrabold text-neutral-950">JWT + Redis 인증 흐름을 단계적으로 고도화</h3>
+          </div>
+          <div class="mt-5">
+            <div class="decision-row">
+              <strong class="text-sm text-neutral-950">배경</strong>
+              <p class="text-sm leading-6 text-neutral-700">일반 로그인, Google OAuth2, 로그아웃, 토큰 재발급이 모두 같은 인증 경계를 공유해야 했습니다.</p>
+            </div>
+            <div class="decision-row">
+              <strong class="text-sm text-blue-700">선택</strong>
+              <p class="text-sm leading-6 text-neutral-700">Access Token은 요청 인증에 사용하고, Refresh Token은 Redis에 저장해 Rotation과 로그아웃 시 폐기를 관리했습니다. 이후 OAuth 응답은 HttpOnly Cookie 기반으로 전환했습니다.</p>
+            </div>
+            <div class="decision-row">
+              <strong class="text-sm text-neutral-950">이유</strong>
+              <p class="text-sm leading-6 text-neutral-700">재발급과 로그아웃을 서버에서 통제할 수 있고, 토큰이 URL이나 응답 body에 직접 노출되는 위험을 줄일 수 있었습니다.</p>
+            </div>
+            <div class="decision-row">
+              <strong class="text-sm text-emerald-700">검증</strong>
+              <p class="text-sm leading-6 text-neutral-700">Redis 저장값과 TTL, 재발급 전후 토큰 불일치, OAuth 1회용 코드 교환, HttpOnly Cookie 동작을 PR 캡처와 Swagger 흐름으로 확인했습니다.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="rounded-lg border border-neutral-200 bg-white p-6 shadow-sm md:p-7">
+          <div class="flex flex-wrap items-center gap-3">
+            <span class="rounded bg-blue-50 px-2.5 py-1 text-xs font-extrabold uppercase text-blue-700">Mapingo</span>
+            <h3 class="text-xl font-extrabold text-neutral-950">DTO와 Swagger 문서를 구현 코드와 분리</h3>
+          </div>
+          <div class="mt-5">
+            <div class="decision-row">
+              <strong class="text-sm text-neutral-950">배경</strong>
+              <p class="text-sm leading-6 text-neutral-700">여러 팀원이 동시에 도메인을 개발하면서 요청/응답 예시와 실제 DTO가 어긋나는 문제가 생겼습니다.</p>
+            </div>
+            <div class="decision-row">
+              <strong class="text-sm text-blue-700">선택</strong>
+              <p class="text-sm leading-6 text-neutral-700">Controller 문서화 클래스를 분리하고 Request/Response DTO 네이밍, responseCode 예시, 입력 검증 기준을 맞췄습니다.</p>
+            </div>
+            <div class="decision-row">
+              <strong class="text-sm text-neutral-950">이유</strong>
+              <p class="text-sm leading-6 text-neutral-700">프론트엔드와 QA가 Swagger를 기준으로 API를 확인하기 때문에 문서 불일치 자체가 기능 결함으로 이어질 수 있었습니다.</p>
+            </div>
+            <div class="decision-row">
+              <strong class="text-sm text-emerald-700">검증</strong>
+              <p class="text-sm leading-6 text-neutral-700">회원가입 검증, 비밀번호 정책, birthDate 검증 오류를 이슈 단위로 재현하고 Swagger 응답과 테스트 결과를 남겼습니다.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="rounded-lg border border-neutral-200 bg-white p-6 shadow-sm md:p-7">
+          <div class="flex flex-wrap items-center gap-3">
+            <span class="rounded bg-blue-50 px-2.5 py-1 text-xs font-extrabold uppercase text-blue-700">Mapingo</span>
+            <h3 class="text-xl font-extrabold text-neutral-950">PortOne 결제 검증을 서버 기준으로 처리</h3>
+          </div>
+          <div class="mt-5">
+            <div class="decision-row">
+              <strong class="text-sm text-neutral-950">배경</strong>
+              <p class="text-sm leading-6 text-neutral-700">유료 기능 진입 전에 결제 성공 여부와 구독 활성 상태를 신뢰할 수 있는 기준으로 확인해야 했습니다.</p>
+            </div>
+            <div class="decision-row">
+              <strong class="text-sm text-blue-700">선택</strong>
+              <p class="text-sm leading-6 text-neutral-700">PortOne V1 API의 imp_uid 기반 조회와 금액 검증을 서버에서 수행하고 payment/subscription 엔티티로 구독 상태를 관리했습니다.</p>
+            </div>
+            <div class="decision-row">
+              <strong class="text-sm text-neutral-950">이유</strong>
+              <p class="text-sm leading-6 text-neutral-700">클라이언트 결과만 신뢰하지 않고 외부 결제 API의 실제 응답과 서버 상태를 맞춰야 결제 우회 가능성을 줄일 수 있었습니다.</p>
+            </div>
+            <div class="decision-row">
+              <strong class="text-sm text-emerald-700">검증</strong>
+              <p class="text-sm leading-6 text-neutral-700">결제 조회, 금액 불일치, 구독 취소, 관리자 결제내역 조회 조건을 PR 본문과 Swagger 응답으로 확인했습니다.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="rounded-lg border border-neutral-200 bg-white p-6 shadow-sm md:p-7">
+          <div class="flex flex-wrap items-center gap-3">
+            <span class="rounded bg-blue-50 px-2.5 py-1 text-xs font-extrabold uppercase text-blue-700">TFT-gogo</span>
+            <h3 class="text-xl font-extrabold text-neutral-950">게임 가이드 데이터를 패치 버전 기준으로 고정</h3>
+          </div>
+          <div class="mt-5">
+            <div class="decision-row">
+              <strong class="text-sm text-neutral-950">배경</strong>
+              <p class="text-sm leading-6 text-neutral-700">챔피언, 아이템, 시너지, 증강체 정보는 패치 버전에 따라 의미가 바뀌므로 화면과 API가 같은 기준을 바라봐야 했습니다.</p>
+            </div>
+            <div class="decision-row">
+              <strong class="text-sm text-blue-700">선택</strong>
+              <p class="text-sm leading-6 text-neutral-700">CDragon 데이터를 import하고, 게임 가이드와 패치노트 화면에서 패치 버전 기준 조회가 흔들리지 않도록 API 계약을 먼저 정리했습니다.</p>
+            </div>
+            <div class="decision-row">
+              <strong class="text-sm text-neutral-950">이유</strong>
+              <p class="text-sm leading-6 text-neutral-700">외부 데이터가 갱신되는 시점과 사용자가 조회하는 시점을 분리하지 않으면 최신 데이터와 화면 설명이 어긋날 수 있었습니다.</p>
+            </div>
+            <div class="decision-row">
+              <strong class="text-sm text-emerald-700">검증</strong>
+              <p class="text-sm leading-6 text-neutral-700">scheduler, import 결과, API 응답 필드, 패치 필터 동작을 PR과 화면 캡처로 확인했습니다.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="rounded-lg border border-neutral-200 bg-white p-6 shadow-sm md:p-7">
+          <div class="flex flex-wrap items-center gap-3">
+            <span class="rounded bg-blue-50 px-2.5 py-1 text-xs font-extrabold uppercase text-blue-700">TFT-gogo</span>
+            <h3 class="text-xl font-extrabold text-neutral-950">패치노트 import를 source 기준으로 중복 방지</h3>
+          </div>
+          <div class="mt-5">
+            <div class="decision-row">
+              <strong class="text-sm text-neutral-950">배경</strong>
+              <p class="text-sm leading-6 text-neutral-700">공식 패치노트는 주기적으로 갱신되지만, 같은 문서를 반복 import하면 중복 데이터와 운영 부하가 생길 수 있었습니다.</p>
+            </div>
+            <div class="decision-row">
+              <strong class="text-sm text-blue-700">선택</strong>
+              <p class="text-sm leading-6 text-neutral-700">서버 시작 시 1회 import, 매시간 목록 확인, 매일 06:30 상세 refresh로 나누고 DB에 없는 sourceKey/sourceUrl/version만 상세 import하도록 설계했습니다.</p>
+            </div>
+            <div class="decision-row">
+              <strong class="text-sm text-neutral-950">이유</strong>
+              <p class="text-sm leading-6 text-neutral-700">수집 실패 fallback, 중복 실행 방지, 최신 데이터 반영을 동시에 고려해야 했기 때문입니다.</p>
+            </div>
+            <div class="decision-row">
+              <strong class="text-sm text-emerald-700">검증</strong>
+              <p class="text-sm leading-6 text-neutral-700">로컬/dev 기본값은 OFF로 두고 공용 개발 서버나 운영 서버에서만 켜도록 분리했습니다. 단일 서버 기준 중복 실행은 AtomicBoolean guard로 막고, 멀티 서버 환경은 공용 락 후속 이슈로 분리했습니다.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="rounded-lg border border-neutral-200 bg-white p-6 shadow-sm md:p-7">
+          <div class="flex flex-wrap items-center gap-3">
+            <span class="rounded bg-blue-50 px-2.5 py-1 text-xs font-extrabold uppercase text-blue-700">TFT-gogo</span>
+            <h3 class="text-xl font-extrabold text-neutral-950">AI 기능은 FastAPI 서버와 Spring 프록시로 역할 분리</h3>
+          </div>
+          <div class="mt-5">
+            <div class="decision-row">
+              <strong class="text-sm text-neutral-950">배경</strong>
+              <p class="text-sm leading-6 text-neutral-700">GameGuide AI Pathfinder는 프론트 채팅 UI, Spring API, FastAPI AI 서버, OpenAI 응답이 함께 맞물리는 기능이었습니다.</p>
+            </div>
+            <div class="decision-row">
+              <strong class="text-sm text-blue-700">선택</strong>
+              <p class="text-sm leading-6 text-neutral-700">AI 생성은 FastAPI에서 처리하고, Spring은 인증/프록시/응답 DTO 경계, React는 선택 UI와 결과 패널을 담당하도록 나눴습니다.</p>
+            </div>
+            <div class="decision-row">
+              <strong class="text-sm text-neutral-950">이유</strong>
+              <p class="text-sm leading-6 text-neutral-700">AI 응답 모델을 독립적으로 조정하면서도 기존 서비스 API 계약과 화면 상태를 안정적으로 유지할 수 있었습니다.</p>
+            </div>
+            <div class="decision-row">
+              <strong class="text-sm text-emerald-700">검증</strong>
+              <p class="text-sm leading-6 text-neutral-700">응답을 evidence_notes와 creative_suggestions로 분리하고, 프롬프트 공격 문구와 허용되지 않은 ref 변조를 서버에서 검사했습니다. AI 서버 테스트는 66 passed까지 확인했습니다.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="rounded-lg border border-neutral-200 bg-white p-6 shadow-sm md:p-7">
+          <div class="flex flex-wrap items-center gap-3">
+            <span class="rounded bg-blue-50 px-2.5 py-1 text-xs font-extrabold uppercase text-blue-700">공통</span>
+            <h3 class="text-xl font-extrabold text-neutral-950">운영 배포 설정은 로컬 QA 설정과 분리</h3>
+          </div>
+          <div class="mt-5">
+            <div class="decision-row">
+              <strong class="text-sm text-neutral-950">배경</strong>
+              <p class="text-sm leading-6 text-neutral-700">배포 환경에서는 CORS, OAuth redirect, AI 서버 URL, OpenAI 키, DB migration, healthcheck, ALB 라우팅처럼 실패 지점이 많았습니다.</p>
+            </div>
+            <div class="decision-row">
+              <strong class="text-sm text-blue-700">선택</strong>
+              <p class="text-sm leading-6 text-neutral-700">환경 변수와 secret 파일을 분리하고, Docker/Flyway 기본값에서 local-smoke seed가 섞이지 않도록 운영 기본 경로를 정리했습니다.</p>
+            </div>
+            <div class="decision-row">
+              <strong class="text-sm text-neutral-950">이유</strong>
+              <p class="text-sm leading-6 text-neutral-700">로컬 검증용 데이터나 관리자 계정이 운영 DB에 들어가는 위험은 기능 오류보다 복구 비용이 큰 운영 사고로 이어질 수 있었습니다.</p>
+            </div>
+            <div class="decision-row">
+              <strong class="text-sm text-emerald-700">검증</strong>
+              <p class="text-sm leading-6 text-neutral-700">배포 전 체크리스트와 smoke 기준으로 주요 화면, 게임 가이드 조회, 패치노트 조회, AI Pathfinder 요청, 로그와 환경 변수를 순서대로 확인했습니다.</p>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white">
+    <div class="mx-auto max-w-6xl px-5 py-14">
+      <p class="text-sm font-bold text-blue-700">Operating Rules</p>
+      <h2 class="display mt-2 text-3xl font-extrabold text-neutral-950">앞으로도 유지할 기준</h2>
+      <div class="mt-8 grid gap-6 md:grid-cols-2">
+        <article class="overflow-hidden rounded-lg border border-neutral-200 bg-white shadow-sm">
+          <img class="decision-shot" src="assets/gh-tft-prs-clean.png" alt="TFT-gogo PR 목록" width="1440" height="900"/>
+          <div class="p-5">
+            <h3 class="font-bold text-neutral-950">Issue, Branch, PR 연결</h3>
+            <p class="mt-3 text-sm leading-6 text-neutral-600">구현 의도, 변경 범위, 확인 방법을 PR에 남기고 리뷰 코멘트가 코드에 어떻게 반영됐는지 추적 가능하게 관리합니다.</p>
+          </div>
+        </article>
+        <article class="overflow-hidden rounded-lg border border-neutral-200 bg-white shadow-sm">
+          <img class="decision-shot" src="assets/tft-live-guide.png" alt="TFT-gogo 게임 가이드 화면" width="1440" height="900"/>
+          <div class="p-5">
+            <h3 class="font-bold text-neutral-950">API 계약과 화면 흐름 동시 확인</h3>
+            <p class="mt-3 text-sm leading-6 text-neutral-600">요청/응답 필드, 에러 포맷, 인증 필요 여부를 먼저 맞추고 실제 화면에서 사용자가 거치는 흐름까지 확인합니다.</p>
+          </div>
+        </article>
+      </div>
+      <div class="mt-8 rounded-lg border border-blue-100 bg-blue-50 p-5">
+        <strong class="text-sm text-blue-800">후속으로 남긴 판단</strong>
+        <p class="mt-2 text-sm leading-6 text-neutral-700">단일 서버 기준으로 충분했던 scheduler guard는 멀티 서버 환경에서는 분산 락이 필요합니다. 게임 가이드 탭 조회는 현재 구조에서 화면 요구를 만족하지만, 데이터가 커질 경우 Repository Pageable 조회로 옮겨 DB에서 필요한 페이지 단위만 가져오는 개선이 필요합니다.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="bg-white border-t border-neutral-200">
+  <div class="mx-auto max-w-6xl px-5 py-8 text-sm text-neutral-500">
+      <div class="flex items-baseline justify-between gap-6">
+        <span class="font-bold text-neutral-900">이현재</span>
+        <a class="font-bold text-neutral-900" href="https://github.com/TIG-korea" target="_blank" rel="noreferrer">GitHub 프로필</a>
+      </div>
+      <p class="mt-2">© 2026 이현재 백엔드 포트폴리오. 기술 스택, 의사결정, 운영 검증과 문제 해결.</p>
+  </div>
+</footer>
+<script src="assets/image-modal.js" defer></script>
+</body>
+</html>
