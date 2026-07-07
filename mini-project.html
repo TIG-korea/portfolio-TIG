@@ -131,7 +131,7 @@
         <img class="project-shot" src="assets/gh-mapingo-prs.png" alt="Mapingo 인증과 사용자 PR 목록" width="1440" height="900"/>
         <div class="p-5">
           <h3 class="font-bold text-neutral-950">인증 흐름 고도화</h3>
-          <p class="mt-3 text-sm leading-6 text-neutral-600">일반 로그인, Refresh Token Rotation, 로그아웃 시 토큰 폐기, Google OAuth 로그인, HttpOnly Cookie 전환까지 인증 흐름을 단계적으로 구현했습니다. PR #55, #64, #73, #75, #94 기준입니다.</p>
+          <p class="mt-3 text-sm leading-6 text-neutral-600">JWT 필터와 Redis Refresh Token 저장 구조를 먼저 만들고, 재발급 API에서는 Rotation으로 이전 토큰을 끊도록 개선했습니다. 이후 로그아웃 시 Redis 토큰 삭제, Google OAuth 가입/로그인, Refresh Token의 HttpOnly Cookie 전환까지 이어가며 토큰이 응답 body나 URL에 직접 노출되지 않는 방향으로 정리했습니다.</p>
         </div>
       </article>
       <article class="overflow-hidden rounded-lg border border-neutral-200 bg-white">
@@ -179,7 +179,7 @@
         </details>
         <details class="rounded-lg border border-neutral-200 bg-white p-5" open>
           <summary class="cursor-pointer list-none font-bold text-neutral-950">외부 API와 민감 정보 분리</summary>
-          <p class="mt-3 text-sm leading-6 text-neutral-700">Google OAuth, Redis, PortOne, FastAPI 서버 연동에 필요한 환경 변수와 application-secret.yml을 분리했습니다. 결제 검증은 imp_uid 기반 조회와 금액 검증 흐름으로 잡고, 테스트 채널 이슈는 PR #119, #122에서 조정했습니다.</p>
+          <p class="mt-3 text-sm leading-6 text-neutral-700">Google OAuth, Redis, PortOne, FastAPI 서버 연동에 필요한 환경 변수와 application-secret.yml을 분리했습니다. PortOne은 테스트 버전 호환 문제로 검증 로직이 막히던 지점을 먼저 분리했고, 이후 <code>imp_uid</code> 기반 결제 조회와 금액 검증 흐름을 테스트 채널 기준으로 다시 맞췄습니다.</p>
         </details>
       </div>
     </div>
@@ -195,9 +195,9 @@
           <div>
             <p class="text-xs font-bold uppercase text-blue-700">01 / Signup Validation</p>
             <h3 class="mt-2 text-xl font-extrabold text-neutral-950">회원가입 검증과 문서 불일치를 이슈 단위로 정리했습니다</h3>
-            <p class="mt-3 text-sm leading-6 text-neutral-700">회원가입 1차 구현 이후 약관 동의, 더미 약관 데이터, Swagger 응답 예시, 비밀번호 검증, LocalDate 검증 오류를 순차적으로 반영했습니다. #36, #59, #82, #102와 연결되는 흐름입니다.</p>
+            <p class="mt-3 text-sm leading-6 text-neutral-700">회원가입은 서비스 로직 TDD에서 시작해 Swagger 문서화, 약관 동의와 더미 약관 데이터, 응답 예시 불일치 수정, 비밀번호 정책과 <code>LocalDate</code> 검증 오류 정리로 이어졌습니다. 마지막에는 주소 정규식과 소셜 회원가입 중복 가입 방지까지 묶어 일반 회원가입과 소셜 회원가입의 입력 검증 기준을 맞췄습니다.</p>
             <ul class="mt-4 grid gap-2 text-sm leading-6 text-neutral-700">
-              <li><strong class="text-neutral-950">관련 PR</strong> #28, #33, #47, #62, #87, #99, #107</li>
+              <li><strong class="text-neutral-950">연결 이슈</strong> Swagger example 500, 문서 responseCode 불일치, 짧은 비밀번호 통과, birthDate 검증 오류</li>
               <li><strong class="text-neutral-950">검증 결과</strong> 약관 false, 중복 이메일, 비밀번호 정책, birthDate 어노테이션 오류를 Swagger와 테스트로 재확인</li>
             </ul>
           </div>
@@ -212,7 +212,7 @@
             <h3 class="mt-2 text-xl font-extrabold text-neutral-950">로그인, 재발급, 소셜 인증 흐름을 단계별로 고도화했습니다</h3>
             <p class="mt-3 text-sm leading-6 text-neutral-700">초기 JWT 필터와 Redis Refresh Token 저장을 만든 뒤, 재발급 Rotation, 로그아웃 토큰 삭제, Google OAuth 가입/로그인, HttpOnly Cookie 저장 방식까지 보안 흐름을 단계적으로 개선했습니다.</p>
             <ul class="mt-4 grid gap-2 text-sm leading-6 text-neutral-700">
-              <li><strong class="text-neutral-950">관련 PR</strong> #55, #64, #73, #75, #94</li>
+              <li><strong class="text-neutral-950">구현 흐름</strong> JWT + Redis 1차 구조, Refresh Token Rotation 재발급, 로그아웃 토큰 폐기, Google OAuth 가입/로그인, HttpOnly Cookie 전환</li>
               <li><strong class="text-neutral-950">검증 결과</strong> Redis 저장값/TTL, 재발급 전후 토큰 불일치, OAuth 1회용 코드 교환, HttpOnly Cookie 동작을 캡처로 기록</li>
             </ul>
           </div>
@@ -227,7 +227,7 @@
             <h3 class="mt-2 text-xl font-extrabold text-neutral-950">사용자 운영 기능과 결제 흐름까지 API 범위를 넓혔습니다</h3>
             <p class="mt-3 text-sm leading-6 text-neutral-700">유저 정보 조회, 소셜 로그인 후 프로필 입력, 전화번호 중복 방지, 마이페이지 수정/탈퇴, 관리자 회원 관리, PortOne 결제/구독 검증과 관리자 결제내역 조회까지 구현했습니다.</p>
             <ul class="mt-4 grid gap-2 text-sm leading-6 text-neutral-700">
-              <li><strong class="text-neutral-950">관련 PR</strong> #100, #103, #110, #116, #117, #113, #122, #127, #131, #135, #136</li>
+              <li><strong class="text-neutral-950">확장 범위</strong> 유저 조회와 프로필 입력, 전화번호 중복 방지, 마이페이지/탈퇴, 관리자 회원 상태 변경, 구독 활성 여부, 관리자 결제내역 조회</li>
               <li><strong class="text-neutral-950">검증 결과</strong> 단위 테스트, Swagger 응답, 상태 변경, soft delete, 결제 조회/검증 실패 조건을 PR 본문에 캡처로 기록</li>
             </ul>
           </div>
