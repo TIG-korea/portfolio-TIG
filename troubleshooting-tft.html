@@ -141,6 +141,10 @@
                   <strong class="text-sm text-emerald-700">Result</strong>
                   <p class="text-sm leading-6 text-neutral-700"><a class="font-bold text-neutral-950 underline decoration-neutral-300 underline-offset-4" href="https://github.com/s4ngg/TFT-gogo/pull/701" target="_blank" rel="noreferrer">PR #701</a>에서는 최근 패치노트 목록과 changes 조회 흐름을 함께 정리하면서 통계 쿼리를 단일 group by 조회로 바꿨습니다. 수정 후 <code>PatchNoteServiceImplTest</code>와 백엔드 전체 테스트를 돌리고, 로컬 실제 데이터 API smoke까지 확인했습니다. <a class="font-bold text-neutral-950 underline decoration-neutral-300 underline-offset-4" href="https://github.com/s4ngg/TFT-gogo/issues/710" target="_blank" rel="noreferrer">이슈 #710</a>에는 JMeter 50 users, 300 seconds, 3회 측정 결과를 댓글로 남겨 개선 전후 수치를 추적할 수 있게 했습니다.</p>
                 </div>
+                <div class="case-summary">
+                  <strong class="text-sm text-neutral-950">Follow-up</strong>
+                  <p class="text-sm leading-6 text-neutral-700">이후에는 통계 계산 위치 자체도 다시 비교했습니다. 백엔드가 grouped stats를 계산하는 현재 방식과, <code>includeStats=false</code>로 changes 목록만 내려주고 프론트가 통계를 계산한다고 가정한 방식을 1000 users, ramp-up 10 seconds, duration 300 seconds 조건에서 비교했습니다.</p>
+                </div>
               </div>
             </div>
             <figure class="overflow-hidden rounded-lg border border-neutral-200 bg-neutral-100">
@@ -180,6 +184,33 @@ WHERE c.patchNote = :patchNote
 GROUP BY c.category, c.changeType, c.impact
 """)
 List&lt;PatchChangeStatsCount&gt; countFilteredChangeStats(...);</code></pre>
+          <div class="mt-7 rounded-lg border border-neutral-200 bg-neutral-50 p-5">
+            <h3 class="text-lg font-extrabold text-neutral-950">후속 비교: 통계 계산을 어디서 할 것인가</h3>
+            <p class="mt-3 text-sm leading-7 text-neutral-700">처음에는 통계 계산을 프론트로 넘기면 백엔드 부하가 줄어들 것으로 예상했습니다. 하지만 17.6 패치의 changes 102건을 기준으로 1000명 동시 접속을 걸어보니, 통계 쿼리 하나보다 changes 목록 조회와 DB 커넥션 풀 대기가 더 큰 병목으로 드러났습니다.</p>
+            <div class="mt-5 overflow-x-auto border-y border-neutral-200 bg-white">
+              <table class="min-w-full text-left text-sm">
+                <thead class="bg-neutral-50 text-neutral-600">
+                  <tr>
+                    <th class="px-4 py-3 font-extrabold">지표</th>
+                    <th class="px-4 py-3 font-extrabold">백엔드 grouped stats</th>
+                    <th class="px-4 py-3 font-extrabold">프론트 계산 시뮬레이션</th>
+                    <th class="px-4 py-3 font-extrabold">판단</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-neutral-200">
+                  <tr><td class="px-4 py-3 font-bold">요청 수</td><td class="px-4 py-3">22,418</td><td class="px-4 py-3">14,177</td><td class="px-4 py-3 font-bold text-emerald-700">백엔드 방식 우세</td></tr>
+                  <tr><td class="px-4 py-3 font-bold">TPS</td><td class="px-4 py-3">74.4/s</td><td class="px-4 py-3">46.9/s</td><td class="px-4 py-3 font-bold text-emerald-700">백엔드 방식 우세</td></tr>
+                  <tr><td class="px-4 py-3 font-bold">평균 응답시간</td><td class="px-4 py-3">13,901.1ms</td><td class="px-4 py-3">21,461.1ms</td><td class="px-4 py-3 font-bold text-emerald-700">백엔드 방식 우세</td></tr>
+                  <tr><td class="px-4 py-3 font-bold">p99</td><td class="px-4 py-3">43,386ms</td><td class="px-4 py-3">40,648ms</td><td class="px-4 py-3 font-bold text-neutral-700">프론트 방식 일부 우세</td></tr>
+                  <tr><td class="px-4 py-3 font-bold">최대 응답시간</td><td class="px-4 py-3">82,673ms</td><td class="px-4 py-3">63,513ms</td><td class="px-4 py-3 font-bold text-neutral-700">프론트 방식 일부 우세</td></tr>
+                  <tr><td class="px-4 py-3 font-bold">에러율</td><td class="px-4 py-3">0.06%</td><td class="px-4 py-3">0.56%</td><td class="px-4 py-3 font-bold text-emerald-700">백엔드 방식 우세</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <pre class="code-block mt-5 overflow-x-auto rounded bg-neutral-950 p-4 text-xs leading-6 text-neutral-100"><code>HikariPool-1 - Connection is not available, request timed out after 30234ms
+total=10, active=10, idle=0, waiting=185</code></pre>
+            <p class="mt-4 text-sm leading-7 text-neutral-700">결론적으로 프론트 계산 이관은 채택하지 않았습니다. 같은 통계를 1000명의 브라우저에서 반복 계산하게 하기보다, 백엔드에서 grouped stats로 한 번에 계산하고 이후 캐싱, API 분리, DB connection pool 튜닝, 인덱스 점검으로 이어가는 방향이 더 적합하다고 판단했습니다.</p>
+          </div>
         </div>
       </article>
 

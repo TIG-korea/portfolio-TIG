@@ -395,6 +395,10 @@
               <p class="text-sm leading-6 text-neutral-700">성능 문제를 전체 구조 탓으로 넓히기 전에 어느 API가 무거운지, 왜 무거운지 먼저 나눠야 했습니다.</p>
             </div>
             <div class="decision-row">
+              <strong class="text-sm text-neutral-950">대안 비교</strong>
+              <p class="text-sm leading-6 text-neutral-700">#710 이후에는 통계 계산을 프론트로 넘기는 방식도 1000 users 기준으로 비교했습니다. 하지만 백엔드 grouped stats 방식이 22,418 requests, 74.4 TPS, 평균 13,901.1ms, 에러율 0.06%로 프론트 계산 시뮬레이션보다 안정적이었고, 실제 병목은 통계 계산보다 DB connection pool 대기에 가까웠습니다.</p>
+            </div>
+            <div class="decision-row">
               <strong class="text-sm text-emerald-700">검증</strong>
               <p class="text-sm leading-6 text-neutral-700">JMeter와 로컬 실제 데이터 API smoke로 평균, p95, p99, 최대 응답시간을 비교하고 후속 개선 대상을 분리했습니다.</p>
             </div>
@@ -448,7 +452,7 @@
         </div>
         <div class="evidence-row">
           <strong class="text-sm text-neutral-950">Load / Metrics</strong>
-          <p class="text-sm leading-6 text-neutral-700">패치노트 조회 성능은 JMeter 50 users, 300 seconds 반복 측정으로 평균, p95, p99, 최대 응답시간을 비교했습니다.</p>
+          <p class="text-sm leading-6 text-neutral-700">패치노트 조회 성능은 JMeter 50 users, 300 seconds 반복 측정으로 평균, p95, p99, 최대 응답시간을 비교했습니다. 이후 1000 users 조건에서는 백엔드 grouped stats와 프론트 계산 시뮬레이션을 비교해 계산 위치보다 DB connection pool 대기가 더 큰 병목이라는 점을 확인했습니다.</p>
         </div>
         <div class="evidence-row">
           <strong class="text-sm text-neutral-950">AI Guard</strong>
