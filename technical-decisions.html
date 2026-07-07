@@ -54,9 +54,9 @@
   <section class="bg-white">
     <div class="mx-auto max-w-6xl px-5 py-16">
       <div class="max-w-4xl">
-        <p class="text-sm font-bold uppercase text-blue-700">Technical Stack & Decisions</p>
-        <h1 class="display mt-3 text-4xl font-extrabold leading-tight text-neutral-950 md:text-5xl">기술 스택은 이 페이지에서만 종합해서 봅니다</h1>
-        <p class="mt-5 max-w-3xl text-lg leading-8 text-neutral-700">각 프로젝트 페이지에는 구현 기능과 결과를 남기고, 스택 목록과 기술 선택 이유는 이곳에 모았습니다. 단순히 사용한 도구를 나열하기보다 어떤 문제를 해결하기 위해 선택했고 어떤 방식으로 검증했는지 함께 정리했습니다.</p>
+        <p class="text-sm font-bold uppercase text-blue-700">Technical Overview</p>
+        <h1 class="display mt-3 text-4xl font-extrabold leading-tight text-neutral-950 md:text-5xl">기술 스택과 선택 기준</h1>
+        <p class="mt-5 max-w-3xl text-lg leading-8 text-neutral-700">프로젝트에서 사용한 기술을 역할별로 정리하고, 선택 이유와 검증 방식까지 함께 묶었습니다. 각 프로젝트 페이지에서는 구현 기능과 결과를 중심으로 보여주고, 기술 목록과 의사결정은 이 페이지에서 한 번에 확인할 수 있도록 구성했습니다.</p>
         <div class="mt-8 flex flex-wrap gap-2" aria-label="핵심 기술 스택">
           <span class="stack-chip">Java</span>
           <span class="stack-chip">Spring Boot</span>
@@ -75,20 +75,20 @@
 
   <section class="border-y border-neutral-200 bg-neutral-50">
     <div class="mx-auto max-w-6xl px-5 py-12">
-      <p class="text-sm font-bold text-blue-700">How To Read</p>
-      <h2 class="display mt-2 text-3xl font-extrabold text-neutral-950">이 페이지를 정리한 틀</h2>
+      <p class="text-sm font-bold text-blue-700">Reading Guide</p>
+      <h2 class="display mt-2 text-3xl font-extrabold text-neutral-950">정리 기준</h2>
       <div class="mt-7 grid gap-5 md:grid-cols-3">
         <div class="border-t-2 border-neutral-950 pt-4">
-          <strong class="text-lg text-neutral-950">무엇을 썼는가</strong>
-          <p class="mt-2 text-sm leading-6 text-neutral-600">프로젝트별, 역할별로 사용한 언어, 프레임워크, 저장소, 외부 API, 배포 도구를 모았습니다.</p>
+          <strong class="text-lg text-neutral-950">사용 기술</strong>
+          <p class="mt-2 text-sm leading-6 text-neutral-600">프로젝트별로 사용한 언어, 프레임워크, 저장소, 외부 API, 배포 도구를 역할 기준으로 모았습니다.</p>
         </div>
         <div class="border-t-2 border-neutral-950 pt-4">
-          <strong class="text-lg text-neutral-950">왜 그 경계로 나눴는가</strong>
-          <p class="mt-2 text-sm leading-6 text-neutral-600">백엔드 API, AI 서버, 프론트엔드, 배포 설정이 각각 어떤 책임을 가지도록 설계했는지 적었습니다.</p>
+          <strong class="text-lg text-neutral-950">책임 분리</strong>
+          <p class="mt-2 text-sm leading-6 text-neutral-600">백엔드 API, AI 서버, 프론트엔드, 배포 설정이 각각 어떤 책임을 맡도록 나눴는지 정리했습니다.</p>
         </div>
         <div class="border-t-2 border-neutral-950 pt-4">
-          <strong class="text-lg text-neutral-950">어떻게 확인했는가</strong>
-          <p class="mt-2 text-sm leading-6 text-neutral-600">PR, 이슈, Swagger, 테스트, smoke, JMeter처럼 실제 확인 결과가 남는 방식 위주로 정리했습니다.</p>
+          <strong class="text-lg text-neutral-950">검증 방식</strong>
+          <p class="mt-2 text-sm leading-6 text-neutral-600">PR, 이슈, Swagger, 테스트, smoke, JMeter처럼 결과가 남는 확인 방법을 함께 적었습니다.</p>
         </div>
       </div>
     </div>
@@ -96,76 +96,76 @@
 
   <section class="bg-white">
     <div class="mx-auto max-w-6xl px-5 py-14">
-      <p class="text-sm font-bold text-blue-700">Stack Inventory</p>
-      <h2 class="display mt-2 text-3xl font-extrabold text-neutral-950">전체 기술 스택</h2>
-      <p class="mt-4 max-w-3xl text-sm leading-7 text-neutral-700">스택은 프로젝트 이름보다 역할 기준으로 읽히도록 정리했습니다. 같은 기술이라도 Mapingo에서는 인증/결제 API를 안정화하는 데, TFT-gogo에서는 외부 데이터와 AI 연동을 운영 가능한 흐름으로 묶는 데 사용했습니다.</p>
+      <p class="text-sm font-bold text-blue-700">Stack Overview</p>
+      <h2 class="display mt-2 text-3xl font-extrabold text-neutral-950">기술 스택 한눈에 보기</h2>
+      <p class="mt-4 max-w-3xl text-sm leading-7 text-neutral-700">기술명만 나열하지 않고 실제로 어떤 역할에 사용했는지 함께 정리했습니다. 같은 기술이라도 Mapingo에서는 인증/결제 API를 안정화하는 데, TFT-gogo에서는 외부 데이터와 AI 연동을 운영 가능한 흐름으로 묶는 데 사용했습니다.</p>
       <div class="mt-8 overflow-x-auto border-y border-neutral-200">
         <table class="stack-table min-w-full text-left text-sm">
           <thead class="bg-neutral-50 text-neutral-600">
             <tr>
-              <th class="px-4 py-3 font-extrabold">영역</th>
+              <th class="px-4 py-3 font-extrabold">역할</th>
               <th class="px-4 py-3 font-extrabold">사용 스택</th>
               <th class="px-4 py-3 font-extrabold">사용한 프로젝트</th>
-              <th class="px-4 py-3 font-extrabold">맡은 역할과 기준</th>
+              <th class="px-4 py-3 font-extrabold">사용 목적</th>
             </tr>
           </thead>
           <tbody class="divide-y divide-neutral-200 text-neutral-700">
             <tr>
-              <td class="px-4 py-4 font-bold text-neutral-950">Backend API</td>
-              <td class="px-4 py-4">Java, Java 21, Spring Boot, Spring Security</td>
+              <td class="px-4 py-4 font-bold text-neutral-950">백엔드 API</td>
+              <td class="px-4 py-4">Java, Spring Boot, Spring Security</td>
               <td class="px-4 py-4">Mapingo, TFT-gogo</td>
               <td class="px-4 py-4">도메인 API, 인증 경계, 관리자 조회, 게임 가이드와 패치노트 API를 구현했습니다.</td>
             </tr>
             <tr>
-              <td class="px-4 py-4 font-bold text-neutral-950">Frontend</td>
+              <td class="px-4 py-4 font-bold text-neutral-950">프론트엔드</td>
               <td class="px-4 py-4">React</td>
               <td class="px-4 py-4">Mapingo, TFT-gogo</td>
               <td class="px-4 py-4">사용자 화면 상태와 API 계약을 맞추고 OAuth, AI Pathfinder, 검색/필터 흐름을 연결했습니다.</td>
             </tr>
             <tr>
-              <td class="px-4 py-4 font-bold text-neutral-950">AI Server</td>
-              <td class="px-4 py-4">FastAPI, OpenAI API, prompt guard, structured response</td>
+              <td class="px-4 py-4 font-bold text-neutral-950">AI 서버</td>
+              <td class="px-4 py-4">FastAPI, OpenAI API, 프롬프트 방어, 구조화 응답</td>
               <td class="px-4 py-4">Mapingo, TFT-gogo</td>
               <td class="px-4 py-4">AI 기능은 별도 서버에 두고 Spring이 프록시와 응답 계약을 관리하도록 역할을 나눴습니다.</td>
             </tr>
             <tr>
-              <td class="px-4 py-4 font-bold text-neutral-950">Auth & Security</td>
+              <td class="px-4 py-4 font-bold text-neutral-950">인증/보안</td>
               <td class="px-4 py-4">JWT, Refresh Token Rotation, Redis, OAuth2, HttpOnly Cookie</td>
               <td class="px-4 py-4">Mapingo</td>
               <td class="px-4 py-4">토큰 재발급, 로그아웃, 소셜 로그인, 쿠키 전환까지 인증 흐름을 단계적으로 고도화했습니다.</td>
             </tr>
             <tr>
-              <td class="px-4 py-4 font-bold text-neutral-950">Data & Cache</td>
-              <td class="px-4 py-4">MySQL, Redis, CDragon data, official patch notes</td>
+              <td class="px-4 py-4 font-bold text-neutral-950">데이터/캐시</td>
+              <td class="px-4 py-4">MySQL, Redis, CDragon 데이터, 공식 패치노트</td>
               <td class="px-4 py-4">Mapingo, TFT-gogo</td>
               <td class="px-4 py-4">영속 데이터, 캐시, 외부 import 데이터를 분리하고 갱신 기준과 중복 방지 조건을 명시했습니다.</td>
             </tr>
             <tr>
-              <td class="px-4 py-4 font-bold text-neutral-950">Payment</td>
-              <td class="px-4 py-4">PortOne V1 API, payment/subscription model</td>
+              <td class="px-4 py-4 font-bold text-neutral-950">결제</td>
+              <td class="px-4 py-4">PortOne V1 API, 결제/구독 모델</td>
               <td class="px-4 py-4">Mapingo</td>
               <td class="px-4 py-4">imp_uid 기반 결제 조회와 금액 검증을 서버에서 수행하고 유료 기능 진입 전 구독 상태를 확인했습니다.</td>
             </tr>
             <tr>
-              <td class="px-4 py-4 font-bold text-neutral-950">API Documentation</td>
-              <td class="px-4 py-4">Swagger, Request/Response DTO, response examples</td>
+              <td class="px-4 py-4 font-bold text-neutral-950">API 문서화</td>
+              <td class="px-4 py-4">Swagger, 요청/응답 DTO, 응답 예시</td>
               <td class="px-4 py-4">Mapingo</td>
               <td class="px-4 py-4">프론트엔드와 QA가 보는 문서 기준이 실제 DTO와 어긋나지 않도록 문서화 클래스를 분리했습니다.</td>
             </tr>
             <tr>
-              <td class="px-4 py-4 font-bold text-neutral-950">Batch & Migration</td>
-              <td class="px-4 py-4">Scheduler, Flyway, Docker Compose smoke</td>
+              <td class="px-4 py-4 font-bold text-neutral-950">배치/마이그레이션</td>
+              <td class="px-4 py-4">Scheduler, Flyway, Docker Compose smoke test</td>
               <td class="px-4 py-4">TFT-gogo</td>
               <td class="px-4 py-4">패치노트 import, migration 검증, local-smoke seed 분리처럼 운영 데이터에 영향을 주는 흐름을 관리했습니다.</td>
             </tr>
             <tr>
-              <td class="px-4 py-4 font-bold text-neutral-950">Infra & Deployment</td>
-              <td class="px-4 py-4">Docker, AWS, ALB, healthcheck, CORS, environment variables</td>
+              <td class="px-4 py-4 font-bold text-neutral-950">인프라/배포</td>
+              <td class="px-4 py-4">Docker, AWS, ALB, healthcheck, CORS, 환경 변수</td>
               <td class="px-4 py-4">Mapingo, TFT-gogo</td>
               <td class="px-4 py-4">배포 전후 설정 누락을 줄이기 위해 환경 변수, redirect, AI URL, healthcheck를 체크리스트로 관리했습니다.</td>
             </tr>
             <tr>
-              <td class="px-4 py-4 font-bold text-neutral-950">Portfolio</td>
+              <td class="px-4 py-4 font-bold text-neutral-950">포트폴리오 사이트</td>
               <td class="px-4 py-4">Static HTML, Tailwind CDN, Material Symbols, Vercel</td>
               <td class="px-4 py-4">포트폴리오 사이트</td>
               <td class="px-4 py-4">빌드 없이 열리는 정적 페이지 구조로 유지하고, Vercel 배포 URL에서 실제 응답을 확인했습니다.</td>
