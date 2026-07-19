@@ -65,7 +65,7 @@
       <div>
         <p class="text-sm font-bold uppercase text-blue-700">TFT-gogo Troubleshooting</p>
         <h1 class="display mt-3 text-4xl font-extrabold leading-tight text-neutral-950 md:text-5xl">성능, 데이터, 배포 리스크를 실제 수치로 확인한 파이널 프로젝트 이슈</h1>
-        <p class="mt-5 max-w-3xl text-lg leading-8 text-neutral-700">TFT-gogo에서는 게임 가이드와 패치노트 도메인을 맡으면서 외부 데이터 import, API 응답 성능, DB migration, 화면 분류 품질을 함께 다뤘습니다. Notion 로그에서 포트폴리오에 어필하기 좋은 문제만 골라 정리했습니다.</p>
+        <p class="mt-5 max-w-3xl text-lg leading-8 text-neutral-700">TFT-gogo에서 게임 가이드와 패치노트 도메인을 맡아 외부 데이터 수집, API 응답 성능, DB 마이그레이션, 화면 분류 품질을 함께 다뤘습니다. 노션 기록에서 문제·원인·검증 근거가 분명한 사례만 골라 정리했습니다.</p>
       </div>
       <figure class="overflow-hidden rounded-lg border border-neutral-200 bg-neutral-100">
         <a class="image-link" href="https://github.com/s4ngg/TFT-gogo" target="_blank" rel="noreferrer" aria-label="TFT-gogo GitHub 저장소로 이동">
@@ -81,37 +81,98 @@
       <article class="overflow-hidden rounded-lg border border-neutral-200 bg-white shadow-sm">
         <div class="grid gap-0 md:grid-cols-[0.92fr_1.08fr]">
           <figure class="border-b border-neutral-200 bg-neutral-100 md:border-b-0 md:border-r">
-            <a class="image-link" href="https://github.com/s4ngg/TFT-gogo/pull/677" target="_blank" rel="noreferrer" aria-label="TFT-gogo PR 677로 이동">
+            <a class="image-link" href="https://github.com/s4ngg/TFT-gogo/pull/608" target="_blank" rel="noreferrer" aria-label="TFT-gogo PR 608로 이동">
               <img class="case-shot h-full" src="assets/tft-live-guide.png" alt="TFT-gogo 게임 가이드 화면" width="1440" height="900"/>
             </a>
           </figure>
           <div class="p-6 md:p-7">
             <p class="text-sm font-bold uppercase text-blue-700">Performance / API Flow</p>
-            <h2 class="display mt-2 text-2xl font-extrabold text-neutral-950">게임가이드 카탈로그 선호출 성능 개선 분석</h2>
-            <p class="mt-3 text-sm leading-7 text-neutral-700">첫 진입에 필요한 정보는 현재 패치 버전 정도였지만, 프론트엔드는 챔피언, 시너지, 아이템, 증강체 전체 카탈로그를 반환하는 <code>/api/guide</code>를 먼저 호출하고 있었습니다.</p>
+            <h2 class="display mt-2 text-2xl font-extrabold text-neutral-950">게임가이드 조회 최적화: DB 페이지네이션 구현과 후속 개선 검증</h2>
+            <p class="mt-3 text-sm leading-7 text-neutral-700"><code>GET /api/guide/{tab}</code>은 <code>page</code>와 <code>pageSize</code>를 받았지만 전체 데이터를 메모리에 올린 뒤 서비스에서 잘라냈고, 첫 진입은 현재 패치 버전만 필요해도 전체 카탈로그를 선조회했습니다.</p>
             <div class="mt-6">
               <div class="case-summary">
                 <strong class="text-sm text-red-700">Problem</strong>
-                <p class="text-sm leading-6 text-neutral-700">장애 수준은 아니었지만 게임가이드 API 중 <code>/api/guide</code>가 가장 무거운 호출로 측정됐고, 사용자 첫 진입 흐름에 불필요한 대용량 조회가 포함되어 있었습니다.</p>
+                <p class="text-sm leading-6 text-neutral-700">API 계약에는 페이지 필드가 있었지만 Repository는 전체 <code>List</code>를 반환해 데이터가 늘수록 DB I/O와 서버 메모리 사용량이 함께 증가하는 구조였습니다.</p>
               </div>
               <div class="case-summary">
-                <strong class="text-sm text-neutral-950">Cause</strong>
-                <p class="text-sm leading-6 text-neutral-700">현재 패치 버전만 필요할 때도 전체 카탈로그 데이터를 조회하고 응답으로 내려 DB 조회량, 응답 생성 비용, 네트워크 전송량이 함께 커졌습니다.</p>
+                <strong class="text-sm text-blue-700">직접 구현</strong>
+                <p class="text-sm leading-6 text-neutral-700"><a class="font-bold text-neutral-950 underline decoration-neutral-300 underline-offset-4" href="https://github.com/s4ngg/TFT-gogo/pull/608" target="_blank" rel="noreferrer">PR #608</a>에서 챔피언·시너지·아이템·증강체 조회를 DB 페이지네이션으로 전환해 필요한 행만 가져오도록 했습니다. 검색·등급·유효 데이터 조건을 목록과 전체 건수 쿼리에 동일하게 적용해 기존 응답 형식을 유지했습니다.</p>
               </div>
               <div class="case-summary">
-                <strong class="text-sm text-blue-700">Solution</strong>
-                <p class="text-sm leading-6 text-neutral-700">첫 진입은 <code>/api/guide/patch-version</code>으로 가볍게 처리하고, 탭 접근 시 <code>/api/guide/traits</code>, <code>/api/guide/items</code>, <code>/api/guide/augments</code>, <code>/api/guide/champions</code>를 분리 조회하는 방향으로 정리했습니다.</p>
+                <strong class="text-sm text-emerald-700">직접 검증</strong>
+                <p class="text-sm leading-6 text-neutral-700">목록과 전체 건수가 같은 필터 조건으로 계산되는지 서비스·저장소 테스트와 전체 백엔드 테스트로 검증했습니다.</p>
+              </div>
+              <div class="case-summary">
+                <strong class="text-sm text-neutral-950">팀 후속 기여</strong>
+                <p class="text-sm leading-6 text-neutral-700">팀원이 <a class="font-bold text-neutral-950 underline decoration-neutral-300 underline-offset-4" href="https://github.com/s4ngg/TFT-gogo/pull/677" target="_blank" rel="noreferrer">PR #677</a>에서 전체 카탈로그 선호출을 <code>/api/guide/patch-version</code>으로 경량화했고, 저는 코드·회귀 테스트·JMeter 결과를 재확인해 <a class="font-bold text-neutral-950 underline decoration-neutral-300 underline-offset-4" href="https://github.com/s4ngg/TFT-gogo/pull/677#pullrequestreview-4632558949" target="_blank" rel="noreferrer">최종 리뷰를 승인</a>했습니다.</p>
               </div>
             </div>
-            <dl class="mt-6 grid gap-3 border-y border-neutral-200 py-4 text-sm md:grid-cols-4">
-              <div><dt class="font-bold text-neutral-500">전체 평균</dt><dd class="mt-1 font-extrabold text-neutral-950">14.96ms</dd></div>
-              <div><dt class="font-bold text-neutral-500">전체 p95</dt><dd class="mt-1 font-extrabold text-neutral-950">47ms</dd></div>
-              <div><dt class="font-bold text-neutral-500">/api/guide 평균</dt><dd class="mt-1 font-extrabold text-neutral-950">50.49ms</dd></div>
-              <div><dt class="font-bold text-neutral-500">/api/guide p99</dt><dd class="mt-1 font-extrabold text-neutral-950">100ms</dd></div>
+            <p class="mt-6 text-xs font-bold uppercase tracking-wide text-neutral-500">팀원 후속 PR #677의 선호출 제거 결과(코드·테스트·측정 결과 리뷰) · 로컬 JMeter 50 VU · 300초 · HikariCP pool 50</p>
+            <dl class="mt-3 grid gap-3 border-y border-neutral-200 py-4 text-sm md:grid-cols-4">
+              <div><dt class="font-bold text-neutral-500">평균 응답</dt><dd class="mt-1 font-extrabold text-neutral-950">134 → 18.1ms</dd></div>
+              <div><dt class="font-bold text-neutral-500">p95</dt><dd class="mt-1 font-extrabold text-neutral-950">247 → 24ms</dd></div>
+              <div><dt class="font-bold text-neutral-500">초당 처리량</dt><dd class="mt-1 font-extrabold text-neutral-950">366.7 → 2,711.7/s</dd></div>
+              <div><dt class="font-bold text-neutral-500">오류율</dt><dd class="mt-1 font-extrabold text-neutral-950">0% 유지</dd></div>
             </dl>
-            <div class="mt-5 rounded-lg border border-blue-100 bg-blue-50 p-4">
-              <strong class="text-sm text-blue-800">후속 개선 포인트</strong>
-              <p class="mt-2 text-sm leading-6 text-neutral-700">노션 로그에서 별도로 정리한 탭 조회 이슈까지 보면, <code>GET /api/guide/{tab}</code>도 <code>page</code>, <code>pageSize</code>를 받으면서 실제로는 전체 데이터를 먼저 조회한 뒤 Java 서비스 레이어에서 <code>filter</code>, <code>sorted</code>, <code>subList</code>로 잘라내는 구조였습니다. 따라서 선호출 제거 이후에는 Repository에 <code>Pageable</code> 기반 조회를 추가해 요청한 페이지에 필요한 데이터만 DB에서 가져오는 방향까지 개선 대상으로 분리했습니다.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="overflow-hidden rounded-lg border border-neutral-200 bg-white shadow-sm">
+        <div class="p-6 md:p-7">
+          <p class="text-sm font-bold uppercase text-blue-700">Concurrency / Content Refresh</p>
+          <h2 class="display mt-2 text-2xl font-extrabold text-neutral-950">다중 인스턴스에서도 패치→가이드 갱신 순서를 보장</h2>
+          <p class="mt-3 text-sm leading-7 text-neutral-700">패치노트와 게임가이드가 각자 정상 갱신돼도 서로 다른 lock과 진입점을 사용하면, 서버 A의 패치 커밋 전에 서버 B가 이전 <code>current</code> 버전으로 가이드를 만들 수 있었습니다. 각 API는 성공하지만 사용자에게 보이는 두 콘텐츠 버전은 어긋나는 경쟁 조건입니다.</p>
+          <div class="mt-6">
+            <div class="case-summary">
+              <strong class="text-sm text-red-700">Problem</strong>
+              <p class="text-sm leading-6 text-neutral-700"><code>AtomicBoolean</code>은 한 서버 안에서만 동작하고, 작업별 락만으로는 “패치 저장 후 같은 버전의 가이드를 갱신한다”는 실행 순서를 보장할 수 없었습니다.</p>
+            </div>
+            <div class="case-summary">
+              <strong class="text-sm text-neutral-950">Cause</strong>
+              <p class="text-sm leading-6 text-neutral-700">패치와 가이드가 서로 다른 락을 사용했고, 가이드 작업이 DB의 <code>current</code>를 다시 조회해 패치 트랜잭션의 커밋 시점과 경쟁했습니다. 자동 스케줄러와 관리자 수동 수집도 진입점이 달랐습니다.</p>
+            </div>
+            <div class="case-summary">
+              <strong class="text-sm text-blue-700">Solution</strong>
+              <p class="text-sm leading-6 text-neutral-700">패치→가이드 전체 실행 구간을 공용 MySQL 락(<code>GET_LOCK</code>)으로 보호했습니다. 저장이 끝난 패치 버전을 가이드 작업에 직접 전달하고, 패치 실패나 빈 버전이면 가이드를 실행하지 않았습니다. 자동·수동 경로는 같은 보호 로직을 사용하며, 다른 갱신이 진행 중인 수동 요청에는 HTTP 409를 반환합니다.</p>
+            </div>
+            <div class="case-summary">
+              <strong class="text-sm text-emerald-700">Result</strong>
+              <p class="text-sm leading-6 text-neutral-700">락 경합과 각 실패 경로를 테스트하고, 실제 MySQL 8의 두 연결에서 첫 <code>GET_LOCK=1</code>, 경쟁 연결 <code>0</code>, <code>RELEASE_LOCK=1</code>을 확인했습니다. 가이드 갱신이 실패하면 이미 저장된 패치는 되돌리지 않고 기존 활성 가이드를 보존해 다음 실행에서 재시도합니다.</p>
+            </div>
+            <div class="case-summary">
+              <strong class="text-sm text-neutral-950">직접 기여</strong>
+              <p class="text-sm leading-6 text-neutral-700">경쟁 조건 분석, 락·트랜잭션 경계 설계, 자동·수동 실행 통합, 실패 복구 테스트와 실제 MySQL 경합 검증을 수행했습니다. <a class="font-bold text-neutral-950 underline decoration-neutral-300 underline-offset-4" href="https://github.com/s4ngg/TFT-gogo/issues/748" target="_blank" rel="noreferrer">이슈 #748</a>에서 문제를 정의하고 <a class="font-bold text-neutral-950 underline decoration-neutral-300 underline-offset-4" href="https://github.com/s4ngg/TFT-gogo/pull/773" target="_blank" rel="noreferrer">PR #773</a>으로 <code>develop</code> 최종 반영을 확인했습니다.</p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="overflow-hidden rounded-lg border border-neutral-200 bg-white shadow-sm">
+        <div class="p-6 md:p-7">
+          <p class="text-sm font-bold uppercase text-blue-700">Import / Data Safety</p>
+          <h2 class="display mt-2 text-2xl font-extrabold text-neutral-950">부분 파싱 결과가 기존 패치노트를 지우지 못하게 차단</h2>
+          <p class="mt-3 text-sm leading-7 text-neutral-700">외부 페이지가 HTTP 200을 반환하고 파서 오류가 없어도, 페이지 구조 변경이나 최대 행 제한으로 일부만 추출될 수 있습니다. 기존 로직은 이를 정상 수집으로 보고 새 목록에 없는 기존 자동 수집 행을 삭제 대상으로 판단할 수 있었습니다.</p>
+          <div class="mt-6">
+            <div class="case-summary">
+              <strong class="text-sm text-red-700">Problem</strong>
+              <p class="text-sm leading-6 text-neutral-700">부분 파싱이 정상 커밋되면 공개 API는 200을 반환하면서도 기존 패치 변경사항이 조용히 대량 유실될 수 있었습니다. HTTP 성공·본문 파싱 성공과 운영 반영 가능한 데이터 완전성이 구분되지 않은 상태였습니다.</p>
+            </div>
+            <div class="case-summary">
+              <strong class="text-sm text-neutral-950">Counterexample</strong>
+              <p class="text-sm leading-6 text-neutral-700">기존·신규 결과가 각각 100개여도 수집 식별자의 교집합이 0이면 기존 데이터가 전부 삭제될 수 있습니다. 단순 행 수 대신 실제 삭제 기준과 같은 수집 식별자로 안전성을 판단했습니다.</p>
+            </div>
+            <div class="case-summary">
+              <strong class="text-sm text-blue-700">Solution</strong>
+              <p class="text-sm leading-6 text-neutral-700">0건 결과, 치명적 <code>max detail rows reached</code> 경고, 필수값 누락, 중복 수집 식별자를 DB 변경 전에 거부했습니다. 기존·신규 자동 수집 식별자의 유지율이 50% 미만이면 <code>PATCH_NOTE_INVALID_DATA</code>로 중단하고, 수동 편집 행은 유지율 계산과 삭제 대상에서 제외했습니다.</p>
+            </div>
+            <div class="case-summary">
+              <strong class="text-sm text-emerald-700">Result</strong>
+              <p class="text-sm leading-6 text-neutral-700">100→20으로 급감한 경우, 정확히 50%인 경계, 행 수는 같지만 식별자 교집합이 0인 경우를 검증했습니다. <a class="font-bold text-neutral-950 underline decoration-neutral-300 underline-offset-4" href="https://github.com/s4ngg/TFT-gogo/pull/753" target="_blank" rel="noreferrer">PR #753</a> 시점의 집중 테스트 28개와 백엔드 전체 테스트 352개가 통과했습니다.</p>
+            </div>
+            <div class="case-summary">
+              <strong class="text-sm text-neutral-950">Meaning</strong>
+              <p class="text-sm leading-6 text-neutral-700">실제 장애를 복구한 사례가 아니라, 외부 구조 변경이 기존 데이터를 대량 삭제할 수 있는 경로를 사전에 차단한 사례입니다. 수집 성공 기준을 “요청 성공”에서 “데이터 완전성 검증 통과”로 확장했습니다.</p>
             </div>
           </div>
         </div>
@@ -123,7 +184,7 @@
           <div class="mt-4 grid gap-8 md:grid-cols-[1fr_0.86fr] md:items-start">
             <div>
               <h2 class="display text-2xl font-extrabold text-neutral-950">패치노트 changes 조회 통계 쿼리 중복 개선</h2>
-              <p class="mt-3 text-sm leading-7 text-neutral-700">실제 Riot TFT 17.6 패치노트를 import한 로컬 DB 기준으로 공개 패치노트 API 부하 테스트를 진행했습니다. 에러율은 0%였지만 <code>GET /api/patch-notes/{version}/changes</code> 계열이 목록 조회보다 지속적으로 무거웠고, 변경 전 최대 응답시간은 9,696ms까지 튀었습니다.</p>
+              <p class="mt-3 text-sm leading-7 text-neutral-700">실제 TFT 17.6 데이터를 넣은 로컬 백엔드(<code>localhost:8081</code>)와 MySQL 8 환경에서 변경 전후를 각각 3회 비교했습니다(가상 사용자 50명, 300초). 오류율은 0%였지만 <code>GET /api/patch-notes/{version}/changes</code> 계열의 최대 응답시간은 변경 전 9,696ms까지 늘어났습니다.</p>
               <div class="mt-6">
                 <div class="case-summary">
                   <strong class="text-sm text-red-700">Problem</strong>
@@ -135,20 +196,20 @@
                 </div>
                 <div class="case-summary">
                   <strong class="text-sm text-blue-700">Solution</strong>
-                  <p class="text-sm leading-6 text-neutral-700">category, changeType, impact를 한 번에 group by 하는 projection 쿼리를 추가하고, 기존 응답 스키마는 유지한 채 통계 계산만 단일 결과 순회 방식으로 바꿨습니다.</p>
+                  <p class="text-sm leading-6 text-neutral-700">카테고리·변경 유형·영향도를 한 번에 집계하는 쿼리를 추가하고, 기존 응답 형식은 유지한 채 통계 계산을 한 번의 결과 처리로 바꿨습니다.</p>
                 </div>
                 <div class="case-summary">
                   <strong class="text-sm text-emerald-700">Result</strong>
-                  <p class="text-sm leading-6 text-neutral-700"><a class="font-bold text-neutral-950 underline decoration-neutral-300 underline-offset-4" href="https://github.com/s4ngg/TFT-gogo/pull/701" target="_blank" rel="noreferrer">PR #701</a>에서는 최근 패치노트 목록과 changes 조회 흐름을 함께 정리하면서 통계 쿼리를 단일 group by 조회로 바꿨습니다. 수정 후 <code>PatchNoteServiceImplTest</code>와 백엔드 전체 테스트를 돌리고, 로컬 실제 데이터 API smoke까지 확인했습니다. <a class="font-bold text-neutral-950 underline decoration-neutral-300 underline-offset-4" href="https://github.com/s4ngg/TFT-gogo/issues/710" target="_blank" rel="noreferrer">이슈 #710</a>에는 JMeter 50 users, 300 seconds, 3회 측정 결과를 댓글로 남겨 개선 전후 수치를 추적할 수 있게 했습니다.</p>
+                  <p class="text-sm leading-6 text-neutral-700"><a class="font-bold text-neutral-950 underline decoration-neutral-300 underline-offset-4" href="https://github.com/s4ngg/TFT-gogo/pull/712" target="_blank" rel="noreferrer">PR #712</a>에서 여러 건수 조회를 단일 집계 쿼리로 통합했습니다. 서비스 테스트와 백엔드 전체 테스트, 로컬 실데이터 API 확인을 거쳐 <a class="font-bold text-neutral-950 underline decoration-neutral-300 underline-offset-4" href="https://github.com/s4ngg/TFT-gogo/issues/710" target="_blank" rel="noreferrer">이슈 #710</a>에 같은 조건의 변경 전후 측정값을 남겼습니다.</p>
                 </div>
                 <div class="case-summary">
                   <strong class="text-sm text-neutral-950">대안 비교</strong>
-                  <p class="text-sm leading-6 text-neutral-700">이후에는 통계 계산 위치 자체도 다시 비교했습니다. 백엔드가 grouped stats를 계산하는 현재 방식과, <code>includeStats=false</code>로 changes 목록만 내려주고 프론트가 통계를 계산한다고 가정한 방식을 1000 users, ramp-up 10 seconds, duration 300 seconds 조건에서 비교했습니다.</p>
+                  <p class="text-sm leading-6 text-neutral-700">이후 통계 계산을 프론트로 옮기는 대안도 별도의 1,000 VU 근사 실험으로 비교했습니다.</p>
                 </div>
               </div>
             </div>
             <figure class="overflow-hidden rounded-lg border border-neutral-200 bg-neutral-100">
-              <a class="image-link" href="https://github.com/s4ngg/TFT-gogo/pull/701" target="_blank" rel="noreferrer" aria-label="TFT-gogo PR 701로 이동">
+              <a class="image-link" href="https://github.com/s4ngg/TFT-gogo/pull/712" target="_blank" rel="noreferrer" aria-label="TFT-gogo PR 712로 이동">
                 <img class="case-shot" src="assets/tft-patch-notes.png" alt="TFT-gogo 패치노트 화면" width="1440" height="900"/>
               </a>
               <figcaption class="border-t border-neutral-200 bg-white px-4 py-3 text-sm font-semibold text-neutral-600">통계 쿼리 병합 후 JMeter 기준으로 다시 비교한 패치노트 changes 조회 결과입니다.</figcaption>
@@ -156,16 +217,17 @@
           </div>
           <div class="mt-7">
             <h3 class="text-lg font-extrabold text-neutral-950">1차 개선: 중복 count 쿼리 제거</h3>
-            <p class="mt-2 text-sm leading-7 text-neutral-700">먼저 같은 응답 스키마를 유지한 채 통계 계산용 DB round-trip을 줄였습니다. 여러 count 쿼리를 각각 호출하던 방식을 단일 group by projection으로 묶어, JMeter 50 users / 300 seconds 기준에서 평균과 tail latency를 다시 비교했습니다.</p>
+            <p class="mt-2 text-sm leading-7 text-neutral-700">같은 응답 형식을 유지하면서 여러 건수 조회를 단일 집계 쿼리로 묶었습니다. 위와 같은 조건의 4개 공개 API 혼합 시나리오에서 평균과 상위 지연시간을 비교했습니다. 당시 데이터 분포상 <code>CHAMPION</code>·<code>NERF</code> 필터 2개는 0건 응답이었으므로, 결과는 해당 혼합 조건 안에서만 해석했습니다.</p>
           </div>
           <div class="mt-4 overflow-x-auto border-y border-neutral-200">
             <table class="min-w-full text-left text-sm">
+              <caption class="sr-only">패치노트 조회 집계 쿼리 변경 전후 성능 비교</caption>
               <thead class="bg-neutral-50 text-neutral-600">
                 <tr>
-                  <th class="px-4 py-3 font-extrabold">지표</th>
-                  <th class="px-4 py-3 font-extrabold">변경 전</th>
-                  <th class="px-4 py-3 font-extrabold">변경 후</th>
-                  <th class="px-4 py-3 font-extrabold">변화</th>
+                  <th scope="col" class="px-4 py-3 font-extrabold">지표</th>
+                  <th scope="col" class="px-4 py-3 font-extrabold">변경 전</th>
+                  <th scope="col" class="px-4 py-3 font-extrabold">변경 후</th>
+                  <th scope="col" class="px-4 py-3 font-extrabold">변화</th>
                 </tr>
               </thead>
               <tbody class="divide-y divide-neutral-200">
@@ -190,15 +252,18 @@ GROUP BY c.category, c.changeType, c.impact
 List&lt;PatchChangeStatsCount&gt; countFilteredChangeStats(...);</code></pre>
           <div class="mt-7 rounded-lg border border-neutral-200 bg-neutral-50 p-5">
             <h3 class="text-lg font-extrabold text-neutral-950">2차 검증: 통계 계산을 어디서 할 것인가</h3>
-            <p class="mt-3 text-sm leading-7 text-neutral-700">처음에는 통계 계산을 프론트로 넘기면 백엔드 부하가 줄어들 것으로 예상했습니다. 하지만 17.6 패치의 changes 102건을 기준으로 1000명 동시 접속을 걸어보니, 통계 쿼리 하나보다 changes 목록 조회와 DB 커넥션 풀 대기가 더 큰 병목으로 드러났습니다.</p>
-            <div class="mt-5 overflow-x-auto border-y border-neutral-200 bg-white">
-              <table class="min-w-full text-left text-sm">
+            <p class="mt-3 text-sm leading-7 text-neutral-700">처음에는 통계 계산을 프론트로 넘기면 백엔드 부하가 줄어들 것으로 예상했습니다. 하지만 17.6 패치 변경사항 102건을 사용한 1,000 VU 근사 실험에서는 목록 조회와 DB 연결 대기가 더 큰 병목으로 드러났습니다. 이 실험은 실제 브라우저가 아닌 JMeter 후처리기로 프론트 계산을 근사한 케이스별 1회 비교이므로 성능 성과가 아니라 병목 탐색 근거로만 사용했습니다.</p>
+            <details class="mt-5 rounded-lg border border-neutral-200 bg-white p-4">
+              <summary class="cursor-pointer font-bold text-neutral-950">1,000 VU 근사 실험 상세 수치와 한계 보기</summary>
+              <div class="mt-4 overflow-x-auto border-y border-neutral-200 bg-white">
+                <table class="min-w-full text-left text-sm">
+                  <caption class="sr-only">백엔드 집계와 프론트 계산 근사 실험 비교</caption>
                 <thead class="bg-neutral-50 text-neutral-600">
                   <tr>
-                    <th class="px-4 py-3 font-extrabold">지표</th>
-                    <th class="px-4 py-3 font-extrabold">백엔드 grouped stats</th>
-                    <th class="px-4 py-3 font-extrabold">프론트 계산 시뮬레이션</th>
-                    <th class="px-4 py-3 font-extrabold">판단</th>
+                    <th scope="col" class="px-4 py-3 font-extrabold">지표</th>
+                    <th scope="col" class="px-4 py-3 font-extrabold">백엔드 집계</th>
+                    <th scope="col" class="px-4 py-3 font-extrabold">프론트 계산 시뮬레이션</th>
+                    <th scope="col" class="px-4 py-3 font-extrabold">판단</th>
                   </tr>
                 </thead>
                 <tbody class="divide-y divide-neutral-200">
@@ -210,10 +275,11 @@ List&lt;PatchChangeStatsCount&gt; countFilteredChangeStats(...);</code></pre>
                   <tr><td class="px-4 py-3 font-bold">에러율</td><td class="px-4 py-3">0.06%</td><td class="px-4 py-3">0.56%</td><td class="px-4 py-3 font-bold text-emerald-700">백엔드 방식 우세</td></tr>
                 </tbody>
               </table>
-            </div>
-            <pre class="code-block mt-5 overflow-x-auto rounded bg-neutral-950 p-4 text-xs leading-6 text-neutral-100"><code>HikariPool-1 - Connection is not available, request timed out after 30234ms
+              </div>
+              <pre class="code-block mt-5 overflow-x-auto rounded bg-neutral-950 p-4 text-xs leading-6 text-neutral-100"><code>HikariPool-1 - Connection is not available, request timed out after 30234ms
 total=10, active=10, idle=0, waiting=185</code></pre>
-            <p class="mt-4 text-sm leading-7 text-neutral-700">결론적으로 프론트 계산 이관은 채택하지 않았습니다. 같은 통계를 1000명의 브라우저에서 반복 계산하게 하기보다, 백엔드에서 grouped stats로 한 번에 계산하고 이후 캐싱, API 분리, DB connection pool 튜닝, 인덱스 점검으로 이어가는 방향이 더 적합하다고 판단했습니다.</p>
+            </details>
+            <p class="mt-4 text-sm leading-7 text-neutral-700">백엔드 방식이 요청 수·평균 응답·오류율에서는 우세했고, 프론트 근사 방식은 p99·최대 응답에서 일부 우세했습니다. 계산 위치를 바꿀 근거는 부족해 백엔드 집계를 유지하고, 후속 후보를 캐싱·API 분리·실행계획과 인덱스·DB 연결 풀 점검으로 좁혔습니다.</p>
           </div>
         </div>
       </article>
@@ -227,8 +293,8 @@ total=10, active=10, idle=0, waiting=185</code></pre>
           </figure>
           <div class="p-6 md:p-7">
             <p class="text-sm font-bold uppercase text-blue-700">Flyway / Release Smoke</p>
-            <h2 class="display mt-2 text-2xl font-extrabold text-neutral-950">기존 migration 수정으로 인한 백엔드 배포 실패 리스크</h2>
-            <p class="mt-3 text-sm leading-7 text-neutral-700">패치노트 이력 조회 성능을 위해 인덱스를 추가하면서 새 migration뿐 아니라 이미 존재하던 <code>V1__init_schema.sql</code>에도 같은 인덱스를 추가했고, 기존 DB에서 Flyway checksum mismatch로 backend startup이 중단됐습니다.</p>
+            <h2 class="display mt-2 text-2xl font-extrabold text-neutral-950">기존 마이그레이션 수정으로 발생한 배포 실패 해결</h2>
+            <p class="mt-3 text-sm leading-7 text-neutral-700">로컬 Docker Compose 배포 확인에서 이미 적용된 <code>V1__init_schema.sql</code>이 함께 수정된 사실을 발견했습니다. 기존 DB에 기록된 Flyway 체크섬과 파일이 달라 백엔드 시작이 중단됐습니다.</p>
             <div class="mt-6">
               <div class="case-summary">
                 <strong class="text-sm text-red-700">Problem</strong>
@@ -240,11 +306,11 @@ total=10, active=10, idle=0, waiting=185</code></pre>
               </div>
               <div class="case-summary">
                 <strong class="text-sm text-blue-700">Solution</strong>
-                <p class="text-sm leading-6 text-neutral-700">V1 수정분을 제거하고, 인덱스 추가는 새 forward migration인 <code>V21__add_patch_notes_history_index.sql</code>에서만 수행하도록 분리했습니다. 같은 실수를 막기 위해 spec에 Flyway migration guardrail도 추가했습니다.</p>
+                <p class="text-sm leading-6 text-neutral-700">V1 수정분을 되돌리고 인덱스는 새 순방향 마이그레이션인 <code>V21__add_patch_notes_history_index.sql</code>에서만 추가하도록 분리했습니다. 이후 이미 적용된 마이그레이션은 수정하지 않는 기준도 명세에 남겼습니다.</p>
               </div>
               <div class="case-summary">
                 <strong class="text-sm text-emerald-700">Result</strong>
-                <p class="text-sm leading-6 text-neutral-700">깨끗한 새 MySQL 볼륨에서 V1부터 V21까지 정상 적용됐고, <code>flyway_schema_history</code>의 V21 success=1, <code>idx_patch_notes_history</code> 생성, backend health UP, <code>/api/patch-notes</code> 응답을 확인했습니다.</p>
+                <p class="text-sm leading-6 text-neutral-700">새 MySQL 볼륨에서 V1부터 V21까지 정상 적용되는지, 인덱스 생성과 백엔드 상태, <code>/api/patch-notes</code> 응답까지 확인했습니다.</p>
               </div>
             </div>
           </div>
@@ -285,7 +351,7 @@ total=10, active=10, idle=0, waiting=185</code></pre>
               <a class="image-link" href="https://github.com/s4ngg/TFT-gogo/pull/679" target="_blank" rel="noreferrer" aria-label="TFT-gogo PR 679로 이동">
                 <img class="case-shot" src="assets/gh-tft-pr-679.png" alt="TFT-gogo PR 679 화면" width="1440" height="900"/>
               </a>
-              <figcaption class="border-t border-neutral-200 bg-white px-4 py-3 text-sm font-semibold text-neutral-600">Issue #658의 잘못된 탭 렌더링 원인을 import 단계에서 보강했습니다.</figcaption>
+              <figcaption class="border-t border-neutral-200 bg-white px-4 py-3 text-sm font-semibold text-neutral-600">Issue #658의 잘못된 탭 분류 원인을 데이터 수집 단계에서 보강했습니다.</figcaption>
             </figure>
           </div>
         </div>
@@ -309,7 +375,7 @@ total=10, active=10, idle=0, waiting=185</code></pre>
               </div>
               <div class="case-summary">
                 <strong class="text-sm text-neutral-950">Cause</strong>
-                <p class="text-sm leading-6 text-neutral-700">팀 ERD는 <code>deleted_at</code> 기준으로 삭제 여부를 관리하고 변경사항 테이블도 <code>patch_note_changes</code>를 사용했지만, 엔티티, Repository, local-smoke SQL에 예전 구조가 남아 있었습니다.</p>
+                <p class="text-sm leading-6 text-neutral-700">팀 ERD는 <code>deleted_at</code> 기준으로 삭제 여부를 관리하고 변경사항 테이블도 <code>patch_note_changes</code>를 사용했지만, 엔티티·저장소·로컬 테스트 SQL에 예전 구조가 남아 있었습니다.</p>
               </div>
               <div class="case-summary">
                 <strong class="text-sm text-blue-700">Solution</strong>
@@ -333,7 +399,7 @@ total=10, active=10, idle=0, waiting=185</code></pre>
         <span class="font-bold text-neutral-900">이현재</span>
         <a class="font-bold text-neutral-900" href="https://github.com/TIG-korea" target="_blank" rel="noreferrer">GitHub 프로필</a>
       </div>
-      <p class="mt-2">© 2026 이현재 백엔드 포트폴리오. TFT-gogo 데이터 import, 성능 검증, DB migration과 문제 해결.</p>
+      <p class="mt-2">© 2026 이현재 백엔드 포트폴리오. TFT-gogo 데이터 수집, 성능 검증, DB 마이그레이션과 문제 해결.</p>
   </div>
 </footer>
 <script src="assets/image-modal.js" defer></script>

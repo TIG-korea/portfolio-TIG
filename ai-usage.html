@@ -49,7 +49,7 @@
     <div class="mx-auto max-w-6xl px-5 py-16">
       <p class="text-sm font-bold uppercase text-blue-700">AI Assisted Workflow</p>
       <h1 class="display mt-3 max-w-4xl text-4xl font-extrabold leading-tight text-neutral-950 md:text-5xl">AI를 설계, QA, 보안 검증에 붙여 사용한 기록</h1>
-      <p class="mt-5 max-w-3xl text-lg leading-8 text-neutral-700">노션의 AI 활용 로그는 단순히 코드 생성을 맡긴 기록이 아니라, 요구사항을 구조화하고, 응답 계약을 설계하고, 프롬프트 공격과 배포 위험을 점검한 기록입니다. AI가 낸 결과를 그대로 믿기보다 프로젝트 코드, 데이터 범위, 테스트 기준에 맞게 검증하는 흐름으로 정리했습니다.</p>
+      <p class="mt-5 max-w-3xl text-lg leading-8 text-neutral-700">노션 기록을 바탕으로 AI를 요구사항 정리, 구현 명세, 공격 관점 QA에 활용한 과정을 정리했습니다. 생성 결과는 코드·데이터 범위·테스트 기준과 대조해 채택 여부를 결정했습니다.</p>
     </div>
   </section>
 
@@ -68,7 +68,7 @@
         </div>
         <div class="border-t-2 border-neutral-950 pt-4">
           <strong class="text-lg text-neutral-950">검증을 코드로 남김</strong>
-          <p class="mt-2 text-sm leading-6 text-neutral-600">프롬프트 공격, ref 변조, JSON 실패, 운영 설정 위험처럼 재발 가능한 문제는 테스트와 PR 기록으로 남겼습니다.</p>
+          <p class="mt-2 text-sm leading-6 text-neutral-600">프롬프트 공격, 가이드 키 변조, JSON 실패, 운영 설정 위험처럼 재발 가능한 문제는 테스트와 PR 기록으로 남겼습니다.</p>
         </div>
       </div>
     </div>
@@ -77,24 +77,56 @@
   <section class="mx-auto max-w-6xl px-5 py-14">
     <div class="space-y-7">
       <article class="rounded-lg border border-neutral-200 bg-white p-6 shadow-sm md:p-7">
-        <p class="text-sm font-bold uppercase text-blue-700">ooo seed / Feature Spec</p>
+        <p class="text-sm font-bold uppercase text-blue-700">요구사항 정의 / 구현 명세</p>
         <h2 class="display mt-2 text-2xl font-extrabold text-neutral-950">게임가이드 AI 기능을 구현 가능한 명세로 압축</h2>
         <p class="mt-3 text-sm leading-7 text-neutral-700">처음에는 패치노트 요약이나 일반 챗봇처럼 AI를 붙이는 방향도 고민했지만, 게임가이드의 진짜 문제는 정보가 부족한 것이 아니라 챔피언, 시너지, 아이템, 증강체 정보가 분리되어 사용자가 직접 연결해야 한다는 점이었습니다.</p>
         <div class="mt-6">
           <div class="flow-row">
-            <strong class="text-sm text-neutral-950">Direction</strong>
+            <strong class="text-sm text-neutral-950">기능 방향</strong>
             <p class="text-sm leading-6 text-neutral-700">AI가 최강 덱을 만들어내는 기능이 아니라, 사용자가 선택한 가이드 항목을 하나의 운영 흐름으로 엮어주는 <code>AI Pathfinder</code> 역할로 범위를 좁혔습니다.</p>
           </div>
           <div class="flow-row">
-            <strong class="text-sm text-blue-700">Scope</strong>
+            <strong class="text-sm text-blue-700">역할 범위</strong>
             <p class="text-sm leading-6 text-neutral-700">프론트는 선택 UI와 결과 패널을 만들고, Spring은 AI 서버 프록시를 담당하며, AI 서버는 선택된 가이드 데이터 안에서 요약, 운영 방향, 추천 탐색 항목, 주의점을 생성하도록 나눴습니다.</p>
           </div>
           <div class="flow-row">
-            <strong class="text-sm text-emerald-700">Guard</strong>
+            <strong class="text-sm text-emerald-700">제약 조건</strong>
             <p class="text-sm leading-6 text-neutral-700">승률, 평균 등수, TOP4율처럼 현재 게임가이드 데이터에 없는 수치는 만들지 않는다는 제약을 명세 단계에서 먼저 넣었습니다.</p>
           </div>
         </div>
         <a class="mt-5 inline-flex items-center gap-1 text-sm font-extrabold text-blue-700" href="https://github.com/s4ngg/TFT-gogo/pull/643" target="_blank" rel="noreferrer">PR #643 보기 <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_outward</span></a>
+      </article>
+
+      <article class="rounded-lg border border-neutral-200 bg-white p-6 shadow-sm md:p-7">
+        <p class="text-sm font-bold uppercase text-blue-700">Security / Cost / Reliability</p>
+        <h2 class="display mt-2 text-2xl font-extrabold text-neutral-950">AI 호출 비용과 응답 신뢰성을 계층별로 보호</h2>
+        <p class="mt-3 text-sm leading-7 text-neutral-700">React→Spring Boot→FastAPI→OpenAI 요청 경로를 완성한 뒤, 신규 API가 기존 인증과 호출 제한을 일부 우회할 수 있음을 리뷰에서 발견했습니다. 익명·반복 호출을 차단하고 사용자 입력과 모델 출력을 모두 서버에서 검증했습니다.</p>
+        <div class="mt-6">
+          <div class="flow-row">
+            <strong class="text-sm text-red-700">Risk</strong>
+            <p class="text-sm leading-6 text-neutral-700">익명 사용자의 반복 호출은 비용 증가로, 존재하지 않는 가이드 키는 잘못된 추천 화면 이동으로 이어질 수 있었습니다.</p>
+          </div>
+          <div class="flow-row">
+            <strong class="text-sm text-blue-700">Auth / Cost</strong>
+            <p class="text-sm leading-6 text-neutral-700">Spring에서는 로그인 사용자별로 60초당 10회, FastAPI에서는 OpenAI 호출 전에 프로세스별로 60초당 30회를 제한했습니다. 인증 실패와 호출 제한은 대체 응답으로 숨기지 않고 명확한 오류로 전달했습니다.</p>
+          </div>
+          <div class="flow-row">
+            <strong class="text-sm text-blue-700">데이터 검증</strong>
+            <p class="text-sm leading-6 text-neutral-700">Spring에서 요청의 패치 버전과 가이드 키를 DB와 대조했습니다. 모델이 반환한 키도 서버의 허용 목록으로 다시 확인해 존재하지 않는 항목을 응답과 화면 이동에서 제거했습니다.</p>
+          </div>
+          <div class="flow-row">
+            <strong class="text-sm text-blue-700">Failure</strong>
+            <p class="text-sm leading-6 text-neutral-700">응답 형식 검증, 공격 문구 검사, 장애 차단기, 규칙 기반 대체 응답을 조합했습니다. OpenAI 장애가 60초 안에 5회 누적되면 30초간 추가 호출을 막아 연쇄 실패를 줄였습니다.</p>
+          </div>
+          <div class="flow-row">
+            <strong class="text-sm text-emerald-700">Result</strong>
+            <p class="text-sm leading-6 text-neutral-700"><a class="font-bold text-neutral-950 underline decoration-neutral-300 underline-offset-4" href="https://github.com/s4ngg/TFT-gogo/pull/643" target="_blank" rel="noreferrer">PR #643</a>에서 프론트·Spring·AI 서버 테스트와 최종 CI를 통과했습니다. 공격 입력과 출력 변조는 PR의 회귀 테스트로, <a class="font-bold text-neutral-950 underline decoration-neutral-300 underline-offset-4" href="https://github.com/s4ngg/TFT-gogo/issues/676" target="_blank" rel="noreferrer">QA 이슈 #676</a>에서는 비로그인 상태와 401·429 오류 표시를 점검했습니다.</p>
+          </div>
+          <div class="flow-row">
+            <strong class="text-sm text-neutral-950">Limit</strong>
+            <p class="text-sm leading-6 text-neutral-700">호출 제한과 장애 차단 상태는 프로세스 메모리에 저장됩니다. 다중 워커·인스턴스로 확장할 때는 Redis 등 공용 저장소로 옮겨야 합니다.</p>
+          </div>
+        </div>
       </article>
 
       <article class="rounded-lg border border-neutral-200 bg-white p-6 shadow-sm md:p-7">
@@ -104,15 +136,15 @@
         <div class="mt-6 grid gap-3 text-sm leading-6 text-neutral-700">
           <p><strong class="text-neutral-950">evidence_notes</strong> 실제 게임가이드 데이터에서 확인 가능한 근거만 담습니다.</p>
           <p><strong class="text-neutral-950">creative_suggestions</strong> 데이터 밖의 확정 정보가 아니라, 상황에 따라 시도해볼 수 있는 운영 아이디어만 담습니다.</p>
-          <p><strong class="text-neutral-950">코드 반영</strong> AI 서버 응답 모델, fallback 응답, Spring DTO, 프론트 API 타입, 챗봇 결과 UI까지 함께 수정했습니다.</p>
+          <p><strong class="text-neutral-950">코드 반영</strong> AI 서버 응답 모델, 대체 응답, Spring DTO, 프론트 API 타입, 챗봇 결과 UI까지 함께 수정했습니다.</p>
         </div>
-        <a class="mt-5 inline-flex items-center gap-1 text-sm font-extrabold text-blue-700" href="https://github.com/s4ngg/TFT-gogo/pull/679" target="_blank" rel="noreferrer">PR #679 보기 <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_outward</span></a>
+        <a class="mt-5 inline-flex items-center gap-1 text-sm font-extrabold text-blue-700" href="https://github.com/s4ngg/TFT-gogo/pull/643" target="_blank" rel="noreferrer">응답 계약 구현 PR #643 보기 <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_outward</span></a>
       </article>
 
       <article class="rounded-lg border border-neutral-200 bg-white p-6 shadow-sm md:p-7">
-        <p class="text-sm font-bold uppercase text-blue-700">ooo qa / Prompt Attack Defense</p>
-        <h2 class="display mt-2 text-2xl font-extrabold text-neutral-950">프롬프트 공격을 사용자 질문으로 보고 서버에서 한 번 더 방어</h2>
-        <p class="mt-3 text-sm leading-7 text-neutral-700">노션에서는 개선한 방어 로직을 공격자 입장에서 다시 검증했습니다. 시스템 프롬프트 탈취, API 키 유도, 이전 지시 무시, 정상 질문에 공격 섞기, JSON 형식 깨기, 없는 통계 생성, ref 조작 같은 입력을 직접 넣어봤습니다.</p>
+        <p class="text-sm font-bold uppercase text-blue-700">공격 관점 QA / Prompt Injection Defense</p>
+        <h2 class="display mt-2 text-2xl font-extrabold text-neutral-950">사용자 입력과 AI 출력을 서버에서 이중 검증</h2>
+        <p class="mt-3 text-sm leading-7 text-neutral-700">시스템 프롬프트 탈취, API 키 유도, 허위 통계 생성, 가이드 키 조작 등 공격 시나리오를 직접 입력해 방어 로직을 검증했습니다.</p>
         <div class="mt-6">
           <div class="flow-row">
             <strong class="text-sm text-red-700">Risk</strong>
@@ -120,48 +152,44 @@
           </div>
           <div class="flow-row">
             <strong class="text-sm text-blue-700">Defense</strong>
-            <p class="text-sm leading-6 text-neutral-700">프롬프트에 방어 규칙을 추가하고, 줄바꿈/따옴표/백틱을 정리해 명령문처럼 구조화되지 않게 만들었습니다. 응답 후에는 <code>system prompt</code>, <code>OPENAI_API_KEY</code>, <code>internal secret</code> 같은 위험 문구를 검사해 fallback으로 전환했습니다.</p>
+            <p class="text-sm leading-6 text-neutral-700">입력 정규화 후 알려진 공격 문구를 먼저 차단했습니다. 응답에서는 시스템 프롬프트·API 키 등 위험 문구와 허용되지 않은 가이드 키를 다시 검사했습니다.</p>
           </div>
           <div class="flow-row">
             <strong class="text-sm text-emerald-700">Result</strong>
-            <p class="text-sm leading-6 text-neutral-700">허용된 <code>selected_entries</code>, <code>candidate_refs</code> 밖의 ref는 제거하고, 이름이 변조되면 서버가 원래 가이드명으로 보정했습니다. AI 서버 전체 테스트는 <code>66 passed</code>까지 확인했습니다.</p>
+            <p class="text-sm leading-6 text-neutral-700">허용된 <code>selected_entries</code>, <code>candidate_refs</code> 밖의 가이드 키는 제거하고 이름이 변조되면 서버 기준 명칭으로 보정했습니다. 공격·환각 유도 사례와 재현 가능한 회귀 테스트를 구분해 확인했습니다.</p>
           </div>
         </div>
-        <a class="mt-5 inline-flex items-center gap-1 text-sm font-extrabold text-blue-700" href="https://github.com/s4ngg/TFT-gogo/pull/679" target="_blank" rel="noreferrer">프롬프트 방어 PR 보기 <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_outward</span></a>
+        <a class="mt-5 inline-flex items-center gap-1 text-sm font-extrabold text-blue-700" href="https://github.com/s4ngg/TFT-gogo/pull/643" target="_blank" rel="noreferrer">프롬프트 방어 PR #643 보기 <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_outward</span></a>
       </article>
 
       <article class="rounded-lg border border-neutral-200 bg-white p-6 shadow-sm md:p-7">
-        <p class="text-sm font-bold uppercase text-blue-700">ooo interview / UX QA</p>
+        <p class="text-sm font-bold uppercase text-blue-700">AI 기반 요구사항 인터뷰 / UX QA</p>
         <h2 class="display mt-2 text-2xl font-extrabold text-neutral-950">크롤링 결과를 그대로 보여주지 않고 탐색 가능한 패널로 정리</h2>
-        <p class="mt-3 text-sm leading-7 text-neutral-700">패치노트 페이지 QA에서는 왼쪽 요약 패널에 <code>유닛: 1단계</code>, <code>특성</code> 같은 raw 하이라이트가 그대로 노출되어 맥락이 약한 문제가 있었습니다. AI interview 방식으로 사용자가 이 영역에서 기대하는 정보를 다시 정리했습니다.</p>
+        <p class="mt-3 text-sm leading-7 text-neutral-700">패치노트 페이지 QA에서는 왼쪽 요약 패널에 <code>유닛: 1단계</code>, <code>특성</code> 같은 가공되지 않은 하이라이트가 노출되어 맥락이 약했습니다. AI와의 요구사항 인터뷰로 사용자가 이 영역에서 기대하는 정보를 다시 정리했습니다.</p>
         <div class="mt-6 grid gap-3 text-sm leading-6 text-neutral-700">
-          <p><strong class="text-neutral-950">Before</strong> 크롤링된 하이라이트 문구가 리스트처럼 노출되어 사용자가 패치 흐름을 빠르게 파악하기 어려웠습니다.</p>
-          <p><strong class="text-neutral-950">After</strong> 패치 요약 문장, 정리된 주요 변경 포인트, 카테고리별 빠른 보기 버튼으로 바꿨습니다.</p>
-          <p><strong class="text-neutral-950">Meaning</strong> AI를 화면 문구 생성에만 쓰지 않고, 사용자가 데이터를 어떤 단위로 이해해야 하는지 정리하는 QA 도구로 활용했습니다.</p>
+          <p><strong class="text-neutral-950">개선 전</strong> 크롤링된 하이라이트 문구가 리스트처럼 노출되어 사용자가 패치 흐름을 빠르게 파악하기 어려웠습니다.</p>
+          <p><strong class="text-neutral-950">개선 후</strong> 패치 요약과 정규화된 주요 변경 포인트만 남기고, 카테고리 이동은 기존 우측 탭에 맡겨 중복된 빠른 보기 버튼을 제거했습니다.</p>
+          <p><strong class="text-neutral-950">의미</strong> AI를 화면 문구 생성에만 쓰지 않고, 사용자가 데이터를 어떤 단위로 이해해야 하는지 정리하는 QA 도구로 활용했습니다.</p>
         </div>
-        <a class="mt-5 inline-flex items-center gap-1 text-sm font-extrabold text-blue-700" href="https://github.com/s4ngg/TFT-gogo/pull/679" target="_blank" rel="noreferrer">패치노트 UX 개선 PR 보기 <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_outward</span></a>
+        <a class="mt-5 inline-flex items-center gap-1 text-sm font-extrabold text-blue-700" href="https://github.com/s4ngg/TFT-gogo/pull/631" target="_blank" rel="noreferrer">최종 UX 정리 PR #631 보기 <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_outward</span></a>
       </article>
 
       <article class="rounded-lg border border-neutral-200 bg-white p-6 shadow-sm md:p-7">
-        <p class="text-sm font-bold uppercase text-blue-700">ooo qa / Release Guard</p>
-        <h2 class="display mt-2 text-2xl font-extrabold text-neutral-950">운영 배포 설정에서 local-smoke seed 혼입 위험 발견</h2>
-        <p class="mt-3 text-sm leading-7 text-neutral-700">운영 배포 설정을 QA하던 중 기본 <code>docker-compose.yml</code>의 Flyway 경로에 로컬 테스트용 <code>db/local-smoke</code> seed가 포함될 수 있는 위험을 찾았습니다. 운영 DB에 샘플 데이터나 로컬 관리자 계정이 들어갈 수 있는 설정 문제였습니다.</p>
+        <p class="text-sm font-bold uppercase text-blue-700">AI 기반 배포 QA / Release Guard</p>
+        <h2 class="display mt-2 text-2xl font-extrabold text-neutral-950">운영 배포에 로컬 테스트 데이터가 섞일 위험 차단</h2>
+        <p class="mt-3 text-sm leading-7 text-neutral-700">기본 <code>docker-compose.yml</code>의 Flyway 경로에 로컬 테스트용 초기 데이터가 포함될 수 있었습니다. 그대로 배포하면 샘플 데이터나 로컬 관리자 계정이 운영 DB에 들어갈 수 있는 문제였습니다.</p>
         <div class="mt-6">
           <div class="flow-row">
             <strong class="text-sm text-red-700">Risk</strong>
-            <p class="text-sm leading-6 text-neutral-700">기본 compose 실행에서 정식 migration과 local-smoke seed가 함께 적용될 수 있었습니다.</p>
+            <p class="text-sm leading-6 text-neutral-700">기본 Compose 실행에서 정식 마이그레이션과 로컬 테스트 초기 데이터가 함께 적용될 수 있었습니다.</p>
           </div>
           <div class="flow-row">
             <strong class="text-sm text-blue-700">Fix</strong>
-            <p class="text-sm leading-6 text-neutral-700">기본 compose는 <code>classpath:db/migration</code>만 사용하고, 로컬 스모크가 필요할 때만 <code>docker-compose.local-smoke.yml</code> override를 명시적으로 붙이도록 분리했습니다.</p>
+            <p class="text-sm leading-6 text-neutral-700">기본 Compose는 <code>classpath:db/migration</code>만 사용하고, 로컬 배포 확인이 필요할 때만 <code>docker-compose.local-smoke.yml</code> 덮어쓰기 설정을 붙이도록 분리했습니다.</p>
           </div>
           <div class="flow-row">
             <strong class="text-sm text-emerald-700">Result</strong>
-            <div class="text-sm leading-6 text-neutral-700">
-              <p><a class="font-bold text-neutral-950 underline decoration-neutral-300 underline-offset-4" href="https://github.com/s4ngg/TFT-gogo/issues/650" target="_blank" rel="noreferrer">이슈 #650</a>에는 기본 배포 compose에서 local-smoke seed가 함께 실행될 수 있는 운영 위험을 기록했습니다. 이 설정이 그대로 배포되면 샘플 데이터나 로컬 관리자 계정이 운영 DB에 들어갈 수 있었기 때문에, 단순 문서 수정이 아니라 배포 기본값을 바꾸는 문제로 분리했습니다.</p>
-              <p class="mt-2"><a class="font-bold text-neutral-950 underline decoration-neutral-300 underline-offset-4" href="https://github.com/s4ngg/TFT-gogo/pull/651" target="_blank" rel="noreferrer">PR #651</a>에서는 기본 <code>docker-compose.yml</code>의 Flyway 경로를 정식 migration만 보도록 정리하고, local-smoke seed는 <code>docker-compose.local-smoke.yml</code> override를 명시적으로 붙일 때만 실행되도록 바꿨습니다.</p>
-              <p class="mt-2">그 결과 운영 배포 기본 경로에서는 local-smoke seed가 자동 적용되지 않고, 로컬 QA가 필요할 때만 같은 seed를 재현할 수 있게 됐습니다. 이 분리 기준으로 QA 결과를 다시 확인해 PASS로 남겼습니다.</p>
-            </div>
+            <p class="text-sm leading-6 text-neutral-700"><a class="font-bold text-neutral-950 underline decoration-neutral-300 underline-offset-4" href="https://github.com/s4ngg/TFT-gogo/issues/650" target="_blank" rel="noreferrer">이슈 #650</a>에 위험을 기록하고 <a class="font-bold text-neutral-950 underline decoration-neutral-300 underline-offset-4" href="https://github.com/s4ngg/TFT-gogo/pull/651" target="_blank" rel="noreferrer">PR #651</a>에서 운영용 마이그레이션과 로컬 테스트 데이터를 분리했습니다. 운영 기본 경로에서는 테스트 데이터가 적용되지 않고, 로컬 QA에서는 별도 설정으로 같은 데이터를 재현하도록 검증했습니다.</p>
           </div>
         </div>
       </article>

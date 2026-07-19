@@ -67,7 +67,7 @@
           <span class="stack-chip">Redis</span>
           <span class="stack-chip">Docker</span>
           <span class="stack-chip">AWS</span>
-          <span class="stack-chip">Vercel</span>
+          <span class="stack-chip">OpenAI Sites</span>
         </div>
       </div>
     </div>
@@ -88,7 +88,7 @@
         </div>
         <div class="border-t-2 border-neutral-950 pt-4">
           <strong class="text-lg text-neutral-950">검증 방식</strong>
-          <p class="mt-2 text-sm leading-6 text-neutral-600">PR, 이슈, Swagger, 테스트, smoke, JMeter처럼 결과가 남는 확인 방법을 함께 적었습니다.</p>
+          <p class="mt-2 text-sm leading-6 text-neutral-600">PR, 이슈, Swagger, 테스트, 배포 확인, JMeter처럼 결과가 남는 검증 방법을 함께 적었습니다.</p>
         </div>
       </div>
     </div>
@@ -101,12 +101,13 @@
       <p class="mt-4 max-w-3xl text-sm leading-7 text-neutral-700">기술명만 나열하지 않고 실제로 어떤 역할에 사용했는지 함께 정리했습니다. 같은 기술이라도 Mapingo에서는 인증/결제 API를 안정화하는 데, TFT-gogo에서는 외부 데이터와 AI 연동을 운영 가능한 흐름으로 묶는 데 사용했습니다.</p>
       <div class="mt-8 overflow-x-auto border-y border-neutral-200">
         <table class="stack-table min-w-full text-left text-sm">
+          <caption class="sr-only">프로젝트별 기술 스택과 사용 목적</caption>
           <thead class="bg-neutral-50 text-neutral-600">
             <tr>
-              <th class="px-4 py-3 font-extrabold">역할</th>
-              <th class="px-4 py-3 font-extrabold">사용 스택</th>
-              <th class="px-4 py-3 font-extrabold">사용한 프로젝트</th>
-              <th class="px-4 py-3 font-extrabold">사용 목적</th>
+              <th scope="col" class="px-4 py-3 font-extrabold">역할</th>
+              <th scope="col" class="px-4 py-3 font-extrabold">사용 스택</th>
+              <th scope="col" class="px-4 py-3 font-extrabold">사용한 프로젝트</th>
+              <th scope="col" class="px-4 py-3 font-extrabold">사용 목적</th>
             </tr>
           </thead>
           <tbody class="divide-y divide-neutral-200 text-neutral-700">
@@ -138,7 +139,7 @@
               <td class="px-4 py-4 font-bold text-neutral-950">데이터/캐시</td>
               <td class="px-4 py-4">MySQL, Redis, CDragon 데이터, 공식 패치노트</td>
               <td class="px-4 py-4">Mapingo, TFT-gogo</td>
-              <td class="px-4 py-4">영속 데이터, 캐시, 외부 import 데이터를 분리하고 갱신 기준과 중복 방지 조건을 명시했습니다.</td>
+              <td class="px-4 py-4">영속 데이터, 캐시, 외부 수집 데이터를 분리하고 갱신 기준과 중복 방지 조건을 명시했습니다.</td>
             </tr>
             <tr>
               <td class="px-4 py-4 font-bold text-neutral-950">결제</td>
@@ -154,9 +155,9 @@
             </tr>
             <tr>
               <td class="px-4 py-4 font-bold text-neutral-950">배치/마이그레이션</td>
-              <td class="px-4 py-4">Scheduler, Flyway, Docker Compose smoke test</td>
+              <td class="px-4 py-4">Scheduler, Flyway, Docker Compose 배포 확인</td>
               <td class="px-4 py-4">TFT-gogo</td>
-              <td class="px-4 py-4">패치노트 import, migration 검증, local-smoke seed 분리처럼 운영 데이터에 영향을 주는 흐름을 관리했습니다.</td>
+              <td class="px-4 py-4">패치노트 수집, 마이그레이션 검증, 로컬 테스트 초기 데이터 분리처럼 운영 데이터에 영향을 주는 흐름을 관리했습니다.</td>
             </tr>
             <tr>
               <td class="px-4 py-4 font-bold text-neutral-950">인프라/배포</td>
@@ -166,9 +167,9 @@
             </tr>
             <tr>
               <td class="px-4 py-4 font-bold text-neutral-950">포트폴리오 사이트</td>
-              <td class="px-4 py-4">Static HTML, Tailwind CDN, Material Symbols, Vercel</td>
+              <td class="px-4 py-4">Static HTML, Tailwind CDN, Material Symbols, OpenAI Sites(Cloudflare Worker)</td>
               <td class="px-4 py-4">포트폴리오 사이트</td>
-              <td class="px-4 py-4">빌드 없이 열리는 정적 페이지 구조로 유지하고, Vercel 배포 URL에서 실제 응답을 확인했습니다.</td>
+              <td class="px-4 py-4">정적 파일을 Sites 배포용 Worker로 패키징하고 주요 페이지 응답을 검증했습니다.</td>
             </tr>
           </tbody>
         </table>
@@ -201,7 +202,7 @@
         <article class="rounded-lg border border-neutral-200 bg-white p-6 shadow-sm">
           <p class="text-sm font-bold uppercase text-blue-700">Final Project</p>
           <h3 class="display mt-2 text-2xl font-extrabold text-neutral-950">TFT-gogo</h3>
-          <p class="mt-3 text-sm leading-7 text-neutral-700">롤토체스 유저를 위한 전적 분석, AI 추천, 커뮤니티 플랫폼에서 게임 가이드와 패치노트 도메인을 맡았습니다. 외부 데이터 import, AI 연동, 배포 검증처럼 실패 지점이 많은 흐름을 관리했습니다.</p>
+          <p class="mt-3 text-sm leading-7 text-neutral-700">롤토체스 유저를 위한 전적 분석, AI 추천, 커뮤니티 플랫폼에서 게임 가이드와 패치노트 도메인을 맡았습니다. 외부 데이터 수집, AI 연동, 배포 검증처럼 실패 지점이 많은 흐름을 관리했습니다.</p>
           <div class="mt-5 flex flex-wrap gap-2" aria-label="TFT-gogo 기술 스택">
             <span class="stack-chip">Java</span>
             <span class="stack-chip">Spring Boot</span>
@@ -313,7 +314,7 @@
             </div>
             <div class="decision-row">
               <strong class="text-sm text-blue-700">결정</strong>
-              <p class="text-sm leading-6 text-neutral-700">CDragon 데이터를 import하고 게임 가이드와 패치노트 화면에서 패치 버전 기준 조회가 흔들리지 않도록 API 계약을 먼저 정리했습니다.</p>
+              <p class="text-sm leading-6 text-neutral-700">CDragon 데이터를 수집하고 게임 가이드와 패치노트 화면에서 패치 버전 기준 조회가 흔들리지 않도록 API 계약을 먼저 정리했습니다.</p>
             </div>
             <div class="decision-row">
               <strong class="text-sm text-neutral-950">이유</strong>
@@ -321,32 +322,57 @@
             </div>
             <div class="decision-row">
               <strong class="text-sm text-emerald-700">검증</strong>
-              <p class="text-sm leading-6 text-neutral-700">scheduler, import 결과, API 응답 필드, 패치 필터 동작을 PR과 화면 캡처로 확인했습니다.</p>
+              <p class="text-sm leading-6 text-neutral-700">스케줄러, 수집 결과, API 응답 필드, 패치 필터 동작을 PR과 화면 캡처로 확인했습니다.</p>
             </div>
           </div>
         </article>
 
         <article class="rounded-lg border border-neutral-200 bg-white p-6 shadow-sm md:p-7">
           <div class="flex flex-wrap items-center gap-3">
-            <span class="rounded bg-blue-50 px-2.5 py-1 text-xs font-extrabold uppercase text-blue-700">Import</span>
-            <h3 class="text-xl font-extrabold text-neutral-950">패치노트 import는 source 기준으로 중복을 막음</h3>
+            <span class="rounded bg-blue-50 px-2.5 py-1 text-xs font-extrabold uppercase text-blue-700">Concurrency</span>
+            <h3 class="text-xl font-extrabold text-neutral-950">패치와 가이드 갱신 순서를 하나의 공용 락으로 보호</h3>
           </div>
           <div class="mt-5">
             <div class="decision-row">
               <strong class="text-sm text-neutral-950">배경</strong>
-              <p class="text-sm leading-6 text-neutral-700">공식 패치노트는 주기적으로 갱신되지만 같은 문서를 반복 import하면 중복 데이터와 운영 부하가 생길 수 있었습니다.</p>
+              <p class="text-sm leading-6 text-neutral-700">패치노트와 게임가이드가 서로 다른 named lock을 사용하면 각 작업의 중복은 막아도, 다중 인스턴스에서 가이드가 패치 커밋 전의 이전 버전을 읽는 실행 순서 경쟁은 남았습니다.</p>
             </div>
             <div class="decision-row">
               <strong class="text-sm text-blue-700">결정</strong>
-              <p class="text-sm leading-6 text-neutral-700">서버 시작 시 1회 import, 매시간 목록 확인, 매일 06:30 상세 refresh로 나누고 DB에 없는 sourceKey/sourceUrl/version만 상세 import하도록 설계했습니다.</p>
+              <p class="text-sm leading-6 text-neutral-700">패치→가이드 전체 구간을 공용 MySQL 락(<code>GET_LOCK</code>)으로 보호하고, 저장이 끝난 패치 버전을 가이드 작업에 직접 전달했습니다. 자동 스케줄러와 관리자 수동 수집도 같은 보호 로직을 사용합니다.</p>
             </div>
             <div class="decision-row">
-              <strong class="text-sm text-neutral-950">이유</strong>
-              <p class="text-sm leading-6 text-neutral-700">수집 실패 fallback, 중복 실행 방지, 최신 데이터 반영을 동시에 고려해야 했기 때문입니다.</p>
+              <strong class="text-sm text-neutral-950">실패 경계</strong>
+              <p class="text-sm leading-6 text-neutral-700">패치 실패·빈 버전이면 가이드를 실행하지 않고, 가이드 실패 시에는 이미 성공한 패치를 되돌리지 않은 채 기존 ACTIVE 가이드를 유지하고 다음 실행에서 재시도합니다. 경합 중 수동 요청은 HTTP 409로 구분했습니다.</p>
             </div>
             <div class="decision-row">
               <strong class="text-sm text-emerald-700">검증</strong>
-              <p class="text-sm leading-6 text-neutral-700">로컬/dev 기본값은 OFF로 두고 공용 개발 서버나 운영 서버에서만 켜도록 분리했습니다. 단일 서버 기준 중복 실행은 AtomicBoolean guard로 막고 멀티 서버 환경은 공용 락 후속 과제로 남겼습니다.</p>
+              <p class="text-sm leading-6 text-neutral-700">실제 MySQL 8 두 세션에서 <code>GET_LOCK=1/0</code>, <code>RELEASE_LOCK=1</code>을 확인하고 락 경합·패치 실패·버전 누락·해제 실패를 회귀 테스트로 고정했습니다. 최종 반영은 <a class="font-bold text-neutral-950 underline decoration-neutral-300 underline-offset-4" href="https://github.com/s4ngg/TFT-gogo/pull/773" target="_blank" rel="noreferrer">PR #773</a>에서 확인했습니다.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="rounded-lg border border-neutral-200 bg-white p-6 shadow-sm md:p-7">
+          <div class="flex flex-wrap items-center gap-3">
+            <span class="rounded bg-blue-50 px-2.5 py-1 text-xs font-extrabold uppercase text-blue-700">Data Safety</span>
+            <h3 class="text-xl font-extrabold text-neutral-950">외부 데이터는 DB 반영 전에 완전성을 검증</h3>
+          </div>
+          <div class="mt-5">
+            <div class="decision-row">
+              <strong class="text-sm text-neutral-950">배경</strong>
+              <p class="text-sm leading-6 text-neutral-700">외부 페이지가 정상 응답해도 구조 변경이나 파서 상한으로 일부만 추출되면, 새 결과에 없는 기존 자동 수집 데이터를 삭제할 수 있었습니다.</p>
+            </div>
+            <div class="decision-row">
+              <strong class="text-sm text-blue-700">결정</strong>
+              <p class="text-sm leading-6 text-neutral-700">빈 결과·치명적 파서 경고·필수값 누락·중복 수집 식별자를 거부하고, 기존 데이터 유지율이 50% 미만이면 DB 변경 전에 수집을 중단했습니다. 수동 편집 행은 계산과 삭제 대상에서 제외했습니다.</p>
+            </div>
+            <div class="decision-row">
+              <strong class="text-sm text-neutral-950">이유</strong>
+              <p class="text-sm leading-6 text-neutral-700">요청과 파싱의 성공만으로 데이터가 안전하다고 볼 수 없습니다. 기존 데이터를 지우기 전에는 실제 삭제 기준과 같은 식별자로 완전성을 확인해야 했습니다.</p>
+            </div>
+            <div class="decision-row">
+              <strong class="text-sm text-emerald-700">검증</strong>
+              <p class="text-sm leading-6 text-neutral-700">행 수는 같지만 수집 식별자의 교집합이 0인 반례까지 검증했습니다. 구현과 상세 테스트 근거는 <a class="font-bold text-neutral-950 underline decoration-neutral-300 underline-offset-4" href="https://github.com/s4ngg/TFT-gogo/pull/753" target="_blank" rel="noreferrer">PR #753</a>에 남겼습니다.</p>
             </div>
           </div>
         </article>
@@ -354,7 +380,7 @@
         <article class="rounded-lg border border-neutral-200 bg-white p-6 shadow-sm md:p-7">
           <div class="flex flex-wrap items-center gap-3">
             <span class="rounded bg-blue-50 px-2.5 py-1 text-xs font-extrabold uppercase text-blue-700">AI</span>
-            <h3 class="text-xl font-extrabold text-neutral-950">AI 기능은 FastAPI 서버와 Spring 프록시로 역할 분리</h3>
+            <h3 class="text-xl font-extrabold text-neutral-950">AI 입력과 출력을 각 서버에서 나눠 검증</h3>
           </div>
           <div class="mt-5">
             <div class="decision-row">
@@ -363,15 +389,19 @@
             </div>
             <div class="decision-row">
               <strong class="text-sm text-blue-700">결정</strong>
-              <p class="text-sm leading-6 text-neutral-700">AI 생성은 FastAPI에서 처리하고 Spring은 인증/프록시/응답 DTO 경계, React는 선택 UI와 결과 패널을 담당하도록 나눴습니다.</p>
+              <p class="text-sm leading-6 text-neutral-700">React는 선택 화면, Spring은 인증·사용자별 호출 제한·DB 기반 가이드 키 검증, FastAPI는 프로세스별 호출 제한·OpenAI 연동·응답 형식 검증을 담당하도록 나눴습니다.</p>
             </div>
             <div class="decision-row">
               <strong class="text-sm text-neutral-950">이유</strong>
-              <p class="text-sm leading-6 text-neutral-700">AI 응답 모델을 독립적으로 조정하면서도 기존 서비스 API 계약과 화면 상태를 안정적으로 유지할 수 있었습니다.</p>
+              <p class="text-sm leading-6 text-neutral-700">익명·반복 요청의 비용 노출을 제한하고, 클라이언트 입력과 LLM 출력 모두를 신뢰하지 않는 값으로 취급하면서 기존 API 계약과 화면 상태를 유지하기 위해서였습니다.</p>
             </div>
             <div class="decision-row">
               <strong class="text-sm text-emerald-700">검증</strong>
-              <p class="text-sm leading-6 text-neutral-700">응답을 evidence_notes와 creative_suggestions로 분리하고 프롬프트 공격 문구와 허용되지 않은 ref 변조를 서버에서 검사했습니다. AI 서버 테스트는 66 passed까지 확인했습니다.</p>
+              <p class="text-sm leading-6 text-neutral-700">가이드 근거와 AI 제안을 분리하고, 모델이 반환한 단계별·추천·출처 키를 서버의 허용 목록으로 필터링했습니다. 프롬프트 공격·지원하지 않는 통계 요청·JSON 파싱 실패·OpenAI 장애를 테스트하고 프론트·Spring·AI 서버 CI를 통과했습니다.</p>
+            </div>
+            <div class="decision-row">
+              <strong class="text-sm text-neutral-950">남은 한계</strong>
+              <p class="text-sm leading-6 text-neutral-700">Spring·FastAPI의 호출 제한과 장애 차단 상태는 프로세스 메모리에 저장됩니다. 다중 인스턴스로 확장할 때는 Redis 같은 공용 저장소로 옮겨야 합니다.</p>
             </div>
           </div>
         </article>
@@ -388,7 +418,7 @@
             </div>
             <div class="decision-row">
               <strong class="text-sm text-blue-700">결정</strong>
-              <p class="text-sm leading-6 text-neutral-700">첫 진입은 가벼운 patch-version 조회로 줄이고, 패치노트 통계는 여러 count 쿼리 대신 group by projection으로 묶는 방향을 정리했습니다.</p>
+              <p class="text-sm leading-6 text-neutral-700">게임가이드 탭 조회는 직접 DB <code>Pageable</code> 방식으로 전환했고, 팀원이 구현한 패치 버전 선조회 경량화는 코드와 측정 결과를 검증했습니다. 패치노트 통계는 여러 건수 조회를 단일 집계 쿼리로 직접 통합했습니다.</p>
             </div>
             <div class="decision-row">
               <strong class="text-sm text-neutral-950">이유</strong>
@@ -396,11 +426,11 @@
             </div>
             <div class="decision-row">
               <strong class="text-sm text-neutral-950">대안 비교</strong>
-              <p class="text-sm leading-6 text-neutral-700">#710 이후에는 통계 계산을 프론트로 넘기는 방식도 1000 users 기준으로 비교했습니다. 하지만 백엔드 grouped stats 방식이 22,418 requests, 74.4 TPS, 평균 13,901.1ms, 에러율 0.06%로 프론트 계산 시뮬레이션보다 안정적이었고, 실제 병목은 통계 계산보다 DB connection pool 대기에 가까웠습니다.</p>
+              <p class="text-sm leading-6 text-neutral-700">통계 계산을 프론트로 옮기는 대안도 JMeter로 케이스별 1회 근사했습니다. 실제 브라우저 실험이 아니므로 구조 변경의 근거로 일반화하지 않았고, 확인된 DB 연결 대기는 후속 병목 후보로 분리했습니다.</p>
             </div>
             <div class="decision-row">
               <strong class="text-sm text-emerald-700">검증</strong>
-              <p class="text-sm leading-6 text-neutral-700">JMeter와 로컬 실제 데이터 API smoke로 평균, p95, p99, 최대 응답시간을 비교하고 후속 개선 대상을 분리했습니다.</p>
+              <p class="text-sm leading-6 text-neutral-700">로컬 백엔드와 MySQL 8에 실제 TFT 17.6 데이터를 넣고, 50 VU·300초 조건으로 변경 전후를 각각 3회 비교했습니다. 4개 API 혼합 시나리오에서 TPS 11.1% 향상, p99 21.7% 감소, 오류율 0%를 확인했습니다. 이 중 필터 2개는 당시 데이터에서 0건 응답이었습니다.</p>
             </div>
           </div>
         </article>
@@ -413,11 +443,11 @@
           <div class="mt-5">
             <div class="decision-row">
               <strong class="text-sm text-neutral-950">배경</strong>
-              <p class="text-sm leading-6 text-neutral-700">배포 환경에서는 CORS, OAuth redirect, AI 서버 URL, OpenAI 키, DB migration, healthcheck, ALB 라우팅처럼 실패 지점이 많았습니다.</p>
+              <p class="text-sm leading-6 text-neutral-700">배포 환경에서는 CORS, OAuth 리디렉션, AI 서버 URL, OpenAI 키, DB 마이그레이션, 상태 확인, ALB 라우팅처럼 실패 지점이 많았습니다.</p>
             </div>
             <div class="decision-row">
               <strong class="text-sm text-blue-700">결정</strong>
-              <p class="text-sm leading-6 text-neutral-700">환경 변수와 secret 파일을 분리하고 Docker/Flyway 기본값에서 local-smoke seed가 섞이지 않도록 운영 기본 경로를 정리했습니다.</p>
+              <p class="text-sm leading-6 text-neutral-700">환경 변수와 비밀값 파일을 분리하고 Docker/Flyway 기본값에 로컬 테스트 초기 데이터가 섞이지 않도록 운영 경로를 정리했습니다.</p>
             </div>
             <div class="decision-row">
               <strong class="text-sm text-neutral-950">이유</strong>
@@ -425,7 +455,7 @@
             </div>
             <div class="decision-row">
               <strong class="text-sm text-emerald-700">검증</strong>
-              <p class="text-sm leading-6 text-neutral-700">배포 전 체크리스트와 smoke 기준으로 주요 화면, 게임 가이드 조회, 패치노트 조회, AI Pathfinder 요청, 로그와 환경 변수를 순서대로 확인했습니다.</p>
+              <p class="text-sm leading-6 text-neutral-700">배포 전 체크리스트로 주요 화면, 게임 가이드 조회, 패치노트 조회, AI Pathfinder 요청, 로그와 환경 변수를 순서대로 확인했습니다.</p>
             </div>
           </div>
         </article>
@@ -448,15 +478,15 @@
         </div>
         <div class="evidence-row">
           <strong class="text-sm text-neutral-950">Test / Smoke</strong>
-          <p class="text-sm leading-6 text-neutral-700">단위 테스트, 백엔드 전체 테스트, Docker MySQL + backend smoke, healthcheck, 실제 화면 접근으로 배포 전후 핵심 흐름을 확인했습니다.</p>
+          <p class="text-sm leading-6 text-neutral-700">단위 테스트, 백엔드 전체 테스트, Docker MySQL과 백엔드 연동 확인, 상태 확인 API, 실제 화면 접근으로 배포 전후 핵심 흐름을 검증했습니다.</p>
         </div>
         <div class="evidence-row">
           <strong class="text-sm text-neutral-950">Load / Metrics</strong>
-          <p class="text-sm leading-6 text-neutral-700">패치노트 조회 성능은 JMeter 50 users, 300 seconds 반복 측정으로 평균, p95, p99, 최대 응답시간을 비교했습니다. 이후 1000 users 조건에서는 백엔드 grouped stats와 프론트 계산 시뮬레이션을 비교해 계산 위치보다 DB connection pool 대기가 더 큰 병목이라는 점을 확인했습니다.</p>
+          <p class="text-sm leading-6 text-neutral-700">같은 로컬 조건에서 변경 전후를 반복 측정하고 평균·상위·최대 응답시간을 함께 비교했습니다. 별도 1,000 VU 근사 실험은 성과 수치가 아니라 DB 연결 대기라는 다음 병목을 찾는 데만 사용했습니다.</p>
         </div>
         <div class="evidence-row">
           <strong class="text-sm text-neutral-950">AI Guard</strong>
-          <p class="text-sm leading-6 text-neutral-700">프롬프트 공격, ref 변조, 없는 통계 생성 요청을 입력으로 넣고 위험 문구 필터, 허용 ref 보정, fallback 응답을 확인했습니다.</p>
+          <p class="text-sm leading-6 text-neutral-700">프롬프트 공격, 가이드 키 변조, 없는 통계 생성 요청을 입력하고 위험 문구 필터, 허용 키 보정, 대체 응답을 확인했습니다.</p>
         </div>
       </div>
     </div>
@@ -475,18 +505,18 @@
         </article>
         <article class="rounded-lg border border-neutral-200 bg-white p-5 shadow-sm">
           <span class="material-symbols-outlined text-3xl text-blue-700" aria-hidden="true">shield</span>
-          <h3 class="mt-3 font-extrabold text-neutral-950">신뢰 경계를 서버에 둔다</h3>
+          <h3 class="mt-3 font-extrabold text-neutral-950">중요한 값은 서버에서 다시 확인한다</h3>
           <p class="mt-2 text-sm leading-6 text-neutral-600">인증, 결제, AI 응답 검증처럼 악용 가능성이 있는 흐름은 클라이언트 결과만 믿지 않습니다.</p>
         </article>
         <article class="rounded-lg border border-neutral-200 bg-white p-5 shadow-sm">
           <span class="material-symbols-outlined text-3xl text-blue-700" aria-hidden="true">sync</span>
           <h3 class="mt-3 font-extrabold text-neutral-950">외부 데이터는 반복 실행을 고려한다</h3>
-          <p class="mt-2 text-sm leading-6 text-neutral-600">import, scheduler, migration은 같은 작업이 다시 실행돼도 중복이나 운영 오염이 생기지 않도록 기준을 둡니다.</p>
+          <p class="mt-2 text-sm leading-6 text-neutral-600">데이터 수집, 스케줄러, 마이그레이션은 같은 작업이 다시 실행돼도 중복이나 운영 오염이 생기지 않도록 기준을 둡니다.</p>
         </article>
         <article class="rounded-lg border border-neutral-200 bg-white p-5 shadow-sm">
           <span class="material-symbols-outlined text-3xl text-blue-700" aria-hidden="true">settings</span>
           <h3 class="mt-3 font-extrabold text-neutral-950">환경 설정을 분리한다</h3>
-          <p class="mt-2 text-sm leading-6 text-neutral-600">local, dev, production의 환경 변수, seed, secret, redirect URL을 분리해 배포 기본값이 안전하도록 둡니다.</p>
+          <p class="mt-2 text-sm leading-6 text-neutral-600">로컬·개발·운영 환경의 변수, 초기 데이터, 비밀값, 리디렉션 URL을 분리해 배포 기본값이 안전하도록 둡니다.</p>
         </article>
         <article class="rounded-lg border border-neutral-200 bg-white p-5 shadow-sm">
           <span class="material-symbols-outlined text-3xl text-blue-700" aria-hidden="true">speed</span>
@@ -496,12 +526,12 @@
         <article class="rounded-lg border border-neutral-200 bg-white p-5 shadow-sm">
           <span class="material-symbols-outlined text-3xl text-blue-700" aria-hidden="true">fact_check</span>
           <h3 class="mt-3 font-extrabold text-neutral-950">검증 결과를 기록한다</h3>
-          <p class="mt-2 text-sm leading-6 text-neutral-600">테스트 통과 여부, Swagger 캡처, smoke 결과, 배포 후 확인 항목을 PR과 이슈에 남깁니다.</p>
+          <p class="mt-2 text-sm leading-6 text-neutral-600">테스트 통과 여부, Swagger 캡처, 배포 확인 결과와 후속 점검 항목을 PR과 이슈에 남깁니다.</p>
         </article>
       </div>
       <div class="mt-8 rounded-lg border border-blue-100 bg-blue-50 p-5">
-        <strong class="text-sm text-blue-800">후속으로 남긴 판단</strong>
-        <p class="mt-2 text-sm leading-6 text-neutral-700">단일 서버 기준으로 충분했던 scheduler guard는 멀티 서버 환경에서는 분산 락이 필요합니다. 게임 가이드 탭 조회는 현재 화면 요구를 만족하지만 데이터가 커질 경우 Repository Pageable 조회로 옮겨 DB에서 필요한 페이지 단위만 가져오는 개선이 필요합니다. 이처럼 당장 구현하지 않은 항목도 “왜 지금은 보류했고 언제 다시 볼지”를 남기는 방식으로 관리합니다.</p>
+        <strong class="text-sm text-blue-800">남은 과제</strong>
+        <p class="mt-2 text-sm leading-6 text-neutral-700">AI 호출 제한과 장애 차단 상태를 다중 인스턴스가 공유하도록 Redis 등으로 옮기고, 고부하 근사 실험에서 확인한 DB 연결 대기를 실행계획·인덱스·연결 풀 설정 기준으로 추가 검증해야 합니다.</p>
       </div>
     </div>
   </section>

@@ -843,8 +843,8 @@
 <main class="overflow-x-hidden">
 <!-- 히어로 섹션 -->
 <section class="hero-section flex flex-col justify-center items-center px-margin-mobile md:px-margin-desktop">
-<figure class="hero-portrait" aria-label="이현재 프로필 이미지">
-<img src="assets/profile-hero.jpg" alt="이현재 프로필 사진" width="900" height="1200"/>
+<figure class="hero-portrait" aria-label="포트폴리오 대표 이미지">
+<img src="assets/profile-hero.jpg" alt="반려견 사진" width="900" height="1200"/>
 </figure>
 <div class="hero-content reveal-on-scroll visible">
 <div class="hero-copy">
@@ -853,7 +853,7 @@
 <p class="hero-kicker">서비스의 데이터 흐름을 설계하고 API 구현, 인증/결제, 운영 검증까지 연결해 보는 백엔드 개발자를 지향합니다.</p>
 <div class="hero-lede text-on-surface-variant">
 <p>Mapingo 미니프로젝트에서는 인증, 세션 관리, 외부 결제, API 문서화처럼 서비스 운영에 필요한 백엔드 흐름을 중심으로 작업했습니다.</p>
-<p>TFT-gogo 파이널 프로젝트에서는 게임 가이드와 패치노트 도메인을 맡아 데이터 수집, AI 추천 연동, 배포 환경 점검을 경험했습니다.</p>
+<p>TFT-gogo 파이널 프로젝트에서는 게임 가이드와 패치노트 도메인을 맡아 DB 페이지네이션, 안전한 콘텐츠 갱신, AI 응답 신뢰성까지 구현하고 검증했습니다.</p>
 </div>
 <div class="hero-links" aria-label="홈 주요 링크">
 <a href="https://github.com/TIG-korea" target="_blank" rel="noreferrer">GitHub</a>
@@ -862,7 +862,7 @@
 <span>/</span>
 <a href="https://github.com/soo97/languagemap-spring" target="_blank" rel="noreferrer">Mapingo Spring</a>
 <span>/</span>
-<a href="https://app.notion.com/p/67a963ba895b44d08ff36fbe1d3ebfaf?source=copy_link" target="_blank" rel="noreferrer">Notion 기록</a>
+<a href="https://app.notion.com/p/67a963ba895b44d08ff36fbe1d3ebfaf?source=copy_link" target="_blank" rel="noreferrer">노션 기록</a>
 </div>
 </div>
 </div>
@@ -916,7 +916,7 @@
 </div>
 <span class="project-kind">Final Project</span>
 <h3 class="project-card-title">TFT-gogo</h3>
-<p class="project-card-copy">롤토체스 유저를 위한 전적 분석, AI 메타 추천, 커뮤니티 플랫폼에서 게임 가이드와 패치노트 도메인을 중심으로 작업했습니다.</p>
+<p class="project-card-copy">게임가이드 조회를 DB 페이지네이션으로 전환하고, 공용 락으로 여러 서버의 갱신 경쟁을 차단해 확정된 패치 버전을 가이드 작업에 전달했습니다. 패치노트 통계 쿼리는 한 번의 집계로 통합해 로컬 4개 API 혼합 조건에서 TPS 11.1% 향상, p99 21.7% 감소를 확인했습니다. 당시 필터 2종은 데이터 분포상 0건 응답이어서 수치는 해당 시나리오의 상대 비교로만 해석했습니다.</p>
 <span class="project-link">페이지 보기 <span class="material-symbols-outlined" aria-hidden="true">arrow_outward</span></span>
 </a>
 <a class="project-card reveal-on-scroll" href="troubleshooting.html" aria-label="트러블슈팅 페이지로 이동">
@@ -925,7 +925,7 @@
 </div>
 <span class="project-kind">Troubleshooting</span>
 <h3 class="project-card-title">트러블슈팅 기록</h3>
-<p class="project-card-copy">Mapingo의 인증/캐시/검증 이슈와 TFT-gogo의 성능 병목, 데이터, migration 이슈를 프로젝트별로 나누어 정리합니다.</p>
+<p class="project-card-copy">Mapingo의 인증·캐시 이슈와 TFT-gogo의 성능 병목, 부분 파싱 데이터 보존, 갱신 경쟁 조건, 마이그레이션 문제를 재현과 검증 근거 중심으로 정리합니다.</p>
 <span class="project-link">페이지 보기 <span class="material-symbols-outlined" aria-hidden="true">arrow_outward</span></span>
 </a>
 <a class="project-card reveal-on-scroll" href="technical-decisions.html" aria-label="기술 정리 페이지로 이동">
@@ -949,7 +949,7 @@
 </div>
 <span class="project-kind">AI Workflow</span>
 <h3 class="project-card-title">AI 활용 기록</h3>
-<p class="project-card-copy">노션에 남긴 ooo seed, interview, qa 기록을 바탕으로 기능 설계, 프롬프트 보강, 프롬프트 공격 방어, 배포 QA를 정리합니다.</p>
+<p class="project-card-copy">노션의 요구사항 인터뷰·구현 명세·공격 관점 QA 기록을 바탕으로 AI 기능 설계와 입력·응답 검증, 배포 설정 점검 과정을 정리합니다.</p>
 <ul class="project-tags" aria-label="주요 항목">
 <li>Spec</li>
 <li>Prompt</li>
@@ -978,7 +978,7 @@
 <div class="w-full md:w-1/2 pl-12 md:pl-16 reveal-on-scroll">
 <span class="md:hidden font-label-md text-label-md text-secondary block mb-2">2026.06 — 현재</span>
 <h3 class="font-headline-md text-headline-md mb-2">백엔드 포트폴리오 정리</h3>
-<p class="career-role">Mapingo와 TFT-gogo에서 맡은 API, 데이터 import, 운영 검증 경험을 중심으로 포트폴리오를 정리하고 있습니다.</p>
+<p class="career-role">Mapingo와 TFT-gogo에서 맡은 API, 데이터 수집, 운영 검증 경험을 중심으로 포트폴리오를 정리하고 있습니다.</p>
 </div>
 </div>
 <!-- History 2 -->
@@ -989,20 +989,8 @@
 <div class="absolute left-[-5px] md:left-1/2 w-[11px] h-[11px] bg-outline-variant rounded-full md:-translate-x-1/2 z-10"></div>
 <div class="w-full md:w-1/2 pr-0 md:pr-16 pl-12 md:pl-0 md:text-right reveal-on-scroll">
 <span class="md:hidden font-label-md text-label-md text-secondary block mb-2">2026.01 — 2026.07</span>
-<h3 class="font-headline-md text-headline-md mb-2">교육 과정</h3>
-<p class="career-role">- 보류 -</p>
-</div>
-</div>
-<!-- History 3 -->
-<div class="relative flex flex-col md:flex-row items-start md:items-center">
-<div class="hidden md:block w-1/2 pr-16 text-right reveal-on-scroll">
-<span class="font-label-md text-label-md text-secondary">2025.02</span>
-</div>
-<div class="absolute left-[-5px] md:left-1/2 w-[11px] h-[11px] bg-outline-variant rounded-full md:-translate-x-1/2 z-10"></div>
-<div class="w-full md:w-1/2 pl-12 md:pl-16 reveal-on-scroll">
-<span class="md:hidden font-label-md text-label-md text-secondary block mb-2">2025.02</span>
-<h3 class="font-headline-md text-headline-md mb-2">학력 상세</h3>
-<p class="career-role">- 보류 -</p>
+<h3 class="font-headline-md text-headline-md mb-2">팀 프로젝트 · Mapingo / TFT-gogo</h3>
+<p class="career-role">Spring Boot 백엔드 개발을 맡아 API 계약, 데이터 모델링, 외부 서비스 연동, AWS 배포 검증을 수행했습니다.</p>
 </div>
 </div>
 </div>
@@ -1049,7 +1037,7 @@
 <article class="activity-item reveal-on-scroll">
 <span class="activity-meta">Docs</span>
 <div>
-<h4 class="activity-title">도메인 기준과 작업 결과를 문서로 남깁니다</h4>
+<h3 class="activity-title">도메인 기준과 작업 결과를 문서로 남깁니다</h3>
 <p class="activity-copy">TFT-gogo의 게임 가이드/패치노트 명세와 Mapingo의 API 문서화처럼 구현 범위와 검증 기준을 문서로 맞춥니다.</p>
 <div class="collaboration-gallery" aria-label="문서 협업 자료 이미지 영역">
 <figure class="collaboration-shot">
@@ -1066,7 +1054,7 @@
 <article class="activity-item reveal-on-scroll">
 <span class="activity-meta">Flow</span>
 <div>
-<h4 class="activity-title">작업 단위를 나누고 흐름을 기록합니다</h4>
+<h3 class="activity-title">작업 단위를 나누고 흐름을 기록합니다</h3>
 <ul class="activity-detail">
 <li>기능 요구사항, 데이터 기준, API 응답, 화면 연결 범위를 작게 나누어 진행합니다.</li>
 <li>변경 이유와 확인 결과를 기록해 이후에 같은 문제를 다시 따라갈 수 있게 합니다.</li>
@@ -1086,7 +1074,7 @@
 <article class="activity-item reveal-on-scroll">
 <span class="activity-meta">Issue</span>
 <div>
-<h4 class="activity-title">문제를 재현하고 원인을 분리합니다</h4>
+<h3 class="activity-title">문제를 재현하고 원인을 분리합니다</h3>
 <p class="activity-copy">CORS, OAuth2 redirect, AI 서버 설정, 화면 overflow처럼 구현과 배포 중 확인한 문제를 재현 조건과 해결 방향으로 정리합니다.</p>
 <div class="collaboration-gallery" aria-label="GitHub 이슈 자료 이미지 영역">
 <figure class="collaboration-shot">
@@ -1107,7 +1095,7 @@
 <article class="activity-item reveal-on-scroll">
 <span class="activity-meta">Review</span>
 <div>
-<h4 class="activity-title">검증 결과를 바탕으로 개선합니다</h4>
+<h3 class="activity-title">검증 결과를 바탕으로 개선합니다</h3>
 <p class="activity-copy">테스트 실패, 빌드 경고, 화면 확인 결과를 기준으로 수정 범위를 좁히고 같은 문제가 반복되지 않도록 다시 확인합니다.</p>
 <div class="collaboration-gallery" aria-label="코드리뷰 자료 이미지 영역">
 <figure class="collaboration-shot">
@@ -1132,7 +1120,7 @@
 <span class="font-bold text-neutral-900">이현재</span>
 <a class="font-bold text-neutral-900" href="https://github.com/TIG-korea" target="_blank" rel="noreferrer">GitHub 프로필</a>
 </div>
-      <p class="mt-2">© 2026 이현재 백엔드 포트폴리오. 데이터 import, 운영 검증과 문제 해결.</p>
+      <p class="mt-2">© 2026 이현재 백엔드 포트폴리오. 데이터 수집, 운영 검증과 문제 해결.</p>
 </div>
 </footer>
 <script src="assets/image-modal.js" defer></script>
