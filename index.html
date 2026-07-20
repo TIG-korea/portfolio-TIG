@@ -3,6 +3,22 @@
 <html class="scroll-smooth" lang="ko"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta name="description" content="데이터 흐름 설계, API 구현, 운영 검증 경험을 TFT-gogo와 Mapingo 프로젝트로 정리한 이현재의 백엔드 개발자 포트폴리오입니다."/>
+<meta name="theme-color" content="#f9f9fb"/>
+<link rel="canonical" href="https://tig-backend-portfolio.leehjpp5.chatgpt.site/"/>
+<meta property="og:type" content="website"/>
+<meta property="og:locale" content="ko_KR"/>
+<meta property="og:title" content="이현재 | 백엔드 포트폴리오"/>
+<meta property="og:description" content="데이터 흐름 설계, API 구현, 운영 검증 경험을 프로젝트 근거와 함께 소개합니다."/>
+<meta property="og:url" content="https://tig-backend-portfolio.leehjpp5.chatgpt.site/"/>
+<meta property="og:image" content="https://tig-backend-portfolio.leehjpp5.chatgpt.site/assets/portfolio-og.png"/>
+<meta property="og:image:width" content="1731"/>
+<meta property="og:image:height" content="909"/>
+<meta property="og:image:alt" content="이현재 백엔드 포트폴리오 소셜 미리보기"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="이현재 | 백엔드 포트폴리오"/>
+<meta name="twitter:description" content="TFT-gogo와 Mapingo로 정리한 백엔드 개발 경험"/>
+<meta name="twitter:image" content="https://tig-backend-portfolio.leehjpp5.chatgpt.site/assets/portfolio-og.png"/>
 <title>이현재 | 백엔드 포트폴리오</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=Noto+Sans+KR:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
@@ -269,6 +285,7 @@
         .hero-links {
             display: inline-flex;
             align-items: center;
+            flex-wrap: wrap;
             gap: 10px;
             margin-top: 28px;
             color: #2f3438;
@@ -389,6 +406,11 @@
             height: 100%;
             object-fit: contain;
             padding: 18px;
+        }
+        .project-media--screenshot img {
+            object-fit: cover;
+            object-position: left top;
+            padding: 0;
         }
         .project-media--mark {
             background:
@@ -753,6 +775,12 @@
             .project-media img {
                 padding: 14px;
             }
+            .project-media--screenshot img {
+                padding: 0;
+            }
+            .hero-links > span {
+                display: none;
+            }
             .project-card-title {
                 font-size: 20px;
             }
@@ -844,7 +872,7 @@
 <!-- 히어로 섹션 -->
 <section class="hero-section flex flex-col justify-center items-center px-margin-mobile md:px-margin-desktop">
 <figure class="hero-portrait" aria-label="포트폴리오 대표 이미지">
-<img src="assets/profile-hero.jpg" alt="반려견 사진" width="900" height="1200"/>
+<img src="assets/profile-hero.jpg" alt="반려견 사진" width="554" height="554"/>
 </figure>
 <div class="hero-content reveal-on-scroll visible">
 <div class="hero-copy">
@@ -858,7 +886,9 @@
 <div class="hero-links" aria-label="홈 주요 링크">
 <a href="https://github.com/TIG-korea" target="_blank" rel="noreferrer">GitHub</a>
 <span>/</span>
-<a href="https://github.com/s4ngg/TFT-gogo" target="_blank" rel="noreferrer">TFT-gogo</a>
+<a href="https://tftgogo.com/" target="_blank" rel="noreferrer">TFT-gogo Live</a>
+<span>/</span>
+<a href="https://github.com/s4ngg/TFT-gogo" target="_blank" rel="noreferrer">TFT-gogo GitHub</a>
 <span>/</span>
 <a href="https://github.com/soo97/languagemap-spring" target="_blank" rel="noreferrer">Mapingo Spring</a>
 <span>/</span>
@@ -911,12 +941,12 @@
 <span class="project-link">페이지 보기 <span class="material-symbols-outlined" aria-hidden="true">arrow_outward</span></span>
 </a>
 <a class="project-card reveal-on-scroll" href="final-project.html" aria-label="TFT-gogo 페이지로 이동">
-<div class="project-media project-media--cveradar">
-<span class="material-symbols-outlined text-[48px] text-on-surface-variant" aria-hidden="true">rocket_launch</span>
+<div class="project-media project-media--screenshot">
+<img src="assets/tft-live-guide.png" alt="TFT-gogo 최종 게임 가이드 화면" width="1440" height="900" loading="lazy" decoding="async"/>
 </div>
 <span class="project-kind">Final Project</span>
 <h3 class="project-card-title">TFT-gogo</h3>
-<p class="project-card-copy">게임가이드 조회를 DB 페이지네이션으로 전환하고, 공용 락으로 여러 서버의 갱신 경쟁을 차단해 확정된 패치 버전을 가이드 작업에 전달했습니다. 패치노트 통계 쿼리는 한 번의 집계로 통합해 로컬 4개 API 혼합 조건에서 TPS 11.1% 향상, p99 21.7% 감소를 확인했습니다. 당시 필터 2종은 데이터 분포상 0건 응답이어서 수치는 해당 시나리오의 상대 비교로만 해석했습니다.</p>
+<p class="project-card-copy">게임가이드 조회를 DB 페이지네이션으로 전환하고 공용 락으로 다중 서버의 갱신 경쟁을 막았습니다. 패치노트 통계 쿼리 통합에서는 동일 조건 기준 TPS 11.1% 향상, p99 21.7% 감소를 확인했습니다.</p>
 <span class="project-link">페이지 보기 <span class="material-symbols-outlined" aria-hidden="true">arrow_outward</span></span>
 </a>
 <a class="project-card reveal-on-scroll" href="troubleshooting.html" aria-label="트러블슈팅 페이지로 이동">
@@ -1054,15 +1084,15 @@
 <article class="activity-item reveal-on-scroll">
 <span class="activity-meta">Flow</span>
 <div>
-<h3 class="activity-title">작업 단위를 나누고 흐름을 기록합니다</h3>
+<h3 class="activity-title">작업 단위를 나누고 실제 화면까지 연결합니다</h3>
 <ul class="activity-detail">
 <li>기능 요구사항, 데이터 기준, API 응답, 화면 연결 범위를 작게 나누어 진행합니다.</li>
 <li>변경 이유와 확인 결과를 기록해 이후에 같은 문제를 다시 따라갈 수 있게 합니다.</li>
 </ul>
-<div class="collaboration-gallery" aria-label="GitHub 브랜치와 커밋 자료 이미지 영역">
+<div class="collaboration-gallery" aria-label="프로젝트 결과 화면 이미지 영역">
 <figure class="collaboration-shot">
-<img src="assets/tft-live-dashboard.png" alt="TFT-gogo 서비스 대시보드 화면" width="1440" height="900"/>
-<figcaption>TFT-gogo 서비스 화면</figcaption>
+<img src="assets/tft-patch-notes.png" alt="TFT-gogo 최종 패치노트 화면" width="1440" height="900" loading="lazy" decoding="async"/>
+<figcaption>TFT-gogo 패치노트</figcaption>
 </figure>
 <figure class="collaboration-shot">
 <img src="assets/mapingo-coaching-conversation.png" alt="Mapingo AI 코칭 대화 화면" width="677" height="515"/>
@@ -1095,11 +1125,11 @@
 <article class="activity-item reveal-on-scroll">
 <span class="activity-meta">Review</span>
 <div>
-<h3 class="activity-title">검증 결과를 바탕으로 개선합니다</h3>
+<h3 class="activity-title">검증 결과를 화면과 피드백으로 확인합니다</h3>
 <p class="activity-copy">테스트 실패, 빌드 경고, 화면 확인 결과를 기준으로 수정 범위를 좁히고 같은 문제가 반복되지 않도록 다시 확인합니다.</p>
-<div class="collaboration-gallery" aria-label="코드리뷰 자료 이미지 영역">
+<div class="collaboration-gallery" aria-label="검증 결과 화면 이미지 영역">
 <figure class="collaboration-shot">
-<img src="assets/tft-live-guide.png" alt="TFT-gogo 게임 가이드 화면" width="1440" height="900"/>
+<img src="assets/tft-live-guide.png" alt="TFT-gogo 게임 가이드 화면" width="1440" height="900" loading="lazy" decoding="async"/>
 <figcaption>TFT-gogo 게임 가이드</figcaption>
 </figure>
 <figure class="collaboration-shot">

@@ -161,7 +161,7 @@
             </tr>
             <tr>
               <td class="px-4 py-4 font-bold text-neutral-950">인프라/배포</td>
-              <td class="px-4 py-4">Docker, AWS, ALB, healthcheck, CORS, 환경 변수</td>
+              <td class="px-4 py-4">Docker, AWS, ALB, ECS, ECR, healthcheck, CORS, 환경 변수</td>
               <td class="px-4 py-4">Mapingo, TFT-gogo</td>
               <td class="px-4 py-4">배포 전후 설정 누락을 줄이기 위해 환경 변수, redirect, AI URL, healthcheck를 체크리스트로 관리했습니다.</td>
             </tr>
@@ -443,7 +443,7 @@
           <div class="mt-5">
             <div class="decision-row">
               <strong class="text-sm text-neutral-950">배경</strong>
-              <p class="text-sm leading-6 text-neutral-700">배포 환경에서는 CORS, OAuth 리디렉션, AI 서버 URL, OpenAI 키, DB 마이그레이션, 상태 확인, ALB 라우팅처럼 실패 지점이 많았습니다.</p>
+              <p class="text-sm leading-6 text-neutral-700">배포 환경에서는 CORS, OAuth 리디렉션, AI 서버 URL, OpenAI 키, DB 마이그레이션, 컨테이너 프로필, 헬스체크와 공개 API 응답처럼 실패 지점이 많았습니다.</p>
             </div>
             <div class="decision-row">
               <strong class="text-sm text-blue-700">결정</strong>
