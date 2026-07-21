@@ -18,6 +18,12 @@ New-Item -ItemType Directory -Force -Path $serverDir, $clientDir | Out-Null
 
 Get-ChildItem -LiteralPath $projectRoot -Filter "*.html" -File |
   Copy-Item -Destination $clientDir
+foreach ($publicFile in @("robots.txt", "sitemap.xml")) {
+  $publicPath = Join-Path $projectRoot $publicFile
+  if (Test-Path -LiteralPath $publicPath) {
+    Copy-Item -LiteralPath $publicPath -Destination $clientDir
+  }
+}
 Copy-Item -LiteralPath (Join-Path $projectRoot "assets") -Destination $clientDir -Recurse
 Copy-Item -LiteralPath (Join-Path $PSScriptRoot "sites-static-worker.js") -Destination (Join-Path $serverDir "index.js")
 

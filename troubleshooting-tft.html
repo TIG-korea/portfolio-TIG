@@ -3,10 +3,27 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta name="description" content="TFT-gogo의 게임가이드 성능, 패치 데이터 안전성, 동시성, Flyway와 ERD 문제를 실제 PR·테스트·측정 근거로 정리한 트러블슈팅 기록입니다."/>
+<meta name="theme-color" content="#fafafa"/>
+<link rel="canonical" href="https://tig-backend-portfolio.leehjpp5.chatgpt.site/troubleshooting-tft"/>
+<meta property="og:type" content="article"/>
+<meta property="og:locale" content="ko_KR"/>
+<meta property="og:title" content="TFT-gogo 트러블슈팅 | 이현재 백엔드 포트폴리오"/>
+<meta property="og:description" content="성능·데이터 안전성·동시성·DB 마이그레이션 문제를 해결하고 검증한 기록"/>
+<meta property="og:url" content="https://tig-backend-portfolio.leehjpp5.chatgpt.site/troubleshooting-tft"/>
+<meta property="og:image" content="https://tig-backend-portfolio.leehjpp5.chatgpt.site/assets/portfolio-og-v2.png"/>
+<meta property="og:image:width" content="1732"/>
+<meta property="og:image:height" content="908"/>
+<meta property="og:image:alt" content="이현재 백엔드 포트폴리오 소셜 미리보기"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="TFT-gogo 트러블슈팅 | 이현재 백엔드 포트폴리오"/>
+<meta name="twitter:description" content="TFT-gogo 성능·데이터·동시성·마이그레이션 문제 해결 기록"/>
+<meta name="twitter:image" content="https://tig-backend-portfolio.leehjpp5.chatgpt.site/assets/portfolio-og-v2.png"/>
+<link rel="icon" href="assets/portfolio-og-v2.png" type="image/png"/>
 <title>TFT-gogo 트러블슈팅 | 이현재 포트폴리오</title>
-<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;600;700;800&family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;600;700;800&amp;family=Noto+Sans+KR:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="assets/tailwind.css"/>
 <style>
   body { font-family: "Noto Sans KR", sans-serif; color: #171717; background: #fafafa; word-break: keep-all; overflow-wrap: break-word; }
   .display { font-family: "Hanken Grotesk", "Noto Sans KR", sans-serif; letter-spacing: 0; }
@@ -31,35 +48,40 @@
   @media (max-width: 640px) {
     .case-summary { grid-template-columns: 1fr; gap: 8px; }
   }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto !important; }
+    *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+  }
 </style>
 </head>
 <body>
+<a class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded focus:bg-neutral-950 focus:px-4 focus:py-3 focus:font-bold focus:text-white" href="#main-content">본문 바로가기</a>
 <header class="sticky top-0 z-50 border-b border-neutral-200 bg-white/90 backdrop-blur">
   <div class="mx-auto flex h-16 max-w-6xl items-center justify-between px-5">
-    <a class="display text-lg font-extrabold text-neutral-950" href="index.html">이현재</a>
-    <nav class="hidden items-center gap-7 md:flex">
-      <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="index.html">홈</a>
-      <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="mini-project.html">미니프로젝트</a>
-      <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="final-project.html">파이널 프로젝트</a>
-      <a class="text-sm font-bold text-blue-700" href="troubleshooting.html">트러블슈팅</a>
-      <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="technical-decisions.html">기술 정리</a>
-      <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="ai-usage.html">AI 활용</a>
+    <a class="display text-lg font-extrabold text-neutral-950" href="/">이현재</a>
+    <nav class="hidden items-center gap-7 md:flex" aria-label="주요 메뉴">
+      <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="/">홈</a>
+      <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="mini-project">미니프로젝트</a>
+      <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="final-project">파이널 프로젝트</a>
+      <a class="text-sm font-bold text-blue-700" href="troubleshooting" aria-current="page">트러블슈팅</a>
+      <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="technical-decisions">기술 정리</a>
+      <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="ai-usage">AI 활용</a>
     </nav>
     <details class="relative md:hidden">
-      <summary class="list-none p-2 text-neutral-900"><span class="material-symbols-outlined">menu</span></summary>
-      <nav class="absolute right-0 mt-2 w-48 rounded-lg border border-neutral-200 bg-white p-2 shadow-lg">
-        <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="index.html">홈</a>
-        <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="mini-project.html">미니프로젝트</a>
-        <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="final-project.html">파이널 프로젝트</a>
-        <a class="block rounded px-3 py-2 text-sm font-bold text-blue-700" href="troubleshooting.html">트러블슈팅</a>
-        <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="technical-decisions.html">기술 정리</a>
-        <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="ai-usage.html">AI 활용</a>
+      <summary class="list-none p-2 text-neutral-900" aria-label="모바일 메뉴 열기"><span class="material-symbols-outlined" aria-hidden="true">menu</span></summary>
+      <nav class="absolute right-0 mt-2 w-48 rounded-lg border border-neutral-200 bg-white p-2 shadow-lg" aria-label="모바일 주요 메뉴">
+        <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="/">홈</a>
+        <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="mini-project">미니프로젝트</a>
+        <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="final-project">파이널 프로젝트</a>
+        <a class="block rounded px-3 py-2 text-sm font-bold text-blue-700" href="troubleshooting" aria-current="page">트러블슈팅</a>
+        <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="technical-decisions">기술 정리</a>
+        <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="ai-usage">AI 활용</a>
       </nav>
     </details>
   </div>
 </header>
 
-<main>
+<main id="main-content">
   <section class="bg-white">
     <div class="mx-auto grid max-w-6xl gap-10 px-5 py-16 md:grid-cols-[1.05fr_0.95fr] md:items-center">
       <div>
@@ -69,7 +91,7 @@
       </div>
       <figure class="overflow-hidden rounded-lg border border-neutral-200 bg-neutral-100">
         <a class="image-link" href="https://github.com/s4ngg/TFT-gogo" target="_blank" rel="noreferrer" aria-label="TFT-gogo GitHub 저장소로 이동">
-          <img class="case-shot" src="assets/tft-live-guide.png" alt="TFT-gogo 게임 가이드 화면" width="1440" height="900"/>
+          <img class="case-shot" src="assets/tft-live-guide.png" alt="TFT-gogo 게임 가이드 화면" width="1440" height="900" decoding="async" fetchpriority="high"/>
         </a>
         <figcaption class="border-t border-neutral-200 bg-white px-4 py-3 text-sm font-semibold text-neutral-600">이미지를 누르면 관련 GitHub 기록으로 이동합니다.</figcaption>
       </figure>
@@ -82,7 +104,7 @@
         <div class="grid gap-0 md:grid-cols-[0.92fr_1.08fr]">
           <figure class="border-b border-neutral-200 bg-neutral-100 md:border-b-0 md:border-r">
             <a class="image-link" href="https://github.com/s4ngg/TFT-gogo/pull/608" target="_blank" rel="noreferrer" aria-label="TFT-gogo PR 608로 이동">
-              <img class="case-shot h-full" src="assets/tft-live-guide.png" alt="TFT-gogo 게임 가이드 화면" width="1440" height="900"/>
+              <img class="case-shot h-full" src="assets/tft-live-guide.png" alt="TFT-gogo 게임 가이드 화면" width="1440" height="900" loading="lazy" decoding="async"/>
             </a>
           </figure>
           <div class="p-6 md:p-7">
@@ -142,7 +164,7 @@
             </div>
             <div class="case-summary">
               <strong class="text-sm text-neutral-950">직접 기여</strong>
-              <p class="text-sm leading-6 text-neutral-700">경쟁 조건 분석, 락·트랜잭션 경계 설계, 자동·수동 실행 통합, 실패 복구 테스트와 실제 MySQL 경합 검증을 수행했습니다. <a class="font-bold text-neutral-950 underline decoration-neutral-300 underline-offset-4" href="https://github.com/s4ngg/TFT-gogo/issues/748" target="_blank" rel="noreferrer">이슈 #748</a>에서 문제를 정의하고 <a class="font-bold text-neutral-950 underline decoration-neutral-300 underline-offset-4" href="https://github.com/s4ngg/TFT-gogo/pull/773" target="_blank" rel="noreferrer">PR #773</a>으로 <code>develop</code> 최종 반영을 확인했습니다.</p>
+              <p class="text-sm leading-6 text-neutral-700">경쟁 조건 분석, 락·트랜잭션 경계 설계, 자동·수동 실행 통합, 실패 복구 테스트와 실제 MySQL 경합 검증을 수행했습니다. <a class="font-bold text-neutral-950 underline decoration-neutral-300 underline-offset-4" href="https://github.com/s4ngg/TFT-gogo/issues/748" target="_blank" rel="noreferrer">이슈 #748</a>에서 문제를 정의하고 <a class="font-bold text-neutral-950 underline decoration-neutral-300 underline-offset-4" href="https://github.com/s4ngg/TFT-gogo/pull/773" target="_blank" rel="noreferrer">PR #773</a>으로 <code>develop</code>에 반영했습니다.</p>
             </div>
           </div>
         </div>
@@ -204,13 +226,13 @@
                 </div>
                 <div class="case-summary">
                   <strong class="text-sm text-neutral-950">대안 비교</strong>
-                  <p class="text-sm leading-6 text-neutral-700">이후 통계 계산을 프론트로 옮기는 대안도 별도의 1,000 VU 근사 실험으로 비교했습니다.</p>
+                  <p class="text-sm leading-6 text-neutral-700">통계 계산을 프론트로 옮기는 대안도 별도의 일회성 고부하 근사 실험으로 탐색했지만, 반복 검증된 정량 성과로 채택하지 않았습니다.</p>
                 </div>
               </div>
             </div>
             <figure class="overflow-hidden rounded-lg border border-neutral-200 bg-neutral-100">
               <a class="image-link" href="https://github.com/s4ngg/TFT-gogo/pull/712" target="_blank" rel="noreferrer" aria-label="TFT-gogo PR 712로 이동">
-                <img class="case-shot" src="assets/tft-patch-notes.png" alt="TFT-gogo 패치노트 화면" width="1440" height="900"/>
+                <img class="case-shot" src="assets/tft-patch-notes.png" alt="TFT-gogo 패치노트 화면" width="1440" height="900" loading="lazy" decoding="async"/>
               </a>
               <figcaption class="border-t border-neutral-200 bg-white px-4 py-3 text-sm font-semibold text-neutral-600">통계 쿼리 병합 후 JMeter 기준으로 다시 비교한 패치노트 changes 조회 결과입니다.</figcaption>
             </figure>
@@ -252,34 +274,8 @@ GROUP BY c.category, c.changeType, c.impact
 List&lt;PatchChangeStatsCount&gt; countFilteredChangeStats(...);</code></pre>
           <div class="mt-7 rounded-lg border border-neutral-200 bg-neutral-50 p-5">
             <h3 class="text-lg font-extrabold text-neutral-950">2차 검증: 통계 계산을 어디서 할 것인가</h3>
-            <p class="mt-3 text-sm leading-7 text-neutral-700">처음에는 통계 계산을 프론트로 넘기면 백엔드 부하가 줄어들 것으로 예상했습니다. 하지만 17.6 패치 변경사항 102건을 사용한 1,000 VU 근사 실험에서는 목록 조회와 DB 연결 대기가 더 큰 병목으로 드러났습니다. 이 실험은 실제 브라우저가 아닌 JMeter 후처리기로 프론트 계산을 근사한 케이스별 1회 비교이므로 성능 성과가 아니라 병목 탐색 근거로만 사용했습니다.</p>
-            <details class="mt-5 rounded-lg border border-neutral-200 bg-white p-4">
-              <summary class="cursor-pointer font-bold text-neutral-950">1,000 VU 근사 실험 상세 수치와 한계 보기</summary>
-              <div class="mt-4 overflow-x-auto border-y border-neutral-200 bg-white">
-                <table class="min-w-full text-left text-sm">
-                  <caption class="sr-only">백엔드 집계와 프론트 계산 근사 실험 비교</caption>
-                <thead class="bg-neutral-50 text-neutral-600">
-                  <tr>
-                    <th scope="col" class="px-4 py-3 font-extrabold">지표</th>
-                    <th scope="col" class="px-4 py-3 font-extrabold">백엔드 집계</th>
-                    <th scope="col" class="px-4 py-3 font-extrabold">프론트 계산 시뮬레이션</th>
-                    <th scope="col" class="px-4 py-3 font-extrabold">판단</th>
-                  </tr>
-                </thead>
-                <tbody class="divide-y divide-neutral-200">
-                  <tr><td class="px-4 py-3 font-bold">요청 수</td><td class="px-4 py-3">22,418</td><td class="px-4 py-3">14,177</td><td class="px-4 py-3 font-bold text-emerald-700">백엔드 방식 우세</td></tr>
-                  <tr><td class="px-4 py-3 font-bold">TPS</td><td class="px-4 py-3">74.4/s</td><td class="px-4 py-3">46.9/s</td><td class="px-4 py-3 font-bold text-emerald-700">백엔드 방식 우세</td></tr>
-                  <tr><td class="px-4 py-3 font-bold">평균 응답시간</td><td class="px-4 py-3">13,901.1ms</td><td class="px-4 py-3">21,461.1ms</td><td class="px-4 py-3 font-bold text-emerald-700">백엔드 방식 우세</td></tr>
-                  <tr><td class="px-4 py-3 font-bold">p99</td><td class="px-4 py-3">43,386ms</td><td class="px-4 py-3">40,648ms</td><td class="px-4 py-3 font-bold text-neutral-700">프론트 방식 일부 우세</td></tr>
-                  <tr><td class="px-4 py-3 font-bold">최대 응답시간</td><td class="px-4 py-3">82,673ms</td><td class="px-4 py-3">63,513ms</td><td class="px-4 py-3 font-bold text-neutral-700">프론트 방식 일부 우세</td></tr>
-                  <tr><td class="px-4 py-3 font-bold">에러율</td><td class="px-4 py-3">0.06%</td><td class="px-4 py-3">0.56%</td><td class="px-4 py-3 font-bold text-emerald-700">백엔드 방식 우세</td></tr>
-                </tbody>
-              </table>
-              </div>
-              <pre class="code-block mt-5 overflow-x-auto rounded bg-neutral-950 p-4 text-xs leading-6 text-neutral-100"><code>HikariPool-1 - Connection is not available, request timed out after 30234ms
-total=10, active=10, idle=0, waiting=185</code></pre>
-            </details>
-            <p class="mt-4 text-sm leading-7 text-neutral-700">백엔드 방식이 요청 수·평균 응답·오류율에서는 우세했고, 프론트 근사 방식은 p99·최대 응답에서 일부 우세했습니다. 계산 위치를 바꿀 근거는 부족해 백엔드 집계를 유지하고, 후속 후보를 캐싱·API 분리·실행계획과 인덱스·DB 연결 풀 점검으로 좁혔습니다.</p>
+            <p class="mt-3 text-sm leading-7 text-neutral-700">처음에는 통계 계산을 프론트로 넘기면 백엔드 부하가 줄어들 것으로 예상했습니다. 별도의 일회성 고부하 근사 비교에서는 목록 조회와 DB 연결 대기가 후속 병목 후보로 나타났지만, 실제 브라우저 실험이나 반복 측정이 아니어서 상세 수치를 성과 근거에서 제외했습니다.</p>
+            <p class="mt-4 text-sm leading-7 text-neutral-700">계산 위치를 바꿀 근거는 부족해 백엔드 집계를 유지하고, 후속 후보를 캐싱·API 분리·실행계획과 인덱스·DB 연결 풀 점검으로 좁혔습니다.</p>
           </div>
         </div>
       </article>
@@ -288,7 +284,7 @@ total=10, active=10, idle=0, waiting=185</code></pre>
         <div class="grid gap-0 md:grid-cols-[0.86fr_1.14fr]">
           <figure class="border-b border-neutral-200 bg-neutral-100 md:border-b-0 md:border-r">
             <a class="image-link" href="https://github.com/s4ngg/TFT-gogo/pull/701" target="_blank" rel="noreferrer" aria-label="TFT-gogo PR 701로 이동">
-              <img class="case-shot h-full" src="assets/gh-tft-prs.png" alt="TFT-gogo PR 목록 화면" width="1440" height="900"/>
+              <img class="case-shot h-full" src="assets/gh-tft-prs.png" alt="TFT-gogo PR 목록 화면" width="1425" height="891" loading="lazy" decoding="async"/>
             </a>
           </figure>
           <div class="p-6 md:p-7">
@@ -349,7 +345,7 @@ total=10, active=10, idle=0, waiting=185</code></pre>
             </div>
             <figure class="overflow-hidden rounded-lg border border-neutral-200 bg-neutral-100">
               <a class="image-link" href="https://github.com/s4ngg/TFT-gogo/pull/679" target="_blank" rel="noreferrer" aria-label="TFT-gogo PR 679로 이동">
-                <img class="case-shot" src="assets/gh-tft-pr-679.png" alt="TFT-gogo PR 679 화면" width="1440" height="900"/>
+                <img class="case-shot" src="assets/gh-tft-pr-679.png" alt="TFT-gogo PR 679 화면" width="1425" height="891" loading="lazy" decoding="async"/>
               </a>
               <figcaption class="border-t border-neutral-200 bg-white px-4 py-3 text-sm font-semibold text-neutral-600">Issue #658의 잘못된 탭 분류 원인을 데이터 수집 단계에서 보강했습니다.</figcaption>
             </figure>
@@ -360,8 +356,8 @@ total=10, active=10, idle=0, waiting=185</code></pre>
       <article class="overflow-hidden rounded-lg border border-neutral-200 bg-white shadow-sm">
         <div class="grid gap-0 md:grid-cols-[0.86fr_1.14fr]">
           <figure class="border-b border-neutral-200 bg-neutral-100 md:border-b-0 md:border-r">
-            <a class="image-link" href="https://github.com/s4ngg/TFT-gogo" target="_blank" rel="noreferrer" aria-label="TFT-gogo GitHub 저장소로 이동">
-              <img class="case-shot h-full" src="assets/gh-tft-docs-spec.png" alt="TFT-gogo 도메인 명세 문서 화면" width="1440" height="900"/>
+            <a class="image-link" href="https://github.com/s4ngg/TFT-gogo/pull/433" target="_blank" rel="noreferrer" aria-label="TFT-gogo PR 433으로 이동">
+              <img class="case-shot h-full" src="assets/gh-tft-docs-spec.png" alt="TFT-gogo 도메인 명세 문서 화면" width="1425" height="891" loading="lazy" decoding="async"/>
             </a>
           </figure>
           <div class="p-6 md:p-7">
@@ -383,7 +379,7 @@ total=10, active=10, idle=0, waiting=185</code></pre>
               </div>
               <div class="case-summary">
                 <strong class="text-sm text-emerald-700">Result</strong>
-                <p class="text-sm leading-6 text-neutral-700">기존 패치노트/변경사항 데이터는 유지하면서 로컬 MySQL과 백엔드 코드가 같은 ERD 기준을 보도록 맞췄고, 백엔드 테스트와 프론트 빌드/테스트까지 확인했습니다.</p>
+                <p class="text-sm leading-6 text-neutral-700"><a class="font-bold text-neutral-950 underline decoration-neutral-300 underline-offset-4" href="https://github.com/s4ngg/TFT-gogo/pull/433" target="_blank" rel="noreferrer">PR #433</a>에서 기존 패치노트/변경사항 데이터는 유지하면서 로컬 MySQL과 백엔드 코드가 같은 ERD 기준을 보도록 맞췄고, 백엔드 테스트와 프론트 빌드/테스트까지 확인했습니다.</p>
               </div>
             </div>
           </div>
@@ -402,6 +398,7 @@ total=10, active=10, idle=0, waiting=185</code></pre>
       <p class="mt-2">© 2026 이현재 백엔드 포트폴리오. TFT-gogo 데이터 수집, 성능 검증, DB 마이그레이션과 문제 해결.</p>
   </div>
 </footer>
+<script src="assets/site-nav.js" defer></script>
 <script src="assets/image-modal.js" defer></script>
 </body>
 </html>

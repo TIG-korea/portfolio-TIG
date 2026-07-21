@@ -1,0 +1,11 @@
+{
+  "name": "lee-hyeonjae-backend-portfolio",
+  "private": true,
+  "scripts": {
+    "build:css": "tailwindcss -i ./assets/tailwind-input.css -o ./assets/tailwind.css --minify",
+    "build": "npm run build:css && powershell -NoProfile -ExecutionPolicy Bypass -File ./build/build-site.ps1"
+  },
+  "devDependencies": {
+    "tailwindcss": "3.4.17"
+  }
+}

@@ -3,10 +3,27 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta name="description" content="AI Pathfinder의 요구사항 설계, Spring·FastAPI 검증 경계, 프롬프트 방어와 배포 QA를 근거와 함께 정리한 이현재의 AI 활용 기록입니다."/>
+<meta name="theme-color" content="#fafafa"/>
+<link rel="canonical" href="https://tig-backend-portfolio.leehjpp5.chatgpt.site/ai-usage"/>
+<meta property="og:type" content="article"/>
+<meta property="og:locale" content="ko_KR"/>
+<meta property="og:title" content="AI 활용 | 이현재 백엔드 포트폴리오"/>
+<meta property="og:description" content="AI Pathfinder 설계부터 입력·출력 검증, 프롬프트 방어와 배포 QA까지"/>
+<meta property="og:url" content="https://tig-backend-portfolio.leehjpp5.chatgpt.site/ai-usage"/>
+<meta property="og:image" content="https://tig-backend-portfolio.leehjpp5.chatgpt.site/assets/portfolio-og-v2.png"/>
+<meta property="og:image:width" content="1732"/>
+<meta property="og:image:height" content="908"/>
+<meta property="og:image:alt" content="이현재 백엔드 포트폴리오 소셜 미리보기"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="AI 활용 | 이현재 백엔드 포트폴리오"/>
+<meta name="twitter:description" content="AI Pathfinder의 설계·검증·보안·배포 QA 기록"/>
+<meta name="twitter:image" content="https://tig-backend-portfolio.leehjpp5.chatgpt.site/assets/portfolio-og-v2.png"/>
+<link rel="icon" href="assets/portfolio-og-v2.png" type="image/png"/>
 <title>AI 활용 | 이현재 포트폴리오</title>
-<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;600;700;800&family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;600;700;800&amp;family=Noto+Sans+KR:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="assets/tailwind.css"/>
 <style>
   body { font-family: "Noto Sans KR", sans-serif; color: #171717; background: #fafafa; word-break: keep-all; overflow-wrap: break-word; }
   .display { font-family: "Hanken Grotesk", "Noto Sans KR", sans-serif; letter-spacing: 0; }
@@ -16,35 +33,40 @@
   @media (max-width: 640px) {
     .flow-row { grid-template-columns: 1fr; gap: 8px; }
   }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto !important; }
+    *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+  }
 </style>
 </head>
 <body>
+<a class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded focus:bg-neutral-950 focus:px-4 focus:py-3 focus:font-bold focus:text-white" href="#main-content">본문 바로가기</a>
 <header class="sticky top-0 z-50 border-b border-neutral-200 bg-white/90 backdrop-blur">
   <div class="mx-auto flex h-16 max-w-6xl items-center justify-between px-5">
-    <a class="display text-lg font-extrabold text-neutral-950" href="index.html">이현재</a>
-    <nav class="hidden items-center gap-7 md:flex">
-      <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="index.html">홈</a>
-      <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="mini-project.html">미니프로젝트</a>
-      <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="final-project.html">파이널 프로젝트</a>
-      <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="troubleshooting.html">트러블슈팅</a>
-      <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="technical-decisions.html">기술 정리</a>
-      <a class="text-sm font-bold text-blue-700" href="ai-usage.html">AI 활용</a>
+    <a class="display text-lg font-extrabold text-neutral-950" href="/">이현재</a>
+    <nav class="hidden items-center gap-7 md:flex" aria-label="주요 메뉴">
+      <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="/">홈</a>
+      <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="mini-project">미니프로젝트</a>
+      <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="final-project">파이널 프로젝트</a>
+      <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="troubleshooting">트러블슈팅</a>
+      <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="technical-decisions">기술 정리</a>
+      <a class="text-sm font-bold text-blue-700" href="ai-usage" aria-current="page">AI 활용</a>
     </nav>
     <details class="relative md:hidden">
-      <summary class="list-none p-2 text-neutral-900"><span class="material-symbols-outlined">menu</span></summary>
-      <nav class="absolute right-0 mt-2 w-48 rounded-lg border border-neutral-200 bg-white p-2 shadow-lg">
-        <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="index.html">홈</a>
-        <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="mini-project.html">미니프로젝트</a>
-        <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="final-project.html">파이널 프로젝트</a>
-        <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="troubleshooting.html">트러블슈팅</a>
-        <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="technical-decisions.html">기술 정리</a>
-        <a class="block rounded px-3 py-2 text-sm font-bold text-blue-700" href="ai-usage.html">AI 활용</a>
+      <summary class="list-none p-2 text-neutral-900" aria-label="모바일 메뉴 열기"><span class="material-symbols-outlined" aria-hidden="true">menu</span></summary>
+      <nav class="absolute right-0 mt-2 w-48 rounded-lg border border-neutral-200 bg-white p-2 shadow-lg" aria-label="모바일 주요 메뉴">
+        <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="/">홈</a>
+        <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="mini-project">미니프로젝트</a>
+        <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="final-project">파이널 프로젝트</a>
+        <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="troubleshooting">트러블슈팅</a>
+        <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="technical-decisions">기술 정리</a>
+        <a class="block rounded px-3 py-2 text-sm font-bold text-blue-700" href="ai-usage" aria-current="page">AI 활용</a>
       </nav>
     </details>
   </div>
 </header>
 
-<main>
+<main id="main-content">
   <section class="bg-white">
     <div class="mx-auto max-w-6xl px-5 py-16">
       <p class="text-sm font-bold uppercase text-blue-700">AI Assisted Workflow</p>
@@ -108,7 +130,7 @@
           </div>
           <div class="flow-row">
             <strong class="text-sm text-blue-700">Auth / Cost</strong>
-            <p class="text-sm leading-6 text-neutral-700">Spring에서는 로그인 사용자별로 60초당 10회, FastAPI에서는 OpenAI 호출 전에 프로세스별로 60초당 30회를 제한했습니다. 인증 실패와 호출 제한은 대체 응답으로 숨기지 않고 명확한 오류로 전달했습니다.</p>
+            <p class="text-sm leading-6 text-neutral-700">Spring은 비로그인 요청을 401로 거부하고 로그인 사용자별 60초당 10회를 넘기면 429를 반환합니다. FastAPI는 OpenAI 호출 전에 프로세스별 60초당 30회를 제한하며, 이 전역 제한과 AI 장애·응답 파싱 실패는 Spring이 규칙 기반 대체 응답으로 전환합니다.</p>
           </div>
           <div class="flow-row">
             <strong class="text-sm text-blue-700">데이터 검증</strong>
@@ -120,7 +142,7 @@
           </div>
           <div class="flow-row">
             <strong class="text-sm text-emerald-700">Result</strong>
-            <p class="text-sm leading-6 text-neutral-700"><a class="font-bold text-neutral-950 underline decoration-neutral-300 underline-offset-4" href="https://github.com/s4ngg/TFT-gogo/pull/643" target="_blank" rel="noreferrer">PR #643</a>에서 프론트·Spring·AI 서버 테스트와 최종 CI를 통과했습니다. 공격 입력과 출력 변조는 PR의 회귀 테스트로, <a class="font-bold text-neutral-950 underline decoration-neutral-300 underline-offset-4" href="https://github.com/s4ngg/TFT-gogo/issues/676" target="_blank" rel="noreferrer">QA 이슈 #676</a>에서는 비로그인 상태와 401·429 오류 표시를 점검했습니다.</p>
+            <p class="text-sm leading-6 text-neutral-700"><a class="font-bold text-neutral-950 underline decoration-neutral-300 underline-offset-4" href="https://github.com/s4ngg/TFT-gogo/pull/643" target="_blank" rel="noreferrer">PR #643</a>에서 프론트·Spring·AI 서버 테스트와 CI를 통과했습니다. 공격 입력과 출력 변조는 PR의 회귀 테스트로, <a class="font-bold text-neutral-950 underline decoration-neutral-300 underline-offset-4" href="https://github.com/s4ngg/TFT-gogo/issues/676" target="_blank" rel="noreferrer">QA 이슈 #676</a>에서는 비로그인 401과 사용자별 제한 429 표시를 점검했습니다.</p>
           </div>
           <div class="flow-row">
             <strong class="text-sm text-neutral-950">Limit</strong>
@@ -171,7 +193,7 @@
           <p><strong class="text-neutral-950">개선 후</strong> 패치 요약과 정규화된 주요 변경 포인트만 남기고, 카테고리 이동은 기존 우측 탭에 맡겨 중복된 빠른 보기 버튼을 제거했습니다.</p>
           <p><strong class="text-neutral-950">의미</strong> AI를 화면 문구 생성에만 쓰지 않고, 사용자가 데이터를 어떤 단위로 이해해야 하는지 정리하는 QA 도구로 활용했습니다.</p>
         </div>
-        <a class="mt-5 inline-flex items-center gap-1 text-sm font-extrabold text-blue-700" href="https://github.com/s4ngg/TFT-gogo/pull/631" target="_blank" rel="noreferrer">최종 UX 정리 PR #631 보기 <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_outward</span></a>
+        <a class="mt-5 inline-flex items-center gap-1 text-sm font-extrabold text-blue-700" href="https://github.com/s4ngg/TFT-gogo/pull/631" target="_blank" rel="noreferrer">패치노트 빠른 보기 중복 제거 PR #631 <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_outward</span></a>
       </article>
 
       <article class="rounded-lg border border-neutral-200 bg-white p-6 shadow-sm md:p-7">
@@ -206,6 +228,6 @@
       <p class="mt-2">© 2026 이현재 백엔드 포트폴리오. AI 활용, 기능 설계, QA, 보안 검증과 문제 해결.</p>
   </div>
 </footer>
-<script src="assets/image-modal.js" defer></script>
+<script src="assets/site-nav.js" defer></script>
 </body>
 </html>

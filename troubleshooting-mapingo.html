@@ -3,10 +3,26 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta name="description" content="Mapingo의 JWT 인증 예외, Redis 캐시 정합성, DTO 검증 오류를 재현하고 원인과 해결 과정을 정리한 백엔드 트러블슈팅 기록입니다."/>
 <title>Mapingo 트러블슈팅 | 이현재 포트폴리오</title>
-<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;600;700;800&family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-<script src="https://cdn.tailwindcss.com"></script>
+<link rel="canonical" href="https://tig-backend-portfolio.leehjpp5.chatgpt.site/troubleshooting-mapingo"/>
+<meta property="og:type" content="article"/>
+<meta property="og:locale" content="ko_KR"/>
+<meta property="og:title" content="Mapingo 트러블슈팅 | 이현재 백엔드 포트폴리오"/>
+<meta property="og:description" content="JWT 인증 경계, Redis 캐시 정합성, DTO 검증 오류를 재현하고 해결한 과정"/>
+<meta property="og:url" content="https://tig-backend-portfolio.leehjpp5.chatgpt.site/troubleshooting-mapingo"/>
+<meta property="og:image" content="https://tig-backend-portfolio.leehjpp5.chatgpt.site/assets/portfolio-og-v2.png"/>
+<meta property="og:image:width" content="1732"/>
+<meta property="og:image:height" content="908"/>
+<meta property="og:image:alt" content="이현재 백엔드 포트폴리오 소셜 미리보기"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Mapingo 트러블슈팅 | 이현재 백엔드 포트폴리오"/>
+<meta name="twitter:description" content="JWT, Redis, DTO 검증 경계를 분리해 해결한 Mapingo 백엔드 이슈"/>
+<meta name="twitter:image" content="https://tig-backend-portfolio.leehjpp5.chatgpt.site/assets/portfolio-og-v2.png"/>
+<link rel="icon" href="assets/portfolio-og-v2.png" type="image/png"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;600;700;800&amp;family=Noto+Sans+KR:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="assets/tailwind.css"/>
 <style>
   body { font-family: "Noto Sans KR", sans-serif; color: #171717; background: #fafafa; word-break: keep-all; overflow-wrap: break-word; }
   .display { font-family: "Hanken Grotesk", "Noto Sans KR", sans-serif; letter-spacing: 0; }
@@ -14,6 +30,8 @@
   .case-shot { aspect-ratio: 16 / 10; width: 100%; object-fit: contain; background: #f8fafc; }
   .case-summary { display: grid; grid-template-columns: 128px minmax(0, 1fr); gap: 16px; padding: 18px 0; border-top: 1px solid #e5e7eb; }
   .case-summary:last-child { border-bottom: 1px solid #e5e7eb; }
+  .skip-link { position: fixed; top: 1rem; left: 1rem; z-index: 100; transform: translateY(-200%); border-radius: 0.375rem; background: #171717; color: #fff; padding: 0.75rem 1rem; font-weight: 700; }
+  .skip-link:focus { transform: translateY(0); }
   .image-link { position: relative; display: block; }
   .image-link::after {
     content: "GitHub에서 보기";
@@ -30,35 +48,39 @@
   @media (max-width: 640px) {
     .case-summary { grid-template-columns: 1fr; gap: 8px; }
   }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { scroll-behavior: auto !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+  }
 </style>
 </head>
 <body>
+<a class="skip-link" href="#main-content">본문 바로가기</a>
 <header class="sticky top-0 z-50 border-b border-neutral-200 bg-white/90 backdrop-blur">
   <div class="mx-auto flex h-16 max-w-6xl items-center justify-between px-5">
-    <a class="display text-lg font-extrabold text-neutral-950" href="index.html">이현재</a>
-    <nav class="hidden items-center gap-7 md:flex">
-      <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="index.html">홈</a>
-      <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="mini-project.html">미니프로젝트</a>
-      <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="final-project.html">파이널 프로젝트</a>
-      <a class="text-sm font-bold text-blue-700" href="troubleshooting.html">트러블슈팅</a>
-      <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="technical-decisions.html">기술 정리</a>
-      <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="ai-usage.html">AI 활용</a>
+    <a class="display text-lg font-extrabold text-neutral-950" href="/">이현재</a>
+    <nav class="hidden items-center gap-7 md:flex" aria-label="주요 메뉴">
+      <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="/">홈</a>
+      <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="mini-project">미니프로젝트</a>
+      <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="final-project">파이널 프로젝트</a>
+      <a class="text-sm font-bold text-blue-700" href="troubleshooting" aria-current="page">트러블슈팅</a>
+      <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="technical-decisions">기술 정리</a>
+      <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="ai-usage">AI 활용</a>
     </nav>
     <details class="relative md:hidden">
-      <summary class="list-none p-2 text-neutral-900"><span class="material-symbols-outlined">menu</span></summary>
-      <nav class="absolute right-0 mt-2 w-48 rounded-lg border border-neutral-200 bg-white p-2 shadow-lg">
-        <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="index.html">홈</a>
-        <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="mini-project.html">미니프로젝트</a>
-        <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="final-project.html">파이널 프로젝트</a>
-        <a class="block rounded px-3 py-2 text-sm font-bold text-blue-700" href="troubleshooting.html">트러블슈팅</a>
-        <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="technical-decisions.html">기술 정리</a>
-        <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="ai-usage.html">AI 활용</a>
+      <summary class="list-none p-2 text-neutral-900" aria-label="모바일 메뉴 열기"><span class="material-symbols-outlined" aria-hidden="true">menu</span></summary>
+      <nav class="absolute right-0 mt-2 w-48 rounded-lg border border-neutral-200 bg-white p-2 shadow-lg" aria-label="모바일 메뉴">
+        <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="/">홈</a>
+        <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="mini-project">미니프로젝트</a>
+        <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="final-project">파이널 프로젝트</a>
+        <a class="block rounded px-3 py-2 text-sm font-bold text-blue-700" href="troubleshooting" aria-current="page">트러블슈팅</a>
+        <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="technical-decisions">기술 정리</a>
+        <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="ai-usage">AI 활용</a>
       </nav>
     </details>
   </div>
 </header>
 
-<main>
+<main id="main-content">
   <section class="bg-white">
     <div class="mx-auto grid max-w-6xl gap-10 px-5 py-16 md:grid-cols-[1.05fr_0.95fr] md:items-center">
       <div>
@@ -68,7 +90,7 @@
       </div>
       <figure class="overflow-hidden rounded-lg border border-neutral-200 bg-neutral-100">
         <a class="image-link" href="https://github.com/soo97/languagemap-spring" target="_blank" rel="noreferrer" aria-label="Mapingo Spring GitHub 저장소로 이동">
-          <img class="case-shot" src="assets/gh-mapingo-prs.png" alt="Mapingo Spring GitHub PR 목록" width="1440" height="900"/>
+          <img class="case-shot" src="assets/gh-mapingo-prs.png" alt="Mapingo Spring GitHub PR 목록" width="1425" height="891" decoding="async"/>
         </a>
         <figcaption class="border-t border-neutral-200 bg-white px-4 py-3 text-sm font-semibold text-neutral-600">이미지를 누르면 관련 GitHub 기록으로 이동합니다.</figcaption>
       </figure>
@@ -81,7 +103,7 @@
         <div class="grid gap-0 md:grid-cols-[0.86fr_1.14fr]">
           <figure class="border-b border-neutral-200 bg-neutral-100 md:border-b-0 md:border-r">
             <a class="image-link" href="https://github.com/soo97/languagemap-spring/pull/143" target="_blank" rel="noreferrer" aria-label="Mapingo JWT 인증 예외 처리 PR로 이동">
-              <img class="case-shot h-full" src="assets/gh-mapingo-prs.png" alt="Mapingo JWT 인증 관련 PR 목록" width="1440" height="900"/>
+              <img class="case-shot h-full" src="assets/gh-mapingo-prs.png" alt="Mapingo JWT 인증 관련 PR 목록" width="1425" height="891" loading="lazy" decoding="async"/>
             </a>
           </figure>
           <div class="p-6 md:p-7">
@@ -137,7 +159,7 @@
           </div>
           <figure class="border-t border-neutral-200 bg-neutral-100 md:order-first md:border-r md:border-t-0">
             <a class="image-link" href="https://github.com/soo97/languagemap-spring" target="_blank" rel="noreferrer" aria-label="Mapingo Spring GitHub 저장소로 이동">
-              <img class="case-shot h-full" src="assets/mapingo-aws-architecture.png" alt="Mapingo AWS 아키텍처 다이어그램" width="1627" height="967"/>
+              <img class="case-shot h-full" src="assets/mapingo-aws-architecture.png" alt="Mapingo AWS 아키텍처 다이어그램" width="1627" height="967" loading="lazy" decoding="async"/>
             </a>
             <figcaption class="border-t border-neutral-200 bg-white px-4 py-3 text-sm font-semibold text-neutral-600">단일 PR 번호가 아니라 Redis 적용 구조와 커밋 이후 로그 검증 흐름을 기준으로 정리한 케이스입니다.</figcaption>
           </figure>
@@ -148,7 +170,7 @@
         <div class="grid gap-0 md:grid-cols-[0.86fr_1.14fr]">
           <figure class="border-b border-neutral-200 bg-neutral-100 md:border-b-0 md:border-r">
             <a class="image-link" href="https://github.com/soo97/languagemap-spring/issues/102" target="_blank" rel="noreferrer" aria-label="Mapingo LocalDate 검증 이슈로 이동">
-              <img class="case-shot h-full" src="assets/gh-mapingo-issues.png" alt="Mapingo GitHub 이슈 목록" width="1440" height="900"/>
+              <img class="case-shot h-full" src="assets/gh-mapingo-issues.png" alt="Mapingo GitHub 이슈 목록" width="1425" height="891" loading="lazy" decoding="async"/>
             </a>
           </figure>
           <div class="p-6 md:p-7">
@@ -195,6 +217,7 @@
       <p class="mt-2">© 2026 이현재 백엔드 포트폴리오. Mapingo 인증, 캐시, 검증 문제 해결.</p>
   </div>
 </footer>
+<script src="assets/site-nav.js" defer></script>
 <script src="assets/image-modal.js" defer></script>
 </body>
 </html>

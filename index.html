@@ -11,127 +11,51 @@
 <meta property="og:title" content="이현재 | 백엔드 포트폴리오"/>
 <meta property="og:description" content="데이터 흐름 설계, API 구현, 운영 검증 경험을 프로젝트 근거와 함께 소개합니다."/>
 <meta property="og:url" content="https://tig-backend-portfolio.leehjpp5.chatgpt.site/"/>
-<meta property="og:image" content="https://tig-backend-portfolio.leehjpp5.chatgpt.site/assets/portfolio-og.png"/>
-<meta property="og:image:width" content="1731"/>
-<meta property="og:image:height" content="909"/>
+<meta property="og:image" content="https://tig-backend-portfolio.leehjpp5.chatgpt.site/assets/portfolio-og-v2.png"/>
+<meta property="og:image:width" content="1732"/>
+<meta property="og:image:height" content="908"/>
 <meta property="og:image:alt" content="이현재 백엔드 포트폴리오 소셜 미리보기"/>
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:title" content="이현재 | 백엔드 포트폴리오"/>
 <meta name="twitter:description" content="TFT-gogo와 Mapingo로 정리한 백엔드 개발 경험"/>
-<meta name="twitter:image" content="https://tig-backend-portfolio.leehjpp5.chatgpt.site/assets/portfolio-og.png"/>
+<meta name="twitter:image" content="https://tig-backend-portfolio.leehjpp5.chatgpt.site/assets/portfolio-og-v2.png"/>
 <title>이현재 | 백엔드 포트폴리오</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link rel="icon" href="assets/portfolio-og-v2.png" type="image/png"/>
+<link rel="stylesheet" href="assets/tailwind.css"/>
+<script>document.documentElement.classList.add("js");</script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=Noto+Sans+KR:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            "colors": {
-                    "outline-variant": "#cfc4c5",
-                    "on-secondary": "#ffffff",
-                    "surface-container-lowest": "#ffffff",
-                    "secondary-fixed-dim": "#c7c6c6",
-                    "on-tertiary": "#ffffff",
-                    "on-tertiary-fixed": "#001b3f",
-                    "on-tertiary-fixed-variant": "#00458f",
-                    "on-primary-container": "#848484",
-                    "secondary-container": "#e1dfdf",
-                    "secondary-fixed": "#e4e2e2",
-                    "surface-container-highest": "#e2e2e4",
-                    "surface-bright": "#f9f9fb",
-                    "on-primary-fixed-variant": "#474747",
-                    "on-primary-fixed": "#1b1b1b",
-                    "on-secondary-fixed": "#1b1c1c",
-                    "surface-container": "#eeeef0",
-                    "inverse-primary": "#c6c6c6",
-                    "on-secondary-container": "#626262",
-                    "on-background": "#1a1c1d",
-                    "on-primary": "#ffffff",
-                    "tertiary": "#000000",
-                    "background": "#f9f9fb",
-                    "primary-fixed": "#e2e2e2",
-                    "on-error": "#ffffff",
-                    "outline": "#7e7576",
-                    "primary": "#000000",
-                    "on-secondary-fixed-variant": "#464747",
-                    "surface": "#f9f9fb",
-                    "primary-fixed-dim": "#c6c6c6",
-                    "on-surface-variant": "#4c4546",
-                    "inverse-surface": "#2f3132",
-                    "on-surface": "#1a1c1d",
-                    "tertiary-fixed-dim": "#abc7ff",
-                    "secondary": "#5e5e5e",
-                    "surface-container-low": "#f3f3f5",
-                    "surface-variant": "#e2e2e4",
-                    "surface-tint": "#5e5e5e",
-                    "primary-container": "#1b1b1b",
-                    "surface-container-high": "#e8e8ea",
-                    "error-container": "#ffdad6",
-                    "on-error-container": "#93000a",
-                    "error": "#ba1a1a",
-                    "tertiary-container": "#001b3f",
-                    "on-tertiary-container": "#2b82f4",
-                    "inverse-on-surface": "#f0f0f2",
-                    "surface-dim": "#d9dadc",
-                    "tertiary-fixed": "#d7e2ff"
-            },
-            "borderRadius": {
-                    "DEFAULT": "0.125rem",
-                    "lg": "0.25rem",
-                    "xl": "0.5rem",
-                    "full": "0.75rem"
-            },
-            "spacing": {
-                    "stack-md": "24px",
-                    "margin-mobile": "20px",
-                    "section-v-padding": "120px",
-                    "stack-sm": "8px",
-                    "container-max": "1200px",
-                    "gutter": "32px",
-                    "stack-lg": "64px",
-                    "margin-desktop": "40px"
-            },
-            "fontFamily": {
-                    "label-md": ["Noto Sans KR", "Inter", "sans-serif"],
-                    "display": ["Noto Sans KR", "Inter", "sans-serif"],
-                    "body-md": ["Noto Sans KR", "Inter", "sans-serif"],
-                    "headline-lg": ["Noto Sans KR", "Inter", "sans-serif"],
-                    "headline-md": ["Noto Sans KR", "Inter", "sans-serif"],
-                    "body-lg": ["Noto Sans KR", "Inter", "sans-serif"],
-                    "caption": ["Noto Sans KR", "Inter", "sans-serif"]
-            },
-            "fontSize": {
-                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0", "fontWeight": "500"}],
-                    "display": ["56px", {"lineHeight": "68px", "letterSpacing": "0", "fontWeight": "700"}],
-                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
-                    "headline-lg": ["40px", {"lineHeight": "50px", "letterSpacing": "0", "fontWeight": "600"}],
-                    "headline-md": ["24px", {"lineHeight": "34px", "letterSpacing": "0", "fontWeight": "600"}],
-                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
-                    "caption": ["12px", {"lineHeight": "16px", "fontWeight": "400"}]
-            }
-          },
-        },
-      }
-    </script>
 <style>
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
         .reveal-on-scroll {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .reveal-on-scroll.visible {
             opacity: 1;
             transform: translateY(0);
         }
-        .nav-link-active {
-            color: #000000;
-            border-bottom: 2px solid #000000;
-            padding-bottom: 4px;
+        .js .reveal-on-scroll:not(.visible) {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .skip-link {
+            position: fixed;
+            top: 12px;
+            left: 12px;
+            z-index: 100;
+            transform: translateY(-160%);
+            border-radius: 6px;
+            background: #111827;
+            color: #ffffff;
+            padding: 10px 14px;
+            font-weight: 800;
+        }
+        .skip-link:focus {
+            transform: translateY(0);
+        }
+        :focus-visible {
+            outline: 3px solid #2563eb;
+            outline-offset: 3px;
         }
         body {
             word-break: keep-all;
@@ -186,11 +110,11 @@
             line-height: 1.52;
         }
         .hero-section {
-            --hero-image-width: clamp(430px, 40vw, 720px);
+            --hero-image-width: clamp(390px, 36vw, 600px);
             --hero-image-offset: max(40px, calc((100% - 1200px) / 2));
             position: relative;
             isolation: isolate;
-            min-height: 520px;
+            min-height: 560px;
             overflow: hidden;
             padding-top: 74px;
             padding-bottom: 82px;
@@ -201,7 +125,7 @@
             position: absolute;
             inset: 0;
             background:
-                linear-gradient(90deg, #f9f9fb 0%, rgba(249, 249, 251, 0.99) 44%, rgba(249, 249, 251, 0.84) 60%, rgba(249, 249, 251, 0.36) 82%, rgba(249, 249, 251, 0.08) 100%),
+                linear-gradient(90deg, #f9f9fb 0%, rgba(249, 249, 251, 0.99) 48%, rgba(249, 249, 251, 0.88) 60%, rgba(249, 249, 251, 0.2) 86%, rgba(249, 249, 251, 0.04) 100%),
                 linear-gradient(180deg, rgba(249, 249, 251, 0.2), rgba(249, 249, 251, 0) 42%, rgba(249, 249, 251, 0.18));
             pointer-events: none;
             z-index: 1;
@@ -282,47 +206,86 @@
             color: #141516;
             font-size: 0.72em;
         }
-        .hero-links {
-            display: inline-flex;
-            align-items: center;
+        .hero-actions {
+            display: flex;
             flex-wrap: wrap;
             gap: 10px;
             margin-top: 28px;
-            color: #2f3438;
-            font-family: "Inter", "Noto Sans KR", sans-serif;
+        }
+        .hero-action {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 44px;
+            gap: 7px;
+            border: 1px solid #cfd4da;
+            border-radius: 7px;
+            background: #ffffff;
+            color: #202428;
+            padding: 10px 16px;
             font-size: 14px;
-            font-weight: 700;
-            line-height: 20px;
-        }
-        .hero-links a {
-            color: inherit;
+            font-weight: 800;
             text-decoration: none;
-            border-bottom: 1px solid rgba(47, 52, 56, 0.35);
-            transition: border-color 0.2s ease, color 0.2s ease;
         }
-        .hero-links a:hover {
-            color: #141516;
-            border-bottom-color: #141516;
+        .hero-action--primary {
+            border-color: #111827;
+            background: #111827;
+            color: #ffffff;
         }
-        .hero-links span {
-            color: #8b9196;
-            font-weight: 600;
+        .hero-action:hover {
+            border-color: #1d4ed8;
+            color: #1d4ed8;
+        }
+        .hero-action--primary:hover {
+            border-color: #1d4ed8;
+            background: #1d4ed8;
+            color: #ffffff;
         }
         .hero-portrait {
             position: absolute;
-            inset: 0 var(--hero-image-offset) 0 auto;
+            top: 72px;
+            right: var(--hero-image-offset);
             width: var(--hero-image-width);
-            height: 100%;
             overflow: hidden;
-            background: #f9f9fb;
+            border: 1px solid #dce1e6;
+            border-radius: 12px;
+            background: #ffffff;
+            box-shadow: 0 28px 70px rgba(22, 33, 50, 0.14);
+            transform: rotate(1deg);
             z-index: 0;
+        }
+        .hero-portrait::before {
+            content: "TFT-gogo · 운영 화면";
+            display: block;
+            border-bottom: 1px solid #e5e7eb;
+            color: #4b5563;
+            padding: 11px 14px;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 0.01em;
         }
         .hero-portrait img {
             display: block;
             width: 100%;
-            height: 100%;
+            aspect-ratio: 16 / 10;
             object-fit: cover;
-            object-position: center center;
+            object-position: left top;
+        }
+        .hero-proof {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1px;
+            border-top: 1px solid #e5e7eb;
+            overflow: hidden;
+            background: #e5e7eb;
+        }
+        .hero-proof span {
+            background: #ffffff;
+            color: #475569;
+            padding: 12px 10px;
+            text-align: center;
+            font-size: 11px;
+            font-weight: 800;
         }
         .career-role {
             margin-top: 6px;
@@ -339,8 +302,7 @@
             line-height: 22px;
         }
         #projects,
-        #experience,
-        #teaching {
+        #experience {
             padding-top: 24px;
         }
         .project-section {
@@ -363,7 +325,7 @@
         }
         .project-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            grid-template-columns: repeat(12, minmax(0, 1fr));
             gap: 20px;
         }
         .project-card {
@@ -378,11 +340,39 @@
             text-decoration: none;
             transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
         }
-        button.project-card {
-            width: 100%;
-            font: inherit;
-            text-align: left;
-            cursor: pointer;
+        .project-card--featured {
+            grid-column: span 6;
+            min-height: 500px;
+        }
+        .project-card--supporting {
+            grid-column: span 4;
+            min-height: 300px;
+        }
+        .project-card--featured .project-media {
+            height: 220px;
+        }
+        .project-card--supporting .project-media {
+            height: 92px;
+            justify-content: flex-start;
+            border: 0;
+            background: transparent;
+        }
+        .project-card--supporting .project-media .material-symbols-outlined {
+            font-size: 38px;
+        }
+        .project-metric {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+            margin-top: 18px;
+        }
+        .project-metric span {
+            border-radius: 999px;
+            background: #eef4ff;
+            color: #174ea6;
+            padding: 6px 10px;
+            font-size: 12px;
+            font-weight: 800;
         }
         .project-card:hover {
             transform: translateY(-3px);
@@ -412,35 +402,8 @@
             object-position: left top;
             padding: 0;
         }
-        .project-media--mark {
-            background:
-                linear-gradient(135deg, rgba(20, 21, 22, 0.03), rgba(20, 21, 22, 0)),
-                #f8fafc;
-        }
         .project-media--cveradar {
             background: #ffffff;
-        }
-        .cveradar-logo {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            color: #111827;
-            font-family: "Inter", "Noto Sans KR", sans-serif;
-            font-size: 22px;
-            font-weight: 800;
-            line-height: 1;
-        }
-        .cveradar-logo-mark {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 24px;
-            height: 24px;
-            background: #f97316;
-            color: #ffffff;
-            font-size: 16px;
-            font-weight: 800;
-            line-height: 1;
         }
         .project-kind {
             color: #6a7075;
@@ -492,103 +455,6 @@
         }
         .project-link .material-symbols-outlined {
             font-size: 17px;
-        }
-        .teaching-section {
-            background: #ffffff;
-        }
-        .teaching-header {
-            margin-bottom: 0;
-            padding-bottom: 28px;
-            border-bottom: 1px solid #e6e7e9;
-        }
-        .teaching-list {
-            display: grid;
-        }
-        .teaching-item {
-            display: grid;
-            grid-template-columns: 190px minmax(0, 1fr);
-            gap: 36px;
-            align-items: start;
-            padding: 24px 0;
-            border-bottom: 1px solid #eceeef;
-        }
-        .teaching-period {
-            color: #6a7075;
-            font-family: "Inter", "Noto Sans KR", sans-serif;
-            font-size: 14px;
-            font-weight: 700;
-            line-height: 24px;
-            white-space: nowrap;
-        }
-        .teaching-course {
-            color: #141516;
-            display: block;
-            font-size: 18px;
-            font-weight: 700;
-            line-height: 1.55;
-        }
-        .teaching-detail {
-            min-width: 0;
-        }
-        .teaching-detail summary {
-            display: grid;
-            grid-template-columns: minmax(0, 1fr) 24px;
-            gap: 16px;
-            align-items: center;
-            cursor: pointer;
-            list-style: none;
-        }
-        .teaching-detail summary::-webkit-details-marker {
-            display: none;
-        }
-        .teaching-detail summary::after {
-            content: "+";
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 22px;
-            height: 22px;
-            border: 1px solid #cfd3d7;
-            border-radius: 50%;
-            color: #4c5155;
-            font-size: 14px;
-            font-weight: 800;
-            line-height: 1;
-        }
-        .teaching-detail[open] summary::after {
-            content: "-";
-        }
-        .teaching-stack-groups {
-            display: grid;
-            gap: 12px;
-            margin-top: 16px;
-        }
-        .teaching-stack-group {
-            display: grid;
-            gap: 7px;
-        }
-        .teaching-stack-label {
-            color: #6a7075;
-            font-size: 12px;
-            font-weight: 800;
-            line-height: 18px;
-        }
-        .teaching-stack-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 7px;
-            margin-top: 0;
-            padding: 0;
-            list-style: none;
-        }
-        .teaching-stack-list li {
-            padding: 5px 9px;
-            border: 1px solid #dde1e5;
-            border-radius: 999px;
-            color: #4f565c;
-            font-size: 12px;
-            font-weight: 700;
-            line-height: 16px;
         }
         .activity-list {
             display: grid;
@@ -713,9 +579,8 @@
                 max-width: 100%;
                 margin-top: 18px;
             }
-            .hero-links {
+            .hero-actions {
                 justify-content: center;
-                margin-top: 24px;
             }
             .hero-portrait {
                 display: none;
@@ -752,8 +617,7 @@
                 line-height: 20px;
             }
             #projects,
-            #experience,
-            #teaching {
+            #experience {
                 padding-top: 24px;
             }
             .project-header {
@@ -768,6 +632,13 @@
                 min-height: auto;
                 padding: 22px;
             }
+            .project-card--featured,
+            .project-card--supporting {
+                grid-column: span 1;
+            }
+            .project-card--featured .project-media {
+                height: 180px;
+            }
             .project-media {
                 height: 128px;
                 margin-bottom: 18px;
@@ -778,39 +649,8 @@
             .project-media--screenshot img {
                 padding: 0;
             }
-            .hero-links > span {
-                display: none;
-            }
             .project-card-title {
                 font-size: 20px;
-            }
-            .teaching-header {
-                display: block;
-                margin-bottom: 0;
-                padding-bottom: 22px;
-            }
-            .teaching-list {
-                grid-template-columns: 1fr;
-            }
-            .teaching-item {
-                grid-template-columns: 1fr;
-                gap: 6px;
-                padding: 20px 0;
-            }
-            .teaching-period {
-                font-size: 13px;
-                line-height: 20px;
-            }
-            .teaching-course {
-                font-size: 16px;
-                line-height: 1.58;
-            }
-            .teaching-detail summary {
-                grid-template-columns: minmax(0, 1fr) 22px;
-                gap: 10px;
-            }
-            .teaching-stack-list {
-                margin-top: 12px;
             }
             .activity-item {
                 grid-template-columns: 1fr;
@@ -838,41 +678,59 @@
             .project-grid {
                 grid-template-columns: repeat(2, minmax(0, 1fr));
             }
+            .project-card--featured,
+            .project-card--supporting {
+                grid-column: span 1;
+            }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            .js .reveal-on-scroll:not(.visible) {
+                opacity: 1;
+                transform: none;
+                transition: none;
+            }
+            .project-card,
+            .hero-action {
+                transition: none;
+            }
         }
     </style>
 </head>
 <body class="bg-surface text-on-surface font-body-md selection:bg-primary-fixed selection:text-on-primary-fixed ko-copy">
+<a class="skip-link" href="#main-content">본문 바로가기</a>
 <header class="sticky top-0 z-50 border-b border-neutral-200 bg-white/90 backdrop-blur">
 <div class="mx-auto flex h-16 max-w-6xl items-center justify-between px-5">
-<a class="display text-lg font-extrabold text-neutral-950" href="index.html">이현재</a>
-<nav class="hidden items-center gap-7 md:flex">
-<a class="text-sm font-bold text-blue-700" href="index.html">홈</a>
-<a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="mini-project.html">미니프로젝트</a>
-<a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="final-project.html">파이널 프로젝트</a>
-<a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="troubleshooting.html">트러블슈팅</a>
-<a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="technical-decisions.html">기술 정리</a>
-<a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="ai-usage.html">AI 활용</a>
+<a class="display text-lg font-extrabold text-neutral-950" href="/">이현재</a>
+<nav class="hidden items-center gap-7 md:flex" aria-label="주요 메뉴">
+<a class="text-sm font-bold text-blue-700" href="/" aria-current="page">홈</a>
+<a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="mini-project">미니프로젝트</a>
+<a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="final-project">파이널 프로젝트</a>
+<a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="troubleshooting">트러블슈팅</a>
+<a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="technical-decisions">기술 정리</a>
+<a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="ai-usage">AI 활용</a>
 </nav>
 <details class="relative md:hidden">
-<summary class="list-none p-2 text-neutral-900 cursor-pointer">
-<span class="material-symbols-outlined">menu</span>
+<summary class="list-none p-2 text-neutral-900 cursor-pointer" aria-label="모바일 메뉴 열기">
+<span class="material-symbols-outlined" aria-hidden="true">menu</span>
 </summary>
-<nav class="absolute right-0 mt-2 w-48 rounded-lg border border-neutral-200 bg-white p-2 shadow-lg">
-<a class="block rounded px-3 py-2 text-sm font-bold text-blue-700" href="index.html">홈</a>
-<a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="mini-project.html">미니프로젝트</a>
-<a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="final-project.html">파이널 프로젝트</a>
-<a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="troubleshooting.html">트러블슈팅</a>
-<a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="technical-decisions.html">기술 정리</a>
-<a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="ai-usage.html">AI 활용</a>
+<nav class="absolute right-0 mt-2 w-48 rounded-lg border border-neutral-200 bg-white p-2 shadow-lg" aria-label="모바일 주요 메뉴">
+<a class="block rounded px-3 py-2 text-sm font-bold text-blue-700" href="/" aria-current="page">홈</a>
+<a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="mini-project">미니프로젝트</a>
+<a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="final-project">파이널 프로젝트</a>
+<a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="troubleshooting">트러블슈팅</a>
+<a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="technical-decisions">기술 정리</a>
+<a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="ai-usage">AI 활용</a>
 </nav>
 </details>
 </div>
 </header>
-<main class="overflow-x-hidden">
+<main class="overflow-x-hidden" id="main-content">
 <!-- 히어로 섹션 -->
 <section class="hero-section flex flex-col justify-center items-center px-margin-mobile md:px-margin-desktop">
-<figure class="hero-portrait" aria-label="포트폴리오 대표 이미지">
-<img src="assets/profile-hero.jpg" alt="반려견 사진" width="554" height="554"/>
+<figure class="hero-portrait" aria-label="TFT-gogo 운영 화면과 핵심 성과">
+<img src="assets/tft-live-guide.png" alt="TFT-gogo 게임 가이드 운영 화면" width="1440" height="900" decoding="async" fetchpriority="high"/>
+<figcaption class="hero-proof"><span>DB 페이지네이션</span><span>MySQL 공용 락</span><span>AI 응답 검증</span></figcaption>
 </figure>
 <div class="hero-content reveal-on-scroll visible">
 <div class="hero-copy">
@@ -883,16 +741,10 @@
 <p>Mapingo 미니프로젝트에서는 인증, 세션 관리, 외부 결제, API 문서화처럼 서비스 운영에 필요한 백엔드 흐름을 중심으로 작업했습니다.</p>
 <p>TFT-gogo 파이널 프로젝트에서는 게임 가이드와 패치노트 도메인을 맡아 DB 페이지네이션, 안전한 콘텐츠 갱신, AI 응답 신뢰성까지 구현하고 검증했습니다.</p>
 </div>
-<div class="hero-links" aria-label="홈 주요 링크">
-<a href="https://github.com/TIG-korea" target="_blank" rel="noreferrer">GitHub</a>
-<span>/</span>
-<a href="https://tftgogo.com/" target="_blank" rel="noreferrer">TFT-gogo Live</a>
-<span>/</span>
-<a href="https://github.com/s4ngg/TFT-gogo" target="_blank" rel="noreferrer">TFT-gogo GitHub</a>
-<span>/</span>
-<a href="https://github.com/soo97/languagemap-spring" target="_blank" rel="noreferrer">Mapingo Spring</a>
-<span>/</span>
-<a href="https://app.notion.com/p/67a963ba895b44d08ff36fbe1d3ebfaf?source=copy_link" target="_blank" rel="noreferrer">노션 기록</a>
+<div class="hero-actions" aria-label="주요 행동">
+<a class="hero-action hero-action--primary" href="final-project">대표 프로젝트 보기 <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_forward</span></a>
+<a class="hero-action" href="https://github.com/TIG-korea" target="_blank" rel="noreferrer">GitHub 활동 <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_outward</span></a>
+<a class="hero-action" href="https://app.notion.com/p/67a963ba895b44d08ff36fbe1d3ebfaf?source=copy_link" target="_blank" rel="noreferrer">개발 기록 <span class="material-symbols-outlined text-base" aria-hidden="true">arrow_outward</span></a>
 </div>
 </div>
 </div>
@@ -927,29 +779,33 @@
 <div class="max-w-container-max mx-auto">
 <div class="project-header reveal-on-scroll">
 <div>
+<span class="project-eyebrow">Selected Work</span>
 <h2 class="font-headline-lg text-headline-lg section-title">프로젝트</h2>
+<p class="mt-4 max-w-3xl text-body-md text-on-surface-variant">두 팀 프로젝트를 중심으로 구현 범위와 결과를 먼저 보여주고, 트러블슈팅·기술 결정·AI 활용 기록은 근거 페이지로 분리했습니다.</p>
 </div>
 </div>
 <div class="project-grid">
-<a class="project-card reveal-on-scroll" href="mini-project.html" aria-label="미니프로젝트 페이지로 이동">
-<div class="project-media project-media--cveradar">
-<span class="material-symbols-outlined text-[48px] text-on-surface-variant" aria-hidden="true">code</span>
+<a class="project-card project-card--featured reveal-on-scroll" href="mini-project" aria-label="Mapingo 미니프로젝트 페이지로 이동">
+<div class="project-media project-media--screenshot">
+<img src="assets/mapingo-coaching-conversation.png" alt="Mapingo AI 코칭 대화 화면" width="702" height="516" loading="lazy" decoding="async"/>
 </div>
 <span class="project-kind">Mini Project</span>
 <h3 class="project-card-title">Mapingo</h3>
 <p class="project-card-copy">지도 기반 AI 영어 학습 서비스의 백엔드 서버에서 인증, 유저 API, 결제/구독, 관리자 API와 문서화 흐름을 구현했습니다.</p>
+<div class="project-metric" aria-label="Mapingo 핵심 경험"><span>Spring Security</span><span>결제·구독</span><span>AWS 운영</span></div>
 <span class="project-link">페이지 보기 <span class="material-symbols-outlined" aria-hidden="true">arrow_outward</span></span>
 </a>
-<a class="project-card reveal-on-scroll" href="final-project.html" aria-label="TFT-gogo 페이지로 이동">
+<a class="project-card project-card--featured reveal-on-scroll" href="final-project" aria-label="TFT-gogo 파이널 프로젝트 페이지로 이동">
 <div class="project-media project-media--screenshot">
 <img src="assets/tft-live-guide.png" alt="TFT-gogo 최종 게임 가이드 화면" width="1440" height="900" loading="lazy" decoding="async"/>
 </div>
 <span class="project-kind">Final Project</span>
 <h3 class="project-card-title">TFT-gogo</h3>
-<p class="project-card-copy">게임가이드 조회를 DB 페이지네이션으로 전환하고 공용 락으로 다중 서버의 갱신 경쟁을 막았습니다. 패치노트 통계 쿼리 통합에서는 동일 조건 기준 TPS 11.1% 향상, p99 21.7% 감소를 확인했습니다.</p>
+<p class="project-card-copy">게임가이드 조회를 DB 페이지네이션으로 전환하고 공용 락으로 다중 서버의 갱신 경쟁을 막았습니다. 로컬 JMeter 50 VU·300초·3회 혼합 조건에서 패치노트 통계 쿼리 통합 전후를 비교했습니다.</p>
+<div class="project-metric" aria-label="TFT-gogo 성능 결과"><span>TPS +11.1%</span><span>p99 -21.7%</span><span>근거 PR #712</span></div>
 <span class="project-link">페이지 보기 <span class="material-symbols-outlined" aria-hidden="true">arrow_outward</span></span>
 </a>
-<a class="project-card reveal-on-scroll" href="troubleshooting.html" aria-label="트러블슈팅 페이지로 이동">
+<a class="project-card project-card--supporting reveal-on-scroll" href="troubleshooting" aria-label="트러블슈팅 페이지로 이동">
 <div class="project-media project-media--cveradar">
 <span class="material-symbols-outlined text-[48px] text-on-surface-variant" aria-hidden="true">build</span>
 </div>
@@ -958,7 +814,7 @@
 <p class="project-card-copy">Mapingo의 인증·캐시 이슈와 TFT-gogo의 성능 병목, 부분 파싱 데이터 보존, 갱신 경쟁 조건, 마이그레이션 문제를 재현과 검증 근거 중심으로 정리합니다.</p>
 <span class="project-link">페이지 보기 <span class="material-symbols-outlined" aria-hidden="true">arrow_outward</span></span>
 </a>
-<a class="project-card reveal-on-scroll" href="technical-decisions.html" aria-label="기술 정리 페이지로 이동">
+<a class="project-card project-card--supporting reveal-on-scroll" href="technical-decisions" aria-label="기술 정리 페이지로 이동">
 <div class="project-media project-media--cveradar">
 <span class="material-symbols-outlined text-[48px] text-on-surface-variant" aria-hidden="true">account_tree</span>
 </div>
@@ -973,7 +829,7 @@
 </ul>
 <span class="project-link">페이지 보기 <span class="material-symbols-outlined" aria-hidden="true">arrow_outward</span></span>
 </a>
-<a class="project-card reveal-on-scroll" href="ai-usage.html" aria-label="AI 활용 페이지로 이동">
+<a class="project-card project-card--supporting reveal-on-scroll" href="ai-usage" aria-label="AI 활용 페이지로 이동">
 <div class="project-media project-media--cveradar">
 <span class="material-symbols-outlined text-[48px] text-on-surface-variant" aria-hidden="true">psychology</span>
 </div>
@@ -991,10 +847,10 @@
 </div>
 </div>
 </section>
-<!-- 이력 섹션 -->
+<!-- 프로젝트 타임라인 -->
 <section class="bg-white py-section-v-padding px-margin-mobile md:px-margin-desktop" id="experience">
 <div class="max-w-container-max mx-auto">
-<h2 class="font-headline-lg text-headline-lg section-title mb-stack-lg border-b border-outline-variant pb-stack-sm">이력</h2>
+<h2 class="font-headline-lg text-headline-lg section-title mb-stack-lg border-b border-outline-variant pb-stack-sm">프로젝트 타임라인</h2>
 <div class="relative ml-4 md:ml-0">
 <!-- 타임라인 세로선 -->
 <div class="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-outline-variant transform md:-translate-x-1/2"></div>
@@ -1007,8 +863,8 @@
 <div class="absolute left-[-5px] md:left-1/2 w-[11px] h-[11px] bg-primary rounded-full md:-translate-x-1/2 z-10"></div>
 <div class="w-full md:w-1/2 pl-12 md:pl-16 reveal-on-scroll">
 <span class="md:hidden font-label-md text-label-md text-secondary block mb-2">2026.06 — 현재</span>
-<h3 class="font-headline-md text-headline-md mb-2">백엔드 포트폴리오 정리</h3>
-<p class="career-role">Mapingo와 TFT-gogo에서 맡은 API, 데이터 수집, 운영 검증 경험을 중심으로 포트폴리오를 정리하고 있습니다.</p>
+<h3 class="font-headline-md text-headline-md mb-2">TFT-gogo 운영 검증·최종 문서화</h3>
+<p class="career-role">배포 워크플로와 공개 API를 다시 확인하고, 게임가이드·패치노트·AI 연동 기여를 PR과 운영 기록에 연결했습니다.</p>
 </div>
 </div>
 <!-- History 2 -->
@@ -1028,7 +884,7 @@
 </div>
 </section>
 <!-- 문제 해결 요약 -->
-<section class="bg-surface-container-low py-12 md:py-14 px-margin-mobile md:px-margin-desktop" id="awards">
+<section class="bg-surface-container-low py-12 md:py-14 px-margin-mobile md:px-margin-desktop" id="strengths">
 <div class="max-w-container-max mx-auto reveal-on-scroll">
 <div class="border-y border-outline-variant py-10">
 <span class="font-label-md text-label-md text-secondary uppercase">Core Strength</span>
@@ -1058,7 +914,7 @@
 </div>
 </section>
 <!-- 협업 방식 -->
-<section class="py-section-v-padding px-margin-mobile md:px-margin-desktop bg-white" id="seminars">
+<section class="py-section-v-padding px-margin-mobile md:px-margin-desktop bg-white" id="collaboration">
 <div class="max-w-container-max mx-auto">
 <div class="reveal-on-scroll">
 <h2 class="font-headline-lg text-headline-lg section-title mb-stack-lg">협업 방식</h2>
@@ -1071,11 +927,11 @@
 <p class="activity-copy">TFT-gogo의 게임 가이드/패치노트 명세와 Mapingo의 API 문서화처럼 구현 범위와 검증 기준을 문서로 맞춥니다.</p>
 <div class="collaboration-gallery" aria-label="문서 협업 자료 이미지 영역">
 <figure class="collaboration-shot">
-<img src="assets/gh-tft-docs-spec.png" alt="TFT-gogo 도메인 명세 문서 화면" width="1440" height="900"/>
+<img src="assets/gh-tft-docs-spec.png" alt="TFT-gogo 도메인 명세 문서 화면" width="1425" height="891" loading="lazy" decoding="async"/>
 <figcaption>TFT-gogo 도메인 명세</figcaption>
 </figure>
 <figure class="collaboration-shot">
-<img src="assets/mapingo-aws-architecture.png" alt="Mapingo AWS 아키텍처 다이어그램" width="1627" height="967"/>
+<img src="assets/mapingo-aws-architecture.png" alt="Mapingo AWS 아키텍처 다이어그램" width="1627" height="967" loading="lazy" decoding="async"/>
 <figcaption>Mapingo AWS 아키텍처</figcaption>
 </figure>
 </div>
@@ -1095,8 +951,8 @@
 <figcaption>TFT-gogo 패치노트</figcaption>
 </figure>
 <figure class="collaboration-shot">
-<img src="assets/mapingo-coaching-conversation.png" alt="Mapingo AI 코칭 대화 화면" width="677" height="515"/>
-<figcaption>Mapingo AI 코칭 화면</figcaption>
+<img src="assets/mapingo-coaching-content.png" alt="Mapingo AI 코칭 학습 콘텐츠 화면" width="773" height="361" loading="lazy" decoding="async"/>
+<figcaption>Mapingo AI 코칭 콘텐츠</figcaption>
 </figure>
 </div>
 </div>
@@ -1109,13 +965,13 @@
 <div class="collaboration-gallery" aria-label="GitHub 이슈 자료 이미지 영역">
 <figure class="collaboration-shot">
 <a href="https://github.com/s4ngg/TFT-gogo/issues" target="_blank" rel="noreferrer">
-<img src="assets/gh-tft-issues.png" alt="TFT-gogo GitHub 이슈 목록 화면" width="1440" height="900"/>
+<img src="assets/gh-tft-issues.png" alt="TFT-gogo GitHub 이슈 목록 화면" width="1425" height="891" loading="lazy" decoding="async"/>
 </a>
 <figcaption>TFT-gogo 이슈 목록</figcaption>
 </figure>
 <figure class="collaboration-shot">
 <a href="https://github.com/soo97/languagemap-spring/issues" target="_blank" rel="noreferrer">
-<img src="assets/gh-mapingo-issues.png" alt="Mapingo GitHub 이슈 목록 화면" width="1440" height="900"/>
+<img src="assets/gh-mapingo-issues.png" alt="Mapingo GitHub 이슈 목록 화면" width="1425" height="891" loading="lazy" decoding="async"/>
 </a>
 <figcaption>Mapingo 이슈 추적 기록</figcaption>
 </figure>
@@ -1129,11 +985,11 @@
 <p class="activity-copy">테스트 실패, 빌드 경고, 화면 확인 결과를 기준으로 수정 범위를 좁히고 같은 문제가 반복되지 않도록 다시 확인합니다.</p>
 <div class="collaboration-gallery" aria-label="검증 결과 화면 이미지 영역">
 <figure class="collaboration-shot">
-<img src="assets/tft-live-guide.png" alt="TFT-gogo 게임 가이드 화면" width="1440" height="900" loading="lazy" decoding="async"/>
-<figcaption>TFT-gogo 게임 가이드</figcaption>
+<img src="assets/gh-tft-prs-clean.png" alt="TFT-gogo 병합 PR 목록 화면" width="1440" height="900" loading="lazy" decoding="async"/>
+<figcaption>TFT-gogo 구현·검증 PR</figcaption>
 </figure>
 <figure class="collaboration-shot">
-<img src="assets/mapingo-coaching-feedback.png" alt="Mapingo 코칭 피드백 화면" width="695" height="297"/>
+<img src="assets/mapingo-coaching-feedback.png" alt="Mapingo 코칭 피드백 화면" width="692" height="295" loading="lazy" decoding="async"/>
 <figcaption>Mapingo 코칭 피드백</figcaption>
 </figure>
 </div>
@@ -1153,68 +1009,22 @@
       <p class="mt-2">© 2026 이현재 백엔드 포트폴리오. 데이터 수집, 운영 검증과 문제 해결.</p>
 </div>
 </footer>
+<script src="assets/site-nav.js" defer></script>
 <script src="assets/image-modal.js" defer></script>
 <script>
-    // Simple Intersection Observer for reveal effects
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-            }
-        });
-    }, observerOptions);
-
-    document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
-
-    // Smooth scroll for nav links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const href = this.getAttribute('href');
-            if (href === '#') {
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
-                return;
-            }
-
-            const target = document.querySelector(href);
-            if (target) {
-                window.scrollTo({
-                    top: target.offsetTop - 80,
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
-
-    // Active Link Highlighting
-    window.addEventListener('scroll', () => {
-        const sections = ['projects', 'experience', 'teaching', 'awards', 'seminars'];
-        let current = '';
-
-        sections.forEach(section => {
-            const sectionEl = document.getElementById(section);
-            if (sectionEl) {
-                const sectionTop = sectionEl.offsetTop;
-                if (pageYOffset >= sectionTop - 150) {
-                    current = section;
+    const revealElements = document.querySelectorAll('.reveal-on-scroll');
+    if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
                 }
-            }
-        });
-
-        document.querySelectorAll('nav .nav-link').forEach(a => {
-            a.classList.remove('nav-link-active');
-            if (a.getAttribute('href') === `#${current}`) {
-                a.classList.add('nav-link-active');
-            }
-        });
-    });
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        revealElements.forEach((element) => observer.observe(element));
+    } else {
+        revealElements.forEach((element) => element.classList.add('visible'));
+    }
 </script>
 </body></html>

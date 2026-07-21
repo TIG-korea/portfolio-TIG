@@ -3,44 +3,66 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta name="description" content="Mapingo와 TFT-gogo에서 문제를 재현하고 코드, 데이터, 설정, 배포 경계까지 원인을 좁혀 해결한 트러블슈팅 기록입니다."/>
 <title>트러블슈팅 | 이현재 포트폴리오</title>
-<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;600;700;800&family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-<script src="https://cdn.tailwindcss.com"></script>
+<link rel="canonical" href="https://tig-backend-portfolio.leehjpp5.chatgpt.site/troubleshooting"/>
+<meta property="og:type" content="website"/>
+<meta property="og:locale" content="ko_KR"/>
+<meta property="og:title" content="트러블슈팅 | 이현재 백엔드 포트폴리오"/>
+<meta property="og:description" content="Mapingo와 TFT-gogo의 재현 가능한 문제를 원인과 검증 근거까지 프로젝트별로 정리했습니다."/>
+<meta property="og:url" content="https://tig-backend-portfolio.leehjpp5.chatgpt.site/troubleshooting"/>
+<meta property="og:image" content="https://tig-backend-portfolio.leehjpp5.chatgpt.site/assets/portfolio-og-v2.png"/>
+<meta property="og:image:width" content="1732"/>
+<meta property="og:image:height" content="908"/>
+<meta property="og:image:alt" content="이현재 백엔드 포트폴리오 소셜 미리보기"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="트러블슈팅 | 이현재 백엔드 포트폴리오"/>
+<meta name="twitter:description" content="Mapingo와 TFT-gogo의 문제 재현, 원인 분석, 해결과 검증 기록"/>
+<meta name="twitter:image" content="https://tig-backend-portfolio.leehjpp5.chatgpt.site/assets/portfolio-og-v2.png"/>
+<link rel="icon" href="assets/portfolio-og-v2.png" type="image/png"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;600;700;800&amp;family=Noto+Sans+KR:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="assets/tailwind.css"/>
 <style>
   body { font-family: "Noto Sans KR", sans-serif; color: #171717; background: #fafafa; word-break: keep-all; overflow-wrap: break-word; }
   .display { font-family: "Hanken Grotesk", "Noto Sans KR", sans-serif; letter-spacing: 0; }
   .material-symbols-outlined { font-variation-settings: "FILL" 0, "wght" 450, "GRAD" 0, "opsz" 24; }
   .hub-shot { aspect-ratio: 16 / 10; width: 100%; object-fit: contain; background: #f8fafc; }
+  .skip-link { position: fixed; top: 1rem; left: 1rem; z-index: 100; transform: translateY(-200%); border-radius: 0.375rem; background: #171717; color: #fff; padding: 0.75rem 1rem; font-weight: 700; }
+  .skip-link:focus { transform: translateY(0); }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { scroll-behavior: auto !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+  }
 </style>
 </head>
 <body>
+<a class="skip-link" href="#main-content">본문 바로가기</a>
 <header class="sticky top-0 z-50 border-b border-neutral-200 bg-white/90 backdrop-blur">
   <div class="mx-auto flex h-16 max-w-6xl items-center justify-between px-5">
-    <a class="display text-lg font-extrabold text-neutral-950" href="index.html">이현재</a>
-    <nav class="hidden items-center gap-7 md:flex">
-      <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="index.html">홈</a>
-      <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="mini-project.html">미니프로젝트</a>
-      <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="final-project.html">파이널 프로젝트</a>
-      <a class="text-sm font-bold text-blue-700" href="troubleshooting.html">트러블슈팅</a>
-      <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="technical-decisions.html">기술 정리</a>
-      <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="ai-usage.html">AI 활용</a>
+    <a class="display text-lg font-extrabold text-neutral-950" href="/">이현재</a>
+    <nav class="hidden items-center gap-7 md:flex" aria-label="주요 메뉴">
+      <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="/">홈</a>
+      <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="mini-project">미니프로젝트</a>
+      <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="final-project">파이널 프로젝트</a>
+      <a class="text-sm font-bold text-blue-700" href="troubleshooting" aria-current="page">트러블슈팅</a>
+      <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="technical-decisions">기술 정리</a>
+      <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="ai-usage">AI 활용</a>
     </nav>
     <details class="relative md:hidden">
-      <summary class="list-none p-2 text-neutral-900"><span class="material-symbols-outlined">menu</span></summary>
-      <nav class="absolute right-0 mt-2 w-48 rounded-lg border border-neutral-200 bg-white p-2 shadow-lg">
-        <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="index.html">홈</a>
-        <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="mini-project.html">미니프로젝트</a>
-        <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="final-project.html">파이널 프로젝트</a>
-        <a class="block rounded px-3 py-2 text-sm font-bold text-blue-700" href="troubleshooting.html">트러블슈팅</a>
-        <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="technical-decisions.html">기술 정리</a>
-        <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="ai-usage.html">AI 활용</a>
+      <summary class="list-none p-2 text-neutral-900" aria-label="모바일 메뉴 열기"><span class="material-symbols-outlined" aria-hidden="true">menu</span></summary>
+      <nav class="absolute right-0 mt-2 w-48 rounded-lg border border-neutral-200 bg-white p-2 shadow-lg" aria-label="모바일 메뉴">
+        <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="/">홈</a>
+        <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="mini-project">미니프로젝트</a>
+        <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="final-project">파이널 프로젝트</a>
+        <a class="block rounded px-3 py-2 text-sm font-bold text-blue-700" href="troubleshooting" aria-current="page">트러블슈팅</a>
+        <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="technical-decisions">기술 정리</a>
+        <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="ai-usage">AI 활용</a>
       </nav>
     </details>
   </div>
 </header>
 
-<main>
+<main id="main-content">
   <section class="bg-white">
     <div class="mx-auto max-w-6xl px-5 py-16">
       <p class="text-sm font-bold uppercase text-blue-700">Troubleshooting</p>
@@ -72,9 +94,9 @@
 
   <section class="mx-auto max-w-6xl px-5 py-14">
     <div class="grid gap-7 md:grid-cols-2">
-      <a class="group overflow-hidden rounded-lg border border-neutral-200 bg-white text-inherit no-underline shadow-sm transition hover:border-neutral-950 hover:shadow-md" href="troubleshooting-mapingo.html">
+      <a class="group overflow-hidden rounded-lg border border-neutral-200 bg-white text-inherit no-underline shadow-sm transition hover:border-neutral-950 hover:shadow-md" href="troubleshooting-mapingo">
         <figure class="border-b border-neutral-200 bg-neutral-100">
-          <img class="hub-shot" src="assets/gh-mapingo-issues.png" alt="Mapingo GitHub 이슈 목록" width="1440" height="900"/>
+          <img class="hub-shot" src="assets/gh-mapingo-issues.png" alt="Mapingo GitHub 이슈 목록" width="1425" height="891" loading="lazy" decoding="async"/>
         </figure>
         <div class="p-6">
           <p class="text-sm font-bold uppercase text-blue-700">Mini Project</p>
@@ -86,9 +108,9 @@
         </div>
       </a>
 
-      <a class="group overflow-hidden rounded-lg border border-neutral-200 bg-white text-inherit no-underline shadow-sm transition hover:border-neutral-950 hover:shadow-md" href="troubleshooting-tft.html">
+      <a class="group overflow-hidden rounded-lg border border-neutral-200 bg-white text-inherit no-underline shadow-sm transition hover:border-neutral-950 hover:shadow-md" href="troubleshooting-tft">
         <figure class="border-b border-neutral-200 bg-neutral-100">
-          <img class="hub-shot" src="assets/tft-patch-notes.png" alt="TFT-gogo 패치노트 화면" width="1440" height="900"/>
+          <img class="hub-shot" src="assets/tft-patch-notes.png" alt="TFT-gogo 패치노트 화면" width="1440" height="900" loading="lazy" decoding="async"/>
         </figure>
         <div class="p-6">
           <p class="text-sm font-bold uppercase text-blue-700">Final Project</p>
@@ -112,6 +134,7 @@
       <p class="mt-2">© 2026 이현재 백엔드 포트폴리오. 데이터 흐름과 문제 해결.</p>
   </div>
 </footer>
+<script src="assets/site-nav.js" defer></script>
 <script src="assets/image-modal.js" defer></script>
 </body>
 </html>

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://tig-backend-portfolio.leehjpp5.chatgpt.site/sitemap.xml

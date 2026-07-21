@@ -3,10 +3,27 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta name="description" content="Mapingo와 TFT-gogo에서 사용한 백엔드·AI·데이터·배포 기술의 선택 이유와 검증 근거를 정리한 이현재의 기술 의사결정 기록입니다."/>
+<meta name="theme-color" content="#fafafa"/>
+<link rel="canonical" href="https://tig-backend-portfolio.leehjpp5.chatgpt.site/technical-decisions"/>
+<meta property="og:type" content="article"/>
+<meta property="og:locale" content="ko_KR"/>
+<meta property="og:title" content="기술 의사결정 | 이현재 백엔드 포트폴리오"/>
+<meta property="og:description" content="인증·데이터·AI·성능·배포 기술을 선택한 이유와 검증 근거"/>
+<meta property="og:url" content="https://tig-backend-portfolio.leehjpp5.chatgpt.site/technical-decisions"/>
+<meta property="og:image" content="https://tig-backend-portfolio.leehjpp5.chatgpt.site/assets/portfolio-og-v2.png"/>
+<meta property="og:image:width" content="1732"/>
+<meta property="og:image:height" content="908"/>
+<meta property="og:image:alt" content="이현재 백엔드 포트폴리오 소셜 미리보기"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="기술 의사결정 | 이현재 백엔드 포트폴리오"/>
+<meta name="twitter:description" content="프로젝트 기술 선택의 이유와 검증 근거"/>
+<meta name="twitter:image" content="https://tig-backend-portfolio.leehjpp5.chatgpt.site/assets/portfolio-og-v2.png"/>
+<link rel="icon" href="assets/portfolio-og-v2.png" type="image/png"/>
 <title>기술 정리 | 이현재 포트폴리오</title>
-<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;600;700;800&family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;600;700;800&amp;family=Noto+Sans+KR:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="assets/tailwind.css"/>
 <style>
   body { font-family: "Noto Sans KR", sans-serif; color: #171717; background: #fafafa; word-break: keep-all; overflow-wrap: break-word; }
   .display { font-family: "Hanken Grotesk", "Noto Sans KR", sans-serif; letter-spacing: 0; }
@@ -22,35 +39,40 @@
     .decision-row,
     .evidence-row { grid-template-columns: 1fr; gap: 8px; }
   }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto !important; }
+    *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+  }
 </style>
 </head>
 <body>
+<a class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded focus:bg-neutral-950 focus:px-4 focus:py-3 focus:font-bold focus:text-white" href="#main-content">본문 바로가기</a>
 <header class="sticky top-0 z-50 border-b border-neutral-200 bg-white/90 backdrop-blur">
   <div class="mx-auto flex h-16 max-w-6xl items-center justify-between px-5">
-    <a class="display text-lg font-extrabold text-neutral-950" href="index.html">이현재</a>
-    <nav class="hidden items-center gap-7 md:flex">
-      <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="index.html">홈</a>
-      <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="mini-project.html">미니프로젝트</a>
-      <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="final-project.html">파이널 프로젝트</a>
-      <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="troubleshooting.html">트러블슈팅</a>
-      <a class="text-sm font-bold text-blue-700" href="technical-decisions.html">기술 정리</a>
-      <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="ai-usage.html">AI 활용</a>
+    <a class="display text-lg font-extrabold text-neutral-950" href="/">이현재</a>
+    <nav class="hidden items-center gap-7 md:flex" aria-label="주요 메뉴">
+      <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="/">홈</a>
+      <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="mini-project">미니프로젝트</a>
+      <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="final-project">파이널 프로젝트</a>
+      <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="troubleshooting">트러블슈팅</a>
+      <a class="text-sm font-bold text-blue-700" href="technical-decisions" aria-current="page">기술 정리</a>
+      <a class="text-sm font-semibold text-neutral-600 hover:text-blue-700" href="ai-usage">AI 활용</a>
     </nav>
     <details class="relative md:hidden">
-      <summary class="list-none p-2 text-neutral-900"><span class="material-symbols-outlined">menu</span></summary>
-      <nav class="absolute right-0 mt-2 w-48 rounded-lg border border-neutral-200 bg-white p-2 shadow-lg">
-        <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="index.html">홈</a>
-        <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="mini-project.html">미니프로젝트</a>
-        <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="final-project.html">파이널 프로젝트</a>
-        <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="troubleshooting.html">트러블슈팅</a>
-        <a class="block rounded px-3 py-2 text-sm font-bold text-blue-700" href="technical-decisions.html">기술 정리</a>
-        <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="ai-usage.html">AI 활용</a>
+      <summary class="list-none p-2 text-neutral-900" aria-label="모바일 메뉴 열기"><span class="material-symbols-outlined" aria-hidden="true">menu</span></summary>
+      <nav class="absolute right-0 mt-2 w-48 rounded-lg border border-neutral-200 bg-white p-2 shadow-lg" aria-label="모바일 주요 메뉴">
+        <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="/">홈</a>
+        <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="mini-project">미니프로젝트</a>
+        <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="final-project">파이널 프로젝트</a>
+        <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="troubleshooting">트러블슈팅</a>
+        <a class="block rounded px-3 py-2 text-sm font-bold text-blue-700" href="technical-decisions" aria-current="page">기술 정리</a>
+        <a class="block rounded px-3 py-2 text-sm font-semibold text-neutral-700 hover:bg-neutral-100" href="ai-usage">AI 활용</a>
       </nav>
     </details>
   </div>
 </header>
 
-<main>
+<main id="main-content">
   <section class="bg-white">
     <div class="mx-auto max-w-6xl px-5 py-16">
       <div class="max-w-4xl">
@@ -160,10 +182,16 @@
               <td class="px-4 py-4">패치노트 수집, 마이그레이션 검증, 로컬 테스트 초기 데이터 분리처럼 운영 데이터에 영향을 주는 흐름을 관리했습니다.</td>
             </tr>
             <tr>
-              <td class="px-4 py-4 font-bold text-neutral-950">인프라/배포</td>
-              <td class="px-4 py-4">Docker, AWS, ALB, ECS, ECR, healthcheck, CORS, 환경 변수</td>
-              <td class="px-4 py-4">Mapingo, TFT-gogo</td>
-              <td class="px-4 py-4">배포 전후 설정 누락을 줄이기 위해 환경 변수, redirect, AI URL, healthcheck를 체크리스트로 관리했습니다.</td>
+              <td class="px-4 py-4 font-bold text-neutral-950">Mapingo 인프라</td>
+              <td class="px-4 py-4">Docker, AWS EC2, S3, CloudFront, 환경 변수</td>
+              <td class="px-4 py-4">Mapingo</td>
+              <td class="px-4 py-4">정적 프론트와 Spring·FastAPI 실행 환경을 분리하고 프로젝트 아키텍처 기준으로 배포 구성을 정리했습니다.</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-4 font-bold text-neutral-950">TFT 인프라/배포</td>
+              <td class="px-4 py-4">GitHub Actions, Docker, AWS ALB·ECR·ECS, healthcheck</td>
+              <td class="px-4 py-4">TFT-gogo</td>
+              <td class="px-4 py-4">README의 기존 EC2 설명이 아니라 현재 <a class="font-bold text-neutral-950 underline decoration-neutral-300 underline-offset-4" href="https://github.com/s4ngg/TFT-gogo/blob/main/.github/workflows/deploy-backend.yml" target="_blank" rel="noreferrer">main 백엔드</a>·<a class="font-bold text-neutral-950 underline decoration-neutral-300 underline-offset-4" href="https://github.com/s4ngg/TFT-gogo/blob/main/.github/workflows/deploy-frontend.yml" target="_blank" rel="noreferrer">프론트 배포 워크플로</a> 기준으로 표기했습니다.</td>
             </tr>
             <tr>
               <td class="px-4 py-4 font-bold text-neutral-950">포트폴리오 사이트</td>
@@ -322,7 +350,7 @@
             </div>
             <div class="decision-row">
               <strong class="text-sm text-emerald-700">검증</strong>
-              <p class="text-sm leading-6 text-neutral-700">스케줄러, 수집 결과, API 응답 필드, 패치 필터 동작을 PR과 화면 캡처로 확인했습니다.</p>
+              <p class="text-sm leading-6 text-neutral-700">스케줄러와 수집 결과, API 응답 필드, 패치 필터를 확인하고, 조회 조건과 페이지 메타데이터는 <a class="font-bold text-neutral-950 underline decoration-neutral-300 underline-offset-4" href="https://github.com/s4ngg/TFT-gogo/pull/608" target="_blank" rel="noreferrer">PR #608</a>의 저장소·서비스 테스트로 검증했습니다.</p>
             </div>
           </div>
         </article>
@@ -397,7 +425,7 @@
             </div>
             <div class="decision-row">
               <strong class="text-sm text-emerald-700">검증</strong>
-              <p class="text-sm leading-6 text-neutral-700">가이드 근거와 AI 제안을 분리하고, 모델이 반환한 단계별·추천·출처 키를 서버의 허용 목록으로 필터링했습니다. 프롬프트 공격·지원하지 않는 통계 요청·JSON 파싱 실패·OpenAI 장애를 테스트하고 프론트·Spring·AI 서버 CI를 통과했습니다.</p>
+              <p class="text-sm leading-6 text-neutral-700">가이드 근거와 AI 제안을 분리하고, 모델이 반환한 단계별·추천·출처 키를 서버의 허용 목록으로 필터링했습니다. <a class="font-bold text-neutral-950 underline decoration-neutral-300 underline-offset-4" href="https://github.com/s4ngg/TFT-gogo/pull/643" target="_blank" rel="noreferrer">PR #643</a>에서 프롬프트 공격·지원하지 않는 통계 요청·JSON 파싱 실패·OpenAI 장애를 테스트하고 프론트·Spring·AI 서버 CI를 통과했습니다.</p>
             </div>
             <div class="decision-row">
               <strong class="text-sm text-neutral-950">남은 한계</strong>
@@ -418,7 +446,7 @@
             </div>
             <div class="decision-row">
               <strong class="text-sm text-blue-700">결정</strong>
-              <p class="text-sm leading-6 text-neutral-700">게임가이드 탭 조회는 직접 DB <code>Pageable</code> 방식으로 전환했고, 팀원이 구현한 패치 버전 선조회 경량화는 코드와 측정 결과를 검증했습니다. 패치노트 통계는 여러 건수 조회를 단일 집계 쿼리로 직접 통합했습니다.</p>
+              <p class="text-sm leading-6 text-neutral-700">게임가이드 탭 조회는 <a class="font-bold text-neutral-950 underline decoration-neutral-300 underline-offset-4" href="https://github.com/s4ngg/TFT-gogo/pull/608" target="_blank" rel="noreferrer">PR #608</a>에서 직접 DB <code>Pageable</code> 방식으로 전환했습니다. 팀원의 패치 버전 선조회 경량화는 <a class="font-bold text-neutral-950 underline decoration-neutral-300 underline-offset-4" href="https://github.com/s4ngg/TFT-gogo/pull/677" target="_blank" rel="noreferrer">PR #677</a>의 코드와 측정 결과를 검토했고, 패치노트 통계는 <a class="font-bold text-neutral-950 underline decoration-neutral-300 underline-offset-4" href="https://github.com/s4ngg/TFT-gogo/pull/712" target="_blank" rel="noreferrer">PR #712</a>에서 단일 집계 쿼리로 직접 통합했습니다.</p>
             </div>
             <div class="decision-row">
               <strong class="text-sm text-neutral-950">이유</strong>
@@ -430,7 +458,7 @@
             </div>
             <div class="decision-row">
               <strong class="text-sm text-emerald-700">검증</strong>
-              <p class="text-sm leading-6 text-neutral-700">로컬 백엔드와 MySQL 8에 실제 TFT 17.6 데이터를 넣고, 50 VU·300초 조건으로 변경 전후를 각각 3회 비교했습니다. 4개 API 혼합 시나리오에서 TPS 11.1% 향상, p99 21.7% 감소, 오류율 0%를 확인했습니다. 이 중 필터 2개는 당시 데이터에서 0건 응답이었습니다.</p>
+              <p class="text-sm leading-6 text-neutral-700">로컬 백엔드와 MySQL 8에 실제 TFT 17.6 데이터를 넣고, 50 VU·300초 조건으로 변경 전후를 각각 3회 비교했습니다. 4개 API 혼합 시나리오에서 TPS 11.1% 향상, p99 21.7% 감소, 오류율 0%를 확인했습니다. 이 중 필터 2개는 당시 데이터에서 0건 응답이었으며 상세 조건과 결과는 <a class="font-bold text-neutral-950 underline decoration-neutral-300 underline-offset-4" href="https://github.com/s4ngg/TFT-gogo/pull/712" target="_blank" rel="noreferrer">PR #712</a>에 한정해 해석했습니다.</p>
             </div>
           </div>
         </article>
@@ -447,7 +475,7 @@
             </div>
             <div class="decision-row">
               <strong class="text-sm text-blue-700">결정</strong>
-              <p class="text-sm leading-6 text-neutral-700">환경 변수와 비밀값 파일을 분리하고 Docker/Flyway 기본값에 로컬 테스트 초기 데이터가 섞이지 않도록 운영 경로를 정리했습니다.</p>
+              <p class="text-sm leading-6 text-neutral-700">로컬 값은 <code>.env</code>·Compose에 두고, 운영 비밀값은 저장소 파일이 아니라 ECS task definition의 <code>secrets</code>가 AWS Secrets Manager ARN을 참조해 컨테이너 환경 변수로 주입하도록 경로를 분리했습니다. Docker/Flyway 기본 경로에서는 로컬 테스트 초기 데이터를 제외했습니다.</p>
             </div>
             <div class="decision-row">
               <strong class="text-sm text-neutral-950">이유</strong>
@@ -455,7 +483,7 @@
             </div>
             <div class="decision-row">
               <strong class="text-sm text-emerald-700">검증</strong>
-              <p class="text-sm leading-6 text-neutral-700">배포 전 체크리스트로 주요 화면, 게임 가이드 조회, 패치노트 조회, AI Pathfinder 요청, 로그와 환경 변수를 순서대로 확인했습니다.</p>
+              <p class="text-sm leading-6 text-neutral-700">현재 <a class="font-bold text-neutral-950 underline decoration-neutral-300 underline-offset-4" href="https://github.com/s4ngg/TFT-gogo/blob/main/.github/workflows/deploy-backend.yml" target="_blank" rel="noreferrer">main ECS 워크플로</a>는 commit SHA 이미지로 task definition을 갱신하고 서비스 안정 상태까지 대기합니다. 다만 이 신호만으로 실반영을 단정하지 않고 task revision·image SHA, health와 공개 API smoke를 별도 확인하는 기준으로 분리했습니다. AI Pathfinder는 인증·오류·fallback 경로까지 확인하되 단일 화면 접근을 모델 응답 성공의 증거로 사용하지 않습니다.</p>
             </div>
           </div>
         </article>
@@ -482,7 +510,7 @@
         </div>
         <div class="evidence-row">
           <strong class="text-sm text-neutral-950">Load / Metrics</strong>
-          <p class="text-sm leading-6 text-neutral-700">같은 로컬 조건에서 변경 전후를 반복 측정하고 평균·상위·최대 응답시간을 함께 비교했습니다. 별도 1,000 VU 근사 실험은 성과 수치가 아니라 DB 연결 대기라는 다음 병목을 찾는 데만 사용했습니다.</p>
+          <p class="text-sm leading-6 text-neutral-700">같은 로컬 조건에서 변경 전후를 반복 측정하고 평균·상위·최대 응답시간을 함께 비교했습니다. 별도의 일회성 고부하 근사 실험은 정밀 성과 수치로 제시하지 않고 DB 연결 대기라는 후속 병목 후보를 찾는 용도로만 사용했습니다.</p>
         </div>
         <div class="evidence-row">
           <strong class="text-sm text-neutral-950">AI Guard</strong>
@@ -546,6 +574,6 @@
       <p class="mt-2">© 2026 이현재 백엔드 포트폴리오. 기술 스택, 의사결정, 운영 검증과 문제 해결.</p>
   </div>
 </footer>
-<script src="assets/image-modal.js" defer></script>
+<script src="assets/site-nav.js" defer></script>
 </body>
 </html>
